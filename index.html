@@ -120,10 +120,10 @@ td.nm{text-align:left;font-weight:500}
 
   <!-- Filtro Geral de Área -->
   <div class="cat-filter-bar">
-    <span class="cat-label">Projeto:</span>
+    <span class="cat-label">Área:</span>
     <div class="cat-pills">
       <button class="cat-btn active" data-cat="Todas">Todas</button>
-      <button class="cat-btn" data-cat="Saúde Indígena"> Saúde Indígena</button>
+      <button class="cat-btn" data-cat="Saúde Indígena">&#127974; Saúde Indígena</button>
       <button class="cat-btn" data-cat="Atenção Especializada">&#127968; Atenção Especializada</button>
     </div>
   </div>
@@ -1174,17 +1174,60 @@ function renderUI() {
     options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},datalabels:{padding:4}}, scales:{x:{beginAtZero:true,suggestedMax:Math.max(...dadosOrdProc.map(o=>o.n_processos))*1.1}} }
   });
   chartsInstances.cDia = new Chart(document.getElementById('graficoDiarias'), {
-    type:'bar', data:{ labels:dadosOrdDia.map(o=>formatName(o.esc)), datasets:[{data:dadosOrdDia.map(o=>o.qtd), backgroundColor:'#3a5a8c', borderRadius:4}] },
-    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},datalabels:{padding:4}}, scales:{x:{beginAtZero:true,suggestedMax:Math.max(...dadosOrdDia.map(o=>o.qtd))*1.1}} }
+    type:'bar',
+    data:{ labels:dadosOrdDia.map(o=>formatName(o.esc)), datasets:[{
+      data:dadosOrdDia.map(o=>o.qtd),
+      monetaryValues:dadosOrdDia.map(o=>o.diarias),
+      backgroundColor:'#3a5a8c', borderRadius:4
+    }]},
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        datalabels:{padding:4},
+        tooltip:{ callbacks:{ label: ctx => {
+          const dias = ctx.raw;
+          const val  = ctx.dataset.monetaryValues[ctx.dataIndex];
+          return [
+            '  ' + dias.toLocaleString('pt-BR',{maximumFractionDigits:1}) + ' dias',
+            '  ' + val.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})
+          ];
+        }}}
+      },
+      scales:{x:{beginAtZero:true,suggestedMax:Math.max(...dadosOrdDia.map(o=>o.qtd))*1.1}}
+    }
   });
 
   // ---- Top 10 Pessoas
-  let mapPessoasQtd = {};
-  ordered.forEach(esc => esc.pessoas.forEach(p => { mapPessoasQtd[p.nome] = (mapPessoasQtd[p.nome]||0) + p.qtd; }));
-  let top10 = Object.keys(mapPessoasQtd).map(nome=>({nome,qtd:mapPessoasQtd[nome]})).sort((a,b)=>b.qtd-a.qtd).slice(0,10);
+  let mapPessoasQtd = {}; let mapPessoasDia = {};
+  ordered.forEach(esc => esc.pessoas.forEach(p => {
+    mapPessoasQtd[p.nome] = (mapPessoasQtd[p.nome]||0) + p.qtd;
+    mapPessoasDia[p.nome] = (mapPessoasDia[p.nome]||0) + p.diarias;
+  }));
+  let top10 = Object.keys(mapPessoasQtd)
+    .map(nome=>({nome, qtd:mapPessoasQtd[nome], diarias:mapPessoasDia[nome]||0}))
+    .sort((a,b)=>b.qtd-a.qtd).slice(0,10);
   chartsInstances.cTopPessoas = new Chart(document.getElementById('graficoTopPessoasDiarias'), {
-    type:'bar', data:{ labels:top10.map(p=>p.nome), datasets:[{data:top10.map(p=>p.qtd), backgroundColor:'#b5552a', borderRadius:4}] },
-    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},datalabels:{padding:4}}, scales:{x:{beginAtZero:true,suggestedMax:Math.max(...top10.map(p=>p.qtd))*1.1}} }
+    type:'bar',
+    data:{ labels:top10.map(p=>p.nome), datasets:[{
+      data:top10.map(p=>p.qtd),
+      monetaryValues:top10.map(p=>p.diarias),
+      backgroundColor:'#b5552a', borderRadius:4
+    }]},
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        datalabels:{padding:4},
+        tooltip:{ callbacks:{ label: ctx => {
+          const dias = ctx.raw;
+          const val  = ctx.dataset.monetaryValues[ctx.dataIndex];
+          return [
+            '  ' + dias.toLocaleString('pt-BR',{maximumFractionDigits:1}) + ' dias',
+            '  ' + val.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})
+          ];
+        }}}
+      },
+      scales:{x:{beginAtZero:true,suggestedMax:Math.max(...top10.map(p=>p.qtd))*1.1}}
+    }
   });
 }
 
