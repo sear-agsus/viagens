@@ -148,13 +148,9 @@ td.nm{text-align:left;font-weight:500}
   <!-- Gráficos -->
   <section class="charts-grid">
     <!-- Evolução Temporal -->
-    <div class="chart-box">
-      <h3>Processos Abertos por Mês/Ano (Data Ida)</h3>
-      <div class="chart-wrap timeline"><canvas id="graficoMesProcessos"></canvas></div>
-    </div>
-    <div class="chart-box">
-      <h3>Volume de Diárias (Dias) por Mês/Ano (Data Ida)</h3>
-      <div class="chart-wrap timeline"><canvas id="graficoMesDiarias"></canvas></div>
+    <div class="chart-box" style="grid-column: 1 / -1;">
+      <h3>Evolução de Processos e Diárias (Mês/Ano - Data Ida)</h3>
+      <div class="chart-wrap timeline"><canvas id="graficoEvolucaoMista"></canvas></div>
     </div>
 
     <!-- Comparativo Todos os Escritórios -->
@@ -169,6 +165,12 @@ td.nm{text-align:left;font-weight:500}
       <div class="chart-scroll-area">
         <div class="chart-wrap tall"><canvas id="graficoDiarias"></canvas></div>
       </div>
+    </div>
+
+    <!-- Top 10 Pessoas - Ocupando toda a largura na parte inferior -->
+    <div class="chart-box" style="grid-column: 1 / -1;">
+      <h3>Top 10 Colaboradores com Mais Diárias (Dias)</h3>
+      <div class="chart-wrap"><canvas id="graficoTopPessoasDiarias"></canvas></div>
     </div>
   </section>
 
@@ -915,6 +917,8 @@ const RAW_VIAGENS = [
 
 const BRL = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const NUM = n => n.toLocaleString('pt-BR',{maximumFractionDigits:1});
+const BRL_CARD = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0});
+const NUM_CARD = n => Math.round(n).toLocaleString('pt-BR');
 const norm = s => s ? s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 const parseBrFloat = str => parseFloat(str.replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '')) || 0;
 
@@ -1081,12 +1085,12 @@ function renderUI() {
 
   // 1. CARDS
   document.getElementById('cards').innerHTML = [
-    {c:'',   lab:'Gasto total',            val:BRL(t.total), note:NUM(t.nrec)+' reg. de viagem'},
-    {c:'c2', lab:'Valor de diárias',       val:BRL(t.diarias), note:NUM(t.qtd)+' diárias (dias)'},
-    {c:'c3', lab:'Gasto passagens',        val:BRL(t.passagem), note:NUM(t.npass)+' passagens'},
-    {c:'c5', lab:'Processos',              val:NUM(t.n_processos), note:'abertos no período'},
-    {c:'c6', lab:'Média / Processo',       val:BRL(mProc), note:'Custo / nº de proc.'},
-    {c:'c4', lab:'Outros gastos',          val:BRL(t.outros), note:'locação veículos'}
+    {c:'',   lab:'Gasto total',            val:BRL_CARD(t.total), note:NUM_CARD(t.nrec)+' reg. de viagem'},
+    {c:'c2', lab:'Valor de diárias',       val:BRL_CARD(t.diarias), note:NUM_CARD(t.qtd)+' diárias (dias)'},
+    {c:'c3', lab:'Gasto passagens',        val:BRL_CARD(t.passagem), note:NUM_CARD(t.npass)+' passagens'},
+    {c:'c5', lab:'Processos',              val:NUM_CARD(t.n_processos), note:'abertos no período'},
+    {c:'c6', lab:'Média / Processo',       val:BRL_CARD(mProc), note:'Custo / nº de proc.'},
+    {c:'c4', lab:'Outros gastos',          val:BRL_CARD(t.outros), note:'locação veículos'}
   ].map(c=>`<div class="card ${c.c}"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="note">${c.note}</div></div>`).join('');
 
   document.getElementById('meta').innerHTML = `<span><b>${NUM(t.nrec)}</b> registros</span><span><b>${NUM(t.npass)}</b> passagens</span><span><b>${NUM(t.qtd)}</b> diárias</span><span>Total <b>${BRL(t.total)}</b></span>`;
@@ -1148,38 +1152,77 @@ function renderUI() {
   // Destroi para recriar
   Object.values(chartsInstances).forEach(c => c.destroy());
 
-  // Gráfico Evolução Processos
-  chartsInstances.cEvoP = new Chart(document.getElementById('graficoMesProcessos'), {
-    type: 'line', data: { labels: tline.labels, datasets: [{ label:'Processos', data: tline.processos, borderColor: '#1f6f5c', backgroundColor: 'rgba(31,111,92,0.1)', fill: true, tension: 0.3 }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { align: 'top', anchor: 'end' } } }
+  // Gráfico Evolução Mista
+  chartsInstances.cEvoMista = new Chart(document.getElementById('graficoEvolucaoMista'), {
+    type: 'line', 
+    data: { 
+      labels: tline.labels, 
+      datasets: [
+        { label:'Processos', data: tline.processos, borderColor: '#1f6f5c', backgroundColor: 'rgba(31,111,92,0.1)', fill: true, tension: 0.3, yAxisID: 'y' },
+        { label:'Diárias (Dias)', data: tline.diarias, borderColor: '#3a5a8c', backgroundColor: 'rgba(58,90,140,0.1)', fill: true, tension: 0.3, yAxisID: 'y1' }
+      ] 
+    },
+    options: { 
+      responsive: true, maintainAspectRatio: false, 
+      plugins: { legend: { display: true, position: 'top' }, datalabels: { align: 'top', anchor: 'end' } },
+      scales: {
+        y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Processos' } },
+        y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Diárias' }, grid: { drawOnChartArea: false } }
+      }
+    }
   });
 
-  // Gráfico Evolução Diárias
-  chartsInstances.cEvoD = new Chart(document.getElementById('graficoMesDiarias'), {
-    type: 'line', data: { labels: tline.labels, datasets: [{ label:'Diárias (Dias)', data: tline.diarias, borderColor: '#3a5a8c', backgroundColor: 'rgba(58,90,140,0.1)', fill: true, tension: 0.3 }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { align: 'top', anchor: 'end' } } }
-  });
-
-  // Gráficos Horizontais (Todos os Escritórios) - Ordenados de forma descendente com base na lista
+  // Gráficos Horizontais (Todos os Escritórios) - Ordenados de forma descendente de forma independente
   // Ajuste de altura dinâmica baseada na quantidade de itens para não espremer barras
   const dynHeight = Math.max(300, itensParaGrafico.length * 35);
   document.getElementById('graficoProcessos').parentNode.style.height = dynHeight + 'px';
   document.getElementById('graficoDiarias').parentNode.style.height = dynHeight + 'px';
 
-  // O ChartJS indexAxis 'y' desenha de cima para baixo. Como nosso array está descendente [10, 9, 8], 
-  // ele exibirá o maior no topo.
-  let labelsEsc = itensParaGrafico.map(o => formatName(o.esc));
-  let dadosProcEsc = itensParaGrafico.map(o => o.n_processos);
-  let dadosDiaEsc = itensParaGrafico.map(o => o.qtd);
+  // Ordena independentemente para garantir ordem decrescente nos gráficos
+  let dadosOrdenadosProc = [...itensParaGrafico].sort((a, b) => b.n_processos - a.n_processos);
+  let labelsProcEsc = dadosOrdenadosProc.map(o => formatName(o.esc));
+  let dadosProcEsc = dadosOrdenadosProc.map(o => o.n_processos);
+
+  let dadosOrdenadosDia = [...itensParaGrafico].sort((a, b) => b.qtd - a.qtd);
+  let labelsDiaEsc = dadosOrdenadosDia.map(o => formatName(o.esc));
+  let dadosDiaEsc = dadosOrdenadosDia.map(o => o.qtd);
 
   chartsInstances.cProc = new Chart(document.getElementById('graficoProcessos'), {
-    type: 'bar', data: { labels: labelsEsc, datasets: [{ data: dadosProcEsc, backgroundColor: '#1f6f5c', borderRadius: 4 }] },
+    type: 'bar', data: { labels: labelsProcEsc, datasets: [{ data: dadosProcEsc, backgroundColor: '#1f6f5c', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { padding: 4 } }, scales: { x: { beginAtZero: true, suggestedMax: Math.max(...dadosProcEsc)*1.1 } } }
   });
 
   chartsInstances.cDia = new Chart(document.getElementById('graficoDiarias'), {
-    type: 'bar', data: { labels: labelsEsc, datasets: [{ data: dadosDiaEsc, backgroundColor: '#3a5a8c', borderRadius: 4 }] },
+    type: 'bar', data: { labels: labelsDiaEsc, datasets: [{ data: dadosDiaEsc, backgroundColor: '#3a5a8c', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { padding: 4 } }, scales: { x: { beginAtZero: true, suggestedMax: Math.max(...dadosDiaEsc)*1.1 } } }
+  });
+
+  // Gráfico Top 10 Pessoas com mais diárias (Analisando globalmente, baseados na lista ordenada)
+  let mapPessoasQtd = {};
+  ordered.forEach(esc => {
+    esc.pessoas.forEach(p => {
+      mapPessoasQtd[p.nome] = (mapPessoasQtd[p.nome] || 0) + p.qtd;
+    });
+  });
+  
+  let top10Pessoas = Object.keys(mapPessoasQtd)
+    .map(nome => ({ nome, qtd: mapPessoasQtd[nome] }))
+    .sort((a,b) => b.qtd - a.qtd)
+    .slice(0, 10);
+
+  chartsInstances.cTopPessoas = new Chart(document.getElementById('graficoTopPessoasDiarias'), {
+    type: 'bar', 
+    data: { 
+      labels: top10Pessoas.map(p => p.nome), 
+      datasets: [{ data: top10Pessoas.map(p => p.qtd), backgroundColor: '#b5552a', borderRadius: 4 }] 
+    },
+    options: { 
+      indexAxis: 'y', 
+      responsive: true, 
+      maintainAspectRatio: false, 
+      plugins: { legend: { display: false }, datalabels: { padding: 4 } }, 
+      scales: { x: { beginAtZero: true, suggestedMax: Math.max(...top10Pessoas.map(p=>p.qtd))*1.1 } } 
+    }
   });
 }
 
