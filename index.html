@@ -7,10 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- Bibliotecas Gráficas -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-
 <style>
 :root{
   --ink:#1c2321; --ink-soft:#4a544f; --line:#cce2ef; --line-strong:#b1d2e5;
@@ -19,68 +17,58 @@
   --shadow:0 1px 2px rgba(28,35,33,.05),0 8px 24px rgba(28,35,33,.06);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Archivo',system-ui,sans-serif;background:var(--paper);color:var(--ink);
-  line-height:1.5;-webkit-font-smoothing:antialiased;padding:0 0 80px;
-}
+body{font-family:'Archivo',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;padding:0 0 80px;}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-header.top{
-  border-bottom:1px solid var(--line-strong);background:var(--card);
-  padding:38px 0 30px;margin-bottom:24px;
-  background-image:radial-gradient(circle at 1px 1px, rgba(31,111,92,.07) 1px, transparent 0);
-  background-size:22px 22px;
-}
+header.top{border-bottom:1px solid var(--line-strong);background:var(--card);padding:38px 0 30px;margin-bottom:24px;background-image:radial-gradient(circle at 1px 1px,rgba(31,111,92,.07) 1px,transparent 0);background-size:22px 22px;}
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
 h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(24px,4vw,38px);letter-spacing:-.01em;line-height:1.1}
 .sub{color:var(--ink-soft);margin-top:10px;font-size:15px;max-width:70ch}
 .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink-soft)}
 .meta b{color:var(--ink);font-weight:600}
-
-/* Cards Responsivos */
+/* Cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:28px}
-.card{
-  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;
-  box-shadow:var(--shadow);position:relative;overflow:hidden; display:flex; flex-direction:column; justify-content:center;
-}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
-.card.c2::before{background:var(--accent-2)} .card.c3::before{background:var(--accent-3)}
-.card.c4::before{background:var(--gold)} .card.c5::before{background:var(--ink-soft)} .card.c6::before{background:var(--warn)}
+.card.c2::before{background:var(--accent-2)}.card.c3::before{background:var(--accent-3)}
+.card.c4::before{background:var(--gold)}.card.c5::before{background:var(--ink-soft)}.card.c6::before{background:var(--warn)}
 .card .lab{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
-/* Evita vazamento de números grandes */
-.card .val{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(16px, 2.2vw, 24px);margin-top:6px;letter-spacing:-.01em; word-break: break-word; line-height: 1.1;}
-.card .note{font-size:12px;color:var(--ink-soft);margin-top:6px; line-height:1.2}
-
-/* Containers de Gráficos (Adaptável) */
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-.chart-box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column;}
-.chart-box h3 { font-family: 'Fraunces', serif; font-size: 16px; margin-bottom: 16px; color: var(--ink); text-align: center; }
-/* Scroll para gráficos de barras para acomodar todos os escritórios */
-.chart-scroll-area { width: 100%; overflow-x: auto; overflow-y: hidden; flex: 1;}
-.chart-wrap { position: relative; width: 100%; min-height: 300px; }
-.chart-wrap.tall { height: 800px; } /* Altura fixa grande para caber todos horizontalmente */
-.chart-wrap.timeline { height: 260px; }
-
+.card .val{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(16px,2.2vw,24px);margin-top:6px;letter-spacing:-.01em;word-break:break-word;line-height:1.1;}
+.card .note{font-size:12px;color:var(--ink-soft);margin-top:6px;line-height:1.2}
+/* Gráficos */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+.chart-box h3{font-family:'Fraunces',serif;font-size:16px;margin-bottom:12px;color:var(--ink);text-align:center;}
+.chart-scroll-area{width:100%;overflow-x:auto;overflow-y:hidden;flex:1;}
+.chart-wrap{position:relative;width:100%;min-height:300px;}
+.chart-wrap.tall{height:800px;}
+.chart-wrap.timeline{height:260px;}
+/* Filtro de categoria */
+.cat-filter-bar{display:flex;align-items:center;gap:14px;padding:14px 0 16px;border-bottom:1px solid var(--line-strong);margin-bottom:20px;flex-wrap:wrap}
+.cat-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);white-space:nowrap}
+.cat-pills{display:flex;gap:8px;flex-wrap:wrap}
+.cat-btn{font-family:inherit;font-size:13px;font-weight:600;padding:7px 18px;border-radius:20px;border:2px solid var(--line-strong);cursor:pointer;transition:all .15s;background:transparent;color:var(--ink-soft)}
+.cat-btn:hover{color:var(--ink)}
+.cat-btn[data-cat="Saúde Indígena"]{border-color:var(--accent);color:var(--accent)}
+.cat-btn[data-cat="Atenção Especializada"]{border-color:var(--accent-3);color:var(--accent-3)}
+.cat-btn[data-cat="Todas"].active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat-btn[data-cat="Saúde Indígena"].active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cat-btn[data-cat="Atenção Especializada"].active{background:var(--accent-3);color:#fff;border-color:var(--accent-3)}
+/* Toggle de métrica */
+.metric-toggle{display:flex;gap:6px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.metric-btn{font-family:inherit;font-size:12px;font-weight:600;padding:5px 14px;border-radius:16px;border:1.5px solid var(--line-strong);cursor:pointer;background:var(--card);color:var(--ink-soft);transition:all .15s}
+.metric-btn[data-metric="processos"].active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.metric-btn[data-metric="diarias"].active{background:var(--accent-3);color:#fff;border-color:var(--accent-3)}
+.metric-btn[data-metric="total"].active{background:var(--accent-2);color:#fff;border-color:var(--accent-2)}
 /* Controles e Lista */
 .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:24px 0 14px}
 .toolbar h2{font-family:'Fraunces',serif;font-weight:600;font-size:20px;margin-right:auto}
 .ctrl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft)}
-select,input[type=search],input[type=date],button{
-  font-family:inherit;font-size:13px;padding:8px 11px;border:1px solid var(--line-strong);
-  border-radius:9px;background:var(--card);color:var(--ink);cursor:pointer;
-}
+select,input[type=search],input[type=date],button{font-family:inherit;font-size:13px;padding:8px 11px;border:1px solid var(--line-strong);border-radius:9px;background:var(--card);color:var(--ink);cursor:pointer;}
 input[type=search]{min-width:210px;cursor:text}
-button.expand{font-weight:500;}
 button:hover{border-color:var(--accent);color:var(--accent)}
-
-.office{
-  background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;
-  box-shadow:var(--shadow);overflow:hidden;
-}
+.office{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;}
 .office.unlinked{border-color:var(--line-strong);background:linear-gradient(180deg,var(--warn-bg),var(--card) 70px)}
-.ohead{
-  display:grid;grid-template-columns:1.6fr .7fr .7fr .7fr .7fr .7fr .9fr 30px;align-items:center;
-  gap:12px;padding:15px 18px;cursor:pointer;user-select:none;transition:background .15s;
-}
+.ohead{display:grid;grid-template-columns:1.6fr .7fr .7fr .7fr .7fr .7fr .9fr 30px;align-items:center;gap:12px;padding:15px 18px;cursor:pointer;user-select:none;transition:background .15s;}
 .ohead:hover{background:rgba(31,111,92,.035)}
 .office.unlinked .ohead:hover{background:rgba(138,90,26,.05)}
 .oname{font-weight:600;font-size:15px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
@@ -94,14 +82,10 @@ button:hover{border-color:var(--accent);color:var(--accent)}
 .ocell.total{font-weight:700}
 .chev{transition:transform .2s;color:var(--ink-soft);justify-self:center}
 .office.open .chev{transform:rotate(90deg)}
-.obody{display:none;border-top:1px solid var(--line);padding:4px 0 6px;background:rgba(227,241,248,.6); overflow-x: auto;}
+.obody{display:none;border-top:1px solid var(--line);padding:4px 0 6px;background:rgba(227,241,248,.6);overflow-x:auto;}
 .office.open .obody{display:block}
-
-table{width:100%;border-collapse:collapse;font-size:13px; min-width: 800px;}
-thead th{
-  text-align:right;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
-  font-weight:600;padding:9px 18px;border-bottom:1px solid var(--line);white-space:nowrap;
-}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:800px;}
+thead th{text-align:right;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;padding:9px 18px;border-bottom:1px solid var(--line);white-space:nowrap;}
 thead th:first-child{text-align:left}
 tbody td{padding:10px 18px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
 tbody tr:last-child td{border-bottom:none}
@@ -109,9 +93,8 @@ tbody tr:hover{background:rgba(31,111,92,.04)}
 td.nm{text-align:left;font-weight:500}
 .muted{color:var(--line-strong)}
 .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--ink-soft);max-width:78ch}
-
 @media(max-width:900px){
-  .charts-grid{grid-template-columns: 1fr;}
+  .charts-grid{grid-template-columns:1fr;}
   .ohead{grid-template-columns:1fr auto 30px;gap:8px}
   .ocell:not(.total){display:none}
 }
@@ -122,66 +105,70 @@ td.nm{text-align:left;font-weight:500}
   <div class="wrap">
     <div class="eyebrow">Agência SUS · Coordenação de Escritórios</div>
     <h1>Painel Gerencial de Diárias e Passagens</h1>
-    <p class="sub">Dados cruzados dinamicamente do financeiro e RH. Utilize o filtro de data abaixo com base na <b>Data de Ida</b> das viagens.</p>
+    <p class="sub">Dados cruzados dinamicamente do financeiro e RH. Utilize os filtros de data e área abaixo.</p>
     <div class="meta" id="meta"></div>
   </div>
 </header>
 
 <div class="wrap">
-  <!-- Filtro de Datas Baseado na Data Ida -->
-  <div class="toolbar" style="margin-top:0; padding-bottom: 12px; border-bottom: 1px solid var(--line-strong);">
-    <div class="ctrl">
-      <label for="data-inicio">Ida de:</label>
-      <input type="date" id="data-inicio">
-    </div>
-    <div class="ctrl">
-      <label for="data-fim">Até:</label>
-      <input type="date" id="data-fim">
-    </div>
-    <button id="btn-limpar" style="display:none; color: var(--warn);">Limpar Filtro</button>
+  <!-- Filtros -->
+  <div class="toolbar" style="margin-top:0;padding-bottom:12px;border-bottom:1px solid var(--line-strong);">
+    <div class="ctrl"><label for="data-inicio">Ida de:</label><input type="date" id="data-inicio"></div>
+    <div class="ctrl"><label for="data-fim">Até:</label><input type="date" id="data-fim"></div>
+    <button id="btn-limpar" style="display:none;color:var(--warn);">Limpar Filtro</button>
   </div>
 
-  <section class="cards" id="cards">
-    <!-- Renderizado via JS -->
-  </section>
+  <!-- Filtro Geral de Área -->
+  <div class="cat-filter-bar">
+    <span class="cat-label">Projeto:</span>
+    <div class="cat-pills">
+      <button class="cat-btn active" data-cat="Todas">Todas</button>
+      <button class="cat-btn" data-cat="Saúde Indígena"> Saúde Indígena</button>
+      <button class="cat-btn" data-cat="Atenção Especializada">&#127968; Atenção Especializada</button>
+    </div>
+  </div>
 
-  <!-- Gráficos -->
+  <section class="cards" id="cards"></section>
+
   <section class="charts-grid">
     <!-- Evolução Temporal -->
-    <div class="chart-box" style="grid-column: 1 / -1;">
-      <h3>Evolução de Processos e Diárias (Mês/Ano - Data Ida)</h3>
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Evolução de Processos e Diárias (Mês/Ano · Data Ida)</h3>
       <div class="chart-wrap timeline"><canvas id="graficoEvolucaoMista"></canvas></div>
     </div>
 
-    <!-- Comparativo Todos os Escritórios -->
+    <!-- NOVO: Breakdown SI x AE -->
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Saúde Indígena × Atenção Especializada — Evolução Mensal</h3>
+      <div class="metric-toggle">
+        <button class="metric-btn active" data-metric="processos">Processos</button>
+        <button class="metric-btn" data-metric="diarias">Diárias (dias)</button>
+        <button class="metric-btn" data-metric="total">Valor Total (R$)</button>
+      </div>
+      <div class="chart-wrap timeline"><canvas id="graficoCategoriaMes"></canvas></div>
+    </div>
+
+    <!-- Comparativo Escritórios -->
     <div class="chart-box">
       <h3>Processos por Escritório (Todos)</h3>
-      <div class="chart-scroll-area">
-        <div class="chart-wrap tall"><canvas id="graficoProcessos"></canvas></div>
-      </div>
+      <div class="chart-scroll-area"><div class="chart-wrap tall"><canvas id="graficoProcessos"></canvas></div></div>
     </div>
     <div class="chart-box">
       <h3>Volume de Diárias por Escritório (Todos)</h3>
-      <div class="chart-scroll-area">
-        <div class="chart-wrap tall"><canvas id="graficoDiarias"></canvas></div>
-      </div>
+      <div class="chart-scroll-area"><div class="chart-wrap tall"><canvas id="graficoDiarias"></canvas></div></div>
     </div>
 
-    <!-- Top 10 Pessoas - Ocupando toda a largura na parte inferior -->
-    <div class="chart-box" style="grid-column: 1 / -1;">
+    <!-- Top 10 Pessoas -->
+    <div class="chart-box" style="grid-column:1/-1;">
       <h3>Top 10 Colaboradores com Mais Diárias (Dias)</h3>
       <div class="chart-wrap"><canvas id="graficoTopPessoasDiarias"></canvas></div>
     </div>
   </section>
 
-  <!-- Detalhamento -->
   <div class="toolbar">
     <h2>Detalhamento por Escritório</h2>
-    <div class="ctrl">
-      <input type="search" id="busca" placeholder="Buscar escritório ou pessoa…" aria-label="Buscar">
-    </div>
-    <div class="ctrl" style="margin-left:auto;">
-      <label for="ord">Ordenar por:</label>
+    <div class="ctrl"><input type="search" id="busca" placeholder="Buscar escritório ou pessoa…" aria-label="Buscar"></div>
+    <div class="ctrl" style="margin-left:auto;"><label for="ord">Ordenar por:</label>
       <select id="ord">
         <option value="total">Maior gasto total</option>
         <option value="processos">Mais processos</option>
@@ -192,16 +179,11 @@ td.nm{text-align:left;font-weight:500}
     </div>
     <button class="expand" id="toggleAll">Expandir todos</button>
   </div>
-
   <section id="lista"></section>
   <div class="foot" id="rodape"></div>
 </div>
 
 <script>
-// ==========================================
-// 1. CARREGAMENTO E ESTRUTURAÇÃO DE DADOS 
-// (Bases enviadas acopladas e transformadas em JSON estruturado para front-end)
-// ==========================================
 
 const RAW_CADASTRO = [
   {"UF":"AC","ESCRITORIO":"Distrital de Cruzeiro do Sul","NOME":"Francisco Claudino dos Santos Junior"},
@@ -423,608 +405,632 @@ const RAW_CADASTRO = [
 ];
 
 const RAW_VIAGENS = [
-  ["001/2025/ERR DSEI_Y", "IGOR ALEJANDRO ARCAY FUENMAYOR", "24/12/2024", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "ANALIMAR DIAS CASTELO BRANCO", "08/02/2025", "7,5", "R$ 600,00", "R$ 120,00", "R$ 4.620,00", "R$ 3.017,15", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "AUDERILDE GERMANO JUSTINO", "08/02/2025", "7,5", "R$ 600,00", "R$ 120,00", "R$ 4.620,00", "R$ 3.072,35", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "CRISTIANE FERREIRA DA SILVA", "08/02/2025", "7,5", "R$ 600,00", "R$ 120,00", "R$ 4.620,00", "R$ 3.671,89", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "VALDENIR ANDRADE FRANÇA", "08/02/2025", "7,5", "R$ 600,00", "R$ 120,00", "R$ 4.620,00", "R$ 3.017,15", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "ANA PATRÍCIA SANTANA DE SOUSA MOREIRA", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 4.815,05", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "CARLOS HENRIQUE OREBEWE DA SILVA TSERONHONHIMI RAMIWE", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 348,07", "R$ 1.168,41"],
-  ["006/2025/GAB/PRES", "CLEIDIANE CARVALHO RIBEIRO", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 3.691,11", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "DANILO GIUPATO", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 3.595,42", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "FÁBIO PEREIRA DOS SANTOS", "09/02/2025", "7,5", "R$ 600,00", "R$ 120,00", "R$ 4.620,00", "R$ 2.689,11", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "FÁBIO PEREIRA DOS SANTOS", "09/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 410,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "FLÁVIO HENRIQUE SANCHES DOS SANTOS", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 3.595,42", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "GUILHERME OLIVEIRA CHAGAS", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 2.624,70", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "JOATAN LIMA CARDOSO", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 3.691,11", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "JORGE ALBERTO SANTOS TEMBÉ", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 348,07", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "KADJURE METYKTIRE", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 2.251,78", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "LUIZ CARLOS FERREIRA PENHA", "09/02/2025", "7,5", "R$ 600,00", "R$ 120,00", "R$ 4.620,00", "R$ 2.989,11", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "LUIZ CARLOS FERREIRA PENHA", "09/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 410,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "MARCOS ROBERTO DANTAS DA SILVA", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 2.624,70", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "MATAVITSA KENA WAURA TXUCARRAMÃE", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 2.251,78", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "MAYARA DE ASSIS CARDOSO", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 1.543,72", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "ROBERTH REYTMANN DA SILVA", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 2.451,65", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "RONALDO DOS SANTOS PENA", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 3.299,19", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "TANIA PAIAKAN KAIAPÓ", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 1.543,72", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "VANESSA TAÍS DE SANTANA BARROS", "09/02/2025", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 3.028,78", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "FÁBIO PEREIRA DOS SANTOS", "10/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.971,86", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "LUIZ CARLOS FERREIRA PENHA", "10/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.971,86", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "LUIZ CARLOS FERREIRA PENHA", "14/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 355,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "ANALIMAR DIAS CASTELO BRANCO", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.653,36", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "AUDERILDES GERMANO JUSTINO", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.655,11", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "AUDERILDES GERMANO JUSTINO", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 400,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 1.285,25"],
-  ["006/2025/GAB/PRES", "CRISTIANE FERREIRA DA SILVA", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.591,21", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "FÁBIO PEREIRA DOS SANTOS", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.474,97", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "JOATAN LIMA CARDOSO", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 490,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "LUIZ CARLOS FERREIRA PENHA", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.474,97", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "VALDENIR ANDRADE FRANÇA", "15/02/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.653,36", "R$ 0,00"],
-  ["014/2025/PRES", "VALDENIR ANDRADE FRANÇA", "24/02/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["031/2025/PRES", "RONALDO DOS SANTOS PENA", "27/03/2025", "2,5", "R$ 600,00", "R$ 0,00", "R$ 1.500,00", "R$ 0,00", "R$ 0,00"],
-  ["033/2025/CVI/PRES", "CLEIDIANE CARVALHO RIBEIRO", "27/03/2025", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 0,00", "R$ 0,00"],
-  ["030/2025/PRES", "VALDENIR ANDRADE FRANÇA", "05/04/2025", "7,5", "R$ 600,00", "R$ 120,00", "R$ 4.620,00", "R$ 3.255,11", "R$ 0,00"],
-  ["030/2025/PRES", "ZELANDES ALBERTO OLIVEIRA", "05/04/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 5.779,65", "R$ 0,00"],
-  ["030/2025/PRES", "VALDENIR ANDRADE FRANÇA", "12/04/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.029,91", "R$ 0,00"],
-  ["030/2025/PRES", "VALDENIR ANDRADE FRANÇA", "12/04/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 995,00", "R$ 0,00"],
-  ["049/2025-29", "RONALDO DOS SANTOS PENA", "23/04/2025", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 0,00", "R$ 0,00"],
-  ["049/2025-29", "RONALDO DOS SANTOS PENA", "24/04/2025", "3", "R$ 550,00", "R$ 110,00", "R$ 1.760,00", "R$ 0,00", "R$ 0,00"],
-  ["039/2025/SEAR/PRES", "VALDENIR ANDRADE FRANÇA", "28/04/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["268/2025-16", "GILMAR WAGNER", "19/05/2025", "4,5", "R$ 600,00", "R$ 120,00", "R$ 2.820,00", "R$ 2.288,70", "R$ 0,00"],
-  ["378/2025", "MATAVITSA KENA WAURA TXUCARRAMÃE", "20/05/2025", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["1053/2025-12", "LIBÉRIO UIAGUMEAREU", "08/06/2025", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["1818/2025-14", "FABIO PEREIRA DOS SANTOS", "15/06/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["1543/2025-19", "CRISTIANE FERREIRA DA SILVA", "01/07/2025", "3,5", "R$ 600,00", "R$ 120,00", "R$ 2.220,00", "R$ 2.231,57", "R$ 0,00"],
-  ["1543/2025-19", "CRISTIANE FERREIRA DA SILVA", "02/07/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.095,32", "R$ 0,00"],
-  ["2319/2025-36", "GILMAR WAGNER", "05/07/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 271,88", "R$ 0,00"],
-  ["2319/2025-36", "GILMAR WAGNER", "07/07/2025", "10,5", "R$ 550,00", "R$ 110,00", "R$ 5.885,00", "R$ 886,25", "R$ 0,00"],
-  ["2043/2025-96", "MATAVITSA KENA WAURA TXUCARRAMÃE", "08/07/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["2765/2025-41", "VANESSA TAÍS DE SANTANA BARROS", "14/07/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["2319/2025-36", "GILMAR WAGNER", "16/07/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 109,04", "R$ 0,00"],
-  ["2404/2025-02", "DANILO GIUPATO", "16/07/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["2487/2025-21", "FRANCISCO MACEDO MOÇAMBITE", "21/07/2025", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["2587/2025-58", "CLEIDIANE CARVALHO RIBEIRO", "25/07/2025", "1", "R$ 550,00", "R$ 110,00", "R$ 660,00", "R$ 8.297,49", "R$ 0,00"],
-  ["2587/2025-58", "CLEIDIANE CARVALHO RIBEIRO", "26/07/2025", "12,5", "R$ 550,00", "R$ 110,00", "R$ 6.985,00", "R$ 1.186,24", "R$ 0,00"],
-  ["2484/2025-98", "GUILHERME OLIVEIRA CHAGAS", "27/07/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 470,07", "R$ 0,00"],
-  ["2484/2025-98", "GUILHERME OLIVEIRA CHAGAS", "27/07/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 470,07", "R$ 0,00"],
-  ["2998/2025-43", "CRISTIANE FERREIRA DA SILVA", "31/07/2025", "10,5", "R$ 550,00", "R$ 0,00", "R$ 5.775,00", "R$ 0,00", "R$ 0,00"],
-  ["2587/2025-58", "CLEIDIANE CARVALHO RIBEIRO", "04/08/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 695,00", "R$ 0,00"],
-  ["2587/2025-58", "CLEIDIANE CARVALHO RIBEIRO", "07/08/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.238,38", "R$ 0,00"],
-  ["3482/2025-16", "CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE", "07/08/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["3285/2025-05", "GILMAR WAGNER", "08/08/2025", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 4.029,86", "R$ 0,00"],
-  ["3285/2025-05", "GILMAR WAGNER", "08/08/2025", "10", "R$ 550,00", "R$ 110,00", "R$ 5.610,00", "R$ 2.951,31", "R$ 0,00"],
-  ["3902/2025-64", "DANILO GIUPATO", "08/08/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["3624/2025-45", "RONALDO DOS SANTOS PENA", "13/08/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["4013/2025-14", "LIBERIO UIAGUMEAREU", "23/08/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["4117/2025-29", "RONALDO DOS SANTOS PENA", "24/08/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["3998/2025-61", "TANIA PAIAKAN KAIAPÓ", "25/08/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["4005/2025-78", "VANESSA TAÍS DE SANTANA BARROS", "27/08/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["4204/2025-86", "KADJURE METYKURE", "27/08/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["3647/2025-50", "GILMAR WAGNER", "29/08/2025", "0,5", "R$ 600,00", "R$ 120,00", "R$ 420,00", "R$ 2.616,60", "R$ 0,00"],
-  ["3647/2025-50", "GILMAR WAGNER", "29/08/2025", "11", "R$ 550,00", "R$ 110,00", "R$ 6.160,00", "R$ 4.897,21", "R$ 0,00"],
-  ["4285/2025-14", "KADJURE METYKURE", "29/08/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["3841/2025-35", "CLEIDIANE CARVALHO RIBEIRO", "31/08/2025", "3", "R$ 600,00", "R$ 120,00", "R$ 1.920,00", "R$ 6.173,88", "R$ 0,00"],
-  ["4884/2025-38", "LIBERIO UIAGUMEAREU", "01/09/2025", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["3841/2025-35", "CLEIDIANE CARVALHO RIBEIRO", "06/09/2025", "3,5", "R$ 600,00", "R$ 120,00", "R$ 2.220,00", "R$ 3.445,27", "R$ 0,00"],
-  ["5396/2025-48", "JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ", "07/09/2025", "3,5", "R$ 600,00", "R$ 0,00", "R$ 2.100,00", "R$ 0,00", "R$ 0,00"],
-  ["3933/2025-15", "GILMAR WAGNER", "13/09/2025", "13", "R$ 550,00", "R$ 220,00", "R$ 7.370,00", "R$ 523,73", "R$ 0,00"],
-  ["5505/2025-27", "MATAVITSA KENA WAURA TXUCARRAMÃE", "16/09/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["3933/2025-15", "GILMAR WAGNER", "20/09/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 75,10", "R$ 0,00"],
-  ["5520/2025-75", "MATAVITSA KENA WAURA TXUCARRAMÃE", "22/09/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["6355/2025-79", "FÁBIO PEREIRA DOS SANTOS", "23/09/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["3933/2025-15", "GILMAR WAGNER", "26/09/2025", "0,5", "R$ 600,00", "R$ 0,00", "R$ 300,00", "R$ 453,14", "R$ 0,00"],
-  ["6361/2025-26", "DANILO GIUPATO", "02/10/2025", "9,5", "R$ 550,00", "R$ 0,00", "R$ 5.225,00", "R$ 0,00", "R$ 0,00"],
-  ["6718/2025-76", "CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE", "06/10/2025", "9,5", "R$ 550,00", "R$ 0,00", "R$ 5.225,00", "R$ 0,00", "R$ 0,00"],
-  ["6523/2025-26", "VANESSA TAÍS DE SANTANA BARROS", "11/10/2025", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["6700/2025-74", "KADJURE METYKTIRE", "13/10/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["7120/2025-02", "NADJA ALMEIDA GUIMARÃES", "15/10/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["7284/2025-21", "RONALDO DOS SANTOS PENA", "15/10/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["6464/2025-96", "JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ", "16/10/2025", "10,5", "R$ 550,00", "R$ 0,00", "R$ 5.775,00", "R$ 0,00", "R$ 0,00"],
-  ["7302/2025-75", "CLEIDIANE CARVALHO RIBEIRO", "19/10/2025", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 3.365,23", "R$ 0,00"],
-  ["7302/2025-75", "CLEIDIANE CARVALHO RIBEIRO", "19/10/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 385,00", "R$ 0,00"],
-  ["8634/2025-77", "GERLANE ALBUQUERQUE DOS SANTOS", "26/10/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 238,00", "R$ 0,00"],
-  ["7116/2025-36", "MATAVITSA KENA WAURA TXUCARRAMÃE", "27/10/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["8068/2025-01", "JOÃO PAULO VIEIRA NETO", "27/10/2025", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["7915/2025-11", "ANDRESSA CARVALHO SANTOS", "28/10/2025", "3,5", "R$ 550,00", "R$ 110,00", "R$ 2.035,00", "R$ 140,67", "R$ 0,00"],
-  ["8819/2025-81", "ARA JOSEFINA SILVEIRA BRASIL", "02/11/2025", "4,5", "R$ 550,00", "R$ 110,00", "R$ 2.585,00", "R$ 550,68", "R$ 0,00"],
-  ["8819/2025-81", "NADJA ALMEIDA GUIMARÃES", "02/11/2025", "4,5", "R$ 550,00", "R$ 110,00", "R$ 2.585,00", "R$ 550,68", "R$ 0,00"],
-  ["8068/2025-01", "JOÃO PAULO VIEIRA NETO", "03/11/2025", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["8068/2025-01", "RAIMUNDO SEBASTIÃO RODRIGUES NETO", "03/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["8648/2025-91", "JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ", "03/11/2025", "3,5", "R$ 600,00", "R$ 0,00", "R$ 2.100,00", "R$ 0,00", "R$ 0,00"],
-  ["8711/2025-99", "MOACYR CAÑIZO DE BRITO FILHO", "04/11/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["9493/2025-18", "NADJA ALMEIDA GUIMARÃES", "06/11/2025", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 614,86", "R$ 0,00"],
-  ["8277/2025-47", "TANIA PAIAKAN KAIAPÓ", "10/11/2025", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["9774/2025-62", "LIBÉRIO UIAGUMEAREU", "11/11/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["10206/2025-12", "RONALDO DOS SANTOS PENA", "17/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["9085/2025-58", "LIBÉRIO UIAGUMEAREU", "17/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["9318/2025-12", "LUIZ CARLOS FERREIRA PENHA", "17/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["9530/2025-80", "MAYNAMY JOSE SANTANA DA SILVA", "17/11/2025", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["9995/2025-31", "SUELLEN VIANA MARIZE LOPES", "17/11/2025", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["8133/2025-91", "ARA JOSEFINA SILVEIRA BRASIL", "19/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["8133/2025-91", "NADJA ALMEIDA GUIMARÃES", "19/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["10664/2025-43", "RAIMUNDO SEBASTIÃO RODRIGUES NETO", "24/11/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["10683/2025-70", "MANOEL MENDONCA DE FARIAS NETO", "24/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["10683/2025-70", "MAYNAMY JOSE SANTANA DA SILVA", "24/11/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["12629/2025/69", "DIONE DA CONCEIÇÃO GARCIA", "25/11/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["7988/2025-02", "JESIEL RODRIGUES", "29/11/2025", "2,5", "R$ 600,00", "R$ 0,00", "R$ 1.500,00", "R$ 6.749,54", "R$ 0,00"],
-  ["7988/2025-02", "RAYLENE ANDRADE OLIVEIRA", "29/11/2025", "3,5", "R$ 600,00", "R$ 0,00", "R$ 2.100,00", "R$ 4.641,58", "R$ 0,00"],
-  ["7988/2025-02", "RAYLENE ANDRADE OLIVEIRA", "29/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 4.923,58", "R$ 0,00"],
-  ["7988/2025-02", "AILSON DOS SANTOS", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 7.574,13", "R$ 0,00"],
-  ["7988/2025-02", "ARA JOSEFINA SILVEIRA BRASIL", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.182,88", "R$ 0,00"],
-  ["7988/2025-02", "AVANILSON KARAJA", "30/11/2025", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 2.979,09", "R$ 0,00"],
-  ["7988/2025-02", "CLEIDIANE CARVALHO RIBEIRO", "30/11/2025", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 7.584,55", "R$ 0,00"],
-  ["7988/2025-02", "DIONE DA CONCEIÇÃO GARCIA", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 5.769,05", "R$ 0,00"],
-  ["7988/2025-02", "DIONE DA CONCEIÇÃO GARCIA", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 260,00", "R$ 0,00"],
-  ["7988/2025-02", "GERLANE ALBUQUERQUE DOS SANTOS", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.527,97", "R$ 0,00"],
-  ["7988/2025-02", "JACQUELINE DA SILVA TARGINO SOARES", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.698,97", "R$ 0,00"],
-  ["7988/2025-02", "JOÃO PAULO VIEIRA NETO", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 5.144,82", "R$ 0,00"],
-  ["7988/2025-02", "JOÃO PAULO VIEIRA NETO", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 260,00", "R$ 0,00"],
-  ["7988/2025-02", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "30/11/2025", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 2.828,06", "R$ 0,00"],
-  ["7988/2025-02", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 260,00", "R$ 0,00"],
-  ["7988/2025-02", "MANOEL MENDONCA DE FARIAS NETO", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 4.928,08", "R$ 0,00"],
-  ["7988/2025-02", "MATAVITSA KENA WAURA TXUCARRAMÃE", "30/11/2025", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 5.195,90", "R$ 0,00"],
-  ["7988/2025-02", "MOACYR CAÑIZO DE BRITO FILHO", "30/11/2025", "1,5", "R$ 600,00", "R$ 0,00", "R$ 900,00", "R$ 6.866,02", "R$ 0,00"],
-  ["7988/2025-02", "NADJA ALMEIDA GUIMARÃES", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.022,72", "R$ 0,00"],
-  ["7988/2025-02", "PRISCILA DA SILVA RAMOS", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.089,10", "R$ 0,00"],
-  ["7988/2025-02", "PRISCILA DA SILVA RAMOS", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 130,00", "R$ 0,00"],
-  ["7988/2025-02", "RAIMUNDO SEBASTIÃO RODRIGUES NETO", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 5.044,73", "R$ 0,00"],
-  ["7988/2025-02", "RAYLENE ANDRADE OLIVEIRA", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.802,62", "R$ 0,00"],
-  ["7988/2025-02", "ROBSON CASSIANO SOARES", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.686,17", "R$ 0,00"],
-  ["7988/2025-02", "ROBSON CASSIANO SOARES", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 270,00", "R$ 0,00"],
-  ["7988/2025-02", "SOLANGE PEREIRA COSTA", "30/11/2025", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 1.394,89", "R$ 0,00"],
-  ["7988/2025-02", "SOLANGE PEREIRA COSTA", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 270,00", "R$ 0,00"],
-  ["7988/2025-02", "SUELLEN VIANA MARIZE LOPES", "30/11/2025", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 1.400,33", "R$ 0,00"],
-  ["7988/2025-02", "SUELLEN VIANA MARIZE LOPES", "30/11/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 260,00", "R$ 0,00"],
-  ["7988/2025-02", "ANDRESSA CARVALHO SANTOS", "01/12/2025", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 2.166,78", "R$ 0,00"],
-  ["7988/2025-02", "ANDRESSA CARVALHO SANTOS", "01/12/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 270,00", "R$ 0,00"],
-  ["10398/2025-59", "TAISSA RAFAELA GUINANCIO DE SOUZA", "02/12/2025", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 5.610,31", "R$ 0,00"],
-  ["11433/2025-57", "AILSON DOS SANTOS", "07/12/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["11433/2025-57", "JACQUELINE DA SILVA TARGINO SOARES", "07/12/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["11433/2025-57", "JACQUELINE DA SILVA TARGINO SOARES", "07/12/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["7988/2025-02", "GILMAR WAGNER", "07/12/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 510,99", "R$ 0,00"],
-  ["11598/2025-29", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "08/12/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["11693/2025-22", "GERLANE ALBUQUERQUE DOS SANTOS", "09/12/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 238,00", "R$ 0,00"],
-  ["11844/2025-42", "NADJA ALMEIDA GUIMARÃES", "09/12/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 6.312,95", "R$ 0,00"],
-  ["11563/2025-90", "RAIMUNDO SEBASTIÃO RODRIGUES NETO", "10/12/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["11331/2025-31", "ANDRESSA CARVALHO SANTOS", "11/12/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["12090/2025-48", "JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ", "11/12/2025", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["11630/2025-76", "MOACYR CAÑIZO DE BRITO FILHO", "13/12/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["11016/2025-12", "AILSON DOS SANTOS", "14/12/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["11016/2025-12", "JACQUELINE DA SILVA TARGINO SOARES", "14/12/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["11016/2025-12", "JACQUELINE DA SILVA TARGINO SOARES", "14/12/2025", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["11358/2025-24", "SOLANGE PEREIRA COSTA", "14/12/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["11540/2025-85", "SUELLEN VIANA MARIZE LOPES", "14/12/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["11611/2025-40", "JOÃO PAULO VIEIRA NETO", "15/12/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["12177/2025-15", "ROBSON CASSIANO SOARES", "15/12/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["12177/2025-15", "ROBSON CASSIANO SOARES", "15/12/2025", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11095/2025-53", "GILMAR WAGNER", "17/12/2025", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["7988/2025-02", "MAYNAMY JOSE SANTANA DA SILVA", "30/12/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.591,89", "R$ 0,00"],
-  ["7988/2025-02", "MAYNAMY JOSE SANTANA DA SILVA", "30/12/2025", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 130,00", "R$ 0,00"],
-  ["12778/2025-28", "DIONE DA CONCEIÇÃO GARCIA", "06/01/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 416,81", "R$ 0,00"],
-  ["166/2026-73", "RAYLENE ANDRADE OLIVEIRA", "06/01/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["166/2026-73", "RAYLENE ANDRADE OLIVEIRA", "06/01/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["11800/2025-12", "RONALDO RAMOS NUNES", "07/01/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["12810/2025-75", "GERLANE ALBUQUERQUE DOS SANTOS", "07/01/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 238,00", "R$ 0,00"],
-  ["12810/2025-75", "PRISCILA DA SILVA RAMOS", "07/01/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["12865/2025-85", "RONALDO DOS SANTOS PENA", "07/01/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["12590/2025-80", "RONALDO DOS SANTOS PENA", "12/01/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["328/2026-73", "FRANCISCO MACEDO MOÇAMBITE", "15/01/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["895/2026-20", "AVANILSON KARAJA", "16/01/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["535/2026-28", "CRISTIANE FERREIRA DA SILVA", "18/01/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["12861/2025-05", "RONALDO DOS SANTOS PENA", "19/01/2026", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["784/2026-13", "ROBSON CASSIANO SOARES", "19/01/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["814/2026-91", "SUELLEN VIANA MARIZE LOPES", "19/01/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["334/2026-21", "FRANCISCO MACEDO MOÇAMBITE", "22/01/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["810/2026-11", "JOÃO PAULO VIEIRA NETO", "26/01/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["1367/2026-98", "DIONE DA CONCEIÇÃO GARCIA", "28/01/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 267,48", "R$ 0,00"],
-  ["1452/2026-56", "ERLISSON DOS SANTOS CIDADE", "31/01/2026", "1", "R$ 550,00", "R$ 0,00", "R$ 550,00", "R$ 0,00", "R$ 0,00"],
-  ["877/2026-48", "JESIEL RODRIGUES", "02/02/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["001331/2026-12", "LIBÉRIO UIAGUMEAREU", "03/02/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["001483/2026-15", "FRANCISCO MACEDO MOÇAMBITE", "03/02/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["0503/2026-22", "VANESSA TAÍS DE SANTANA BARROS", "03/02/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["1716/2026-71", "GERLANE ALBUQUERQUE DOS SANTOS", "03/02/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 384,38", "R$ 0,00"],
-  ["1716/2026-71", "PRISCILA DA SILVA RAMOS", "03/02/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 384,38", "R$ 0,00"],
-  ["1691/2026-14", "RAQUEL MONTEATH DOS SANTOS", "04/02/2026", "3,5", "R$ 600,00", "R$ 120,00", "R$ 2.220,00", "R$ 6.667,31", "R$ 0,00"],
-  ["2358/2026-14", "ANDRESSA CARVALHO SANTOS", "09/02/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["2465/2026-42", "RONALDO RAMOS NUNES", "09/02/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["3021/2026-24", "ERLISSON DOS SANTOS CIDADE", "09/02/2026", "4,5", "R$ 600,00", "R$ 120,00", "R$ 2.820,00", "R$ 0,00", "R$ 0,00"],
-  ["1485/2026-04", "CRISTIANE FERREIRA DA SILVA", "10/02/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["2042/2026-22", "RONALDO DOS SANTOS PENA", "10/02/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["2779/2026-45", "FRANCISCO MACEDO MOÇAMBITE", "11/02/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["2355/2026-81", "FRANCISCO MACEDO MOÇAMBITE", "16/02/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["2594/2026-31", "DANIELLE RODRIGUES ACAMPORA DE MATOS", "22/02/2026", "10", "R$ 550,00", "R$ 120,00", "R$ 5.620,00", "R$ 267,98", "R$ 0,00"],
-  ["2594/2026-31", "HENRIQUE DE LIMA OLVEIRA", "22/02/2026", "10", "R$ 550,00", "R$ 120,00", "R$ 5.620,00", "R$ 267,98", "R$ 0,00"],
-  ["2594/2026-31", "PRYSCILA GOMES LOBO", "22/02/2026", "10", "R$ 550,00", "R$ 120,00", "R$ 5.620,00", "R$ 267,98", "R$ 0,00"],
-  ["2357/2026-70", "CRISTIANE FERREIRA DA SILVA", "23/02/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["2535/2026-62", "MAYNAMY JOSE SANTANA DA SILVA", "23/02/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["3113/2026-12", "SUELLEN VIANA MARIZE LOPES", "23/02/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["3686/2026-38", "GERLANE ALBUQUERQUE DOS SANTOS", "24/02/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 688,12", "R$ 0,00"],
-  ["4526/2026-14", "FÁBIO PEREIRA DOS SANTOS", "27/02/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["4006/2026-01", "ERLISSON DOS SANTOS CIDADE", "01/03/2026", "6,5", "R$ 600,00", "R$ 120,00", "R$ 4.020,00", "R$ 0,00", "R$ 0,00"],
-  ["3822/2026-90", "RONALDO DOS SANTOS PENA", "02/03/2026", "5,5", "R$ 550,00", "R$ 110,00", "R$ 3.135,00", "R$ 0,00", "R$ 0,00"],
-  ["4096/2026-22", "LIBÉRIO UIAGUMEAREU", "02/03/2026", "2,5", "R$ 600,00", "R$ 0,00", "R$ 1.500,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MAYNAMY JOSE SANTANA DA SILVA", "03/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["2594/2026-31", "DANIELLE RODRIGUES ACAMPORA DE MATOS", "04/03/2026", "1,5", "R$ 600,00", "R$ 110,00", "R$ 1.010,00", "R$ 1.482,55", "R$ 0,00"],
-  ["2594/2026-31", "HENRIQUE DE LIMA OLVEIRA", "04/03/2026", "1,5", "R$ 600,00", "R$ 110,00", "R$ 1.010,00", "R$ 1.482,55", "R$ 0,00"],
-  ["2594/2026-31", "PRYSCILA GOMES LOBO", "04/03/2026", "1,5", "R$ 600,00", "R$ 110,00", "R$ 1.010,00", "R$ 1.264,55", "R$ 0,00"],
-  ["1463/2026-36", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "08/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["1463/2026-36", "ROBSON CASSIANO SOARES", "08/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["3069/2026-32", "RONALDO DOS SANTOS PENA", "08/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["3612/2026-00", "ERLISSON DOS SANTOS CIDADE", "08/03/2026", "9,5", "R$ 550,00", "R$ 110,00", "R$ 5.335,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MAYNAMY JOSE SANTANA DA SILVA", "09/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["4711/2026-09", "GERLANE ALBUQUERQUE DOS SANTOS", "11/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["5288/2026-56", "FÁBIO PEREIRA DOS SANTOS", "12/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["4711/2026-09", "GERLANE ALBUQUERQUE DOS SANTOS", "15/03/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["4075/2026-15", "SOLANGE PEREIRA COSTA", "16/03/2026", "4,5", "R$ 550,00", "R$ 110,00", "R$ 2.585,00", "R$ 392,70", "R$ 0,00"],
-  ["4498/2026-27", "VANESSA TAÍS DE SANTANA BARROS", "16/03/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["4770/2026-79", "ANA CAROLINA DELGADO DE ALMEIDA", "16/03/2026", "3,5", "R$ 550,00", "R$ 110,00", "R$ 2.035,00", "R$ 749,71", "R$ 0,00"],
-  ["4770/2026-79", "THAYNARA SIPREDI SOUSA SILVA XERENTE", "16/03/2026", "3,5", "R$ 550,00", "R$ 110,00", "R$ 2.035,00", "R$ 749,71", "R$ 0,00"],
-  ["5499/2026-99", "FRANCISCO MACEDO MOÇAMBITE", "16/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["5780/2026-21", "KUTANAN WAIAPI WAIANA", "16/03/2026", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MANOEL MENDONCA DE FARIAS NETO", "18/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MANOEL MENDONCA DE FARIAS NETO", "18/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["5730/2026-44", "AILSON DOS SANTOS", "18/03/2026", "13,5", "R$ 550,00", "R$ 0,00", "R$ 7.425,00", "R$ 0,00", "R$ 0,00"],
-  ["5730/2026-44", "JACQUELINE DA SILVA TARGINO SOARES", "18/03/2026", "13,5", "R$ 550,00", "R$ 0,00", "R$ 7.425,00", "R$ 0,00", "R$ 0,00"],
-  ["6216/2026-26", "ROSENILDA APARECIDA DA SILVA", "19/03/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["6412/2026-09", "PRISCILA DA SILVA RAMOS", "19/03/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["6536/2026-86", "FÁBIO PEREIRA DOS SANTOS", "19/03/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["2753/2026-05", "VANESSA TAÍS DE SANTANA BARROS", "20/03/2026", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["5112/2026-02", "MOACYR CAÑIZO DE BRITO FILHO", "22/03/2026", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["6205/2026-46", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "22/03/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["6656/2026-83", "DANILO GIUPATO", "22/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MAYNAMY JOSE SANTANA DA SILVA", "23/03/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["4075/2026-15", "SOLANGE PEREIRA COSTA", "23/03/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 476,00", "R$ 0,00"],
-  ["4557/2026-67", "MATAVITSA KENA WAURA TXUCARRAMÃE", "23/03/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["5232/2026-00", "CLAUDIA LEITE VIEIRA", "23/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["5500/2026-85", "CRISTIANE FERREIRA DA SILVA", "23/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MANOEL MENDONCA DE FARIAS NETO", "24/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["6412/2026-09", "GERLANE ALBUQUERQUE DOS SANTOS", "25/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 269,37", "R$ 0,00"],
-  ["6998/2026-01", "CLEOMARA RODRIGUES DOS SANTOS FACHOLLI", "25/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["7000/2026-88", "DANILO GIUPATO", "25/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["6798/2026-41", "ALIRIO ARTUR GUIMARÃES", "26/03/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["6798/2026-41", "GUILHERME OLIVEIRA CHAVES", "26/03/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["5926/2026-39", "RILDO MENDES", "29/03/2026", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MANOEL MENDONCA DE FARIAS NETO", "30/03/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["3784/2026-75", "MANOEL MENDONCA DE FARIAS NETO", "30/03/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["5232/2026-00", "CLAUDIA LEITE VIEIRA", "30/03/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["5775/2026-19", "JESIEL RODRIGUES", "30/03/2026", "8,5", "R$ 550,00", "R$ 0,00", "R$ 4.675,00", "R$ 0,00", "R$ 0,00"],
-  ["6205/2026-46", "ROBSON CASSIANO SOARES", "30/03/2026", "1", "R$ 550,00", "R$ 0,00", "R$ 550,00", "R$ 0,00", "R$ 0,00"],
-  ["6778/2026-70", "ELIENE DA SILVA MACHADO", "30/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["6778/2026-70", "JÉSSICA ANNE PEREIRA CORRÊA FRANÇA", "30/03/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["6205/2026-46", "ROBSON CASSIANO SOARES", "31/03/2026", "1,5", "R$ 600,00", "R$ 0,00", "R$ 900,00", "R$ 0,00", "R$ 0,00"],
-  ["6665/2026-74", "AVANILSON KARAJA", "31/03/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["6613/2026-06", "FÁBIO PEREIRA DOS SANTOS", "03/04/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["7892/2026-17", "DANILO GIUPATO", "03/04/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["5146/2026-99", "RAYLENE ANDRADE OLIVEIRA", "04/04/2026", "2,5", "R$ 600,00", "R$ 0,00", "R$ 1.500,00", "R$ 3.709,05", "R$ 0,00"],
-  ["5146/2026-99", "SAMUEL YRIWERANA KARAJA", "04/04/2026", "6,5", "R$ 600,00", "R$ 0,00", "R$ 3.900,00", "R$ 0,00", "R$ 0,00"],
-  ["5146/2026-99", "AILSON DOS SANTOS", "05/04/2026", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 0,00", "R$ 0,00"],
-  ["5146/2026-99", "ANDRESSA CARVALHO SANTOS", "05/04/2026", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 878,77", "R$ 0,00"],
-  ["5146/2026-99", "JOÃO PAULO VIEIRA NETO", "05/04/2026", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 6.839,04", "R$ 0,00"],
-  ["5146/2026-99", "LIBÉRIO UIAGUMEAREU", "05/04/2026", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 3.564,42", "R$ 0,00"],
-  ["5146/2026-99", "MARCOS MORREIRA", "05/04/2026", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 2.881,39", "R$ 0,00"],
-  ["5146/2026-99", "MARCOS MORREIRA", "05/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 1.938,06", "R$ 0,00"],
-  ["5146/2026-99", "MATAVITSA KENA WAURA TXUCARRAMÃE", "05/04/2026", "6,5", "R$ 600,00", "R$ 0,00", "R$ 3.900,00", "R$ 5.655,13", "R$ 0,00"],
-  ["5146/2026-99", "MAYNAMY JOSE SANTANA DA SILVA", "05/04/2026", "5,5", "R$ 600,00", "R$ 120,00", "R$ 3.420,00", "R$ 3.676,11", "R$ 0,00"],
-  ["5146/2026-99", "RAYLENE ANDRADE OLIVEIRA", "05/04/2026", "5", "R$ 600,00", "R$ 0,00", "R$ 3.000,00", "R$ 5.694,76", "R$ 0,00"],
-  ["5146/2026-99", "ROBSON CASSIANO SOARES", "05/04/2026", "5,5", "R$ 600,00", "R$ 0,00", "R$ 3.300,00", "R$ 4.923,76", "R$ 0,00"],
-  ["5146/2026-99", "SUELLEN VIANA MARIZE LOPES", "05/04/2026", "6,5", "R$ 600,00", "R$ 0,00", "R$ 3.900,00", "R$ 3.245,85", "R$ 0,00"],
-  ["5146/2026-99", "TANIA PAIAKAN KAIAPÓ", "05/04/2026", "6,5", "R$ 600,00", "R$ 0,00", "R$ 3.900,00", "R$ 1.628,05", "R$ 0,00"],
-  ["7511/2026-08", "ENIVALDO SARMENTO DOS SANTOS TEMBÉ", "05/04/2026", "6,5", "R$ 600,00", "R$ 0,00", "R$ 3.900,00", "R$ 0,00", "R$ 0,00"],
-  ["6559/2026-91", "SERGIO MURILO CARDOSO DINIZ", "06/04/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["6809/2026-92", "FRANCISCO MACEDO MOÇAMBITE", "06/04/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["7399/2026-05", "ELDA MESSIAS DE OLIVEIRA PINHEIRO", "06/04/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["7399/2026-05", "ELIENE DA SILVA MACHADO", "06/04/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["8179/2026-91", "ROSENILDA APARECIDA DA SILVA", "07/04/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["7034/2026-72", "BARBARA CRISTINA BATISTA LOPES SANTOS", "08/04/2026", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 1.125,65", "R$ 0,00"],
-  ["8160/2026-44", "FÁBIO PEREIRA DOS SANTOS", "09/04/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["8247/2026-11", "ALIRIO ARTUR GUIMARÃES", "09/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["5724/2026-97", "JESIEL RODRIGUES", "10/04/2026", "12,5", "R$ 550,00", "R$ 0,00", "R$ 6.875,00", "R$ 0,00", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "12/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 753,27", "R$ 0,00"],
-  ["6861/2026-49", "IVISON LUAN FERREIRA ARAÚJO", "12/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 753,27", "R$ 0,00"],
-  ["7064/2026-89", "ANA THEREZA NUNES CAMPOS", "12/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 460,65", "R$ 0,00"],
-  ["7064/2026-89", "ANDRESSA CARVALHO SANTOS", "12/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 716,92", "R$ 0,00"],
-  ["7064/2026-89", "ELIETE JERONIMO DA SILVA", "12/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 460,65", "R$ 0,00"],
-  ["7064/2026-89", "ELIETE JERONIMO DA SILVA", "12/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 716,92", "R$ 0,00"],
-  ["7623/2026-51", "SOLANGE PEREIRA COSTA", "12/04/2026", "1", "R$ 600,00", "R$ 0,00", "R$ 600,00", "R$ 0,00", "R$ 0,00"],
-  ["7973/2026-17", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "12/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["7973/2026-17", "ROBSON CASSIANO SOARES", "12/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["5232/2026-00", "CLAUDIA LEITE VIEIRA", "13/04/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["6812/2026-14", "CRISTIANE FERREIRA DA SILVA", "13/04/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["7034/2026-72", "BARBARA CRISTINA BATISTA LOPES SANTOS", "13/04/2026", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 145,36", "R$ 0,00"],
-  ["7480/2026-87", "OHORI HARITXANA DE FARIAS KARAJA", "13/04/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["7618/2026-48", "ROGÉRIO SIMÃO RODRIGUES FILHO", "13/04/2026", "3", "R$ 550,00", "R$ 0,00", "R$ 1.650,00", "R$ 535,50", "R$ 0,00"],
-  ["7618/2026-48", "SUELLEN VIANA MARIZE LOPES", "13/04/2026", "3", "R$ 550,00", "R$ 0,00", "R$ 1.650,00", "R$ 535,50", "R$ 0,00"],
-  ["7970/2026-83", "ELIENE DA SILVA MACHADO", "13/04/2026", "4,5", "R$ 600,00", "R$ 0,00", "R$ 2.700,00", "R$ 0,00", "R$ 0,00"],
-  ["7970/2026-83", "JÉSSICA ANNE PEREIRA CORRÊA FRANÇA", "13/04/2026", "4,5", "R$ 600,00", "R$ 0,00", "R$ 2.700,00", "R$ 0,00", "R$ 0,00"],
-  ["8506/2026-12", "EDUARDO FUNCHAL", "13/04/2026", "0,5", "R$ 600,00", "R$ 0,00", "R$ 300,00", "R$ 0,00", "R$ 0,00"],
-  ["8763/2026-46", "MAYNAMY JOSE SANTANA DA SILVA", "13/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["2594/2026-31", "CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE", "14/04/2026", "9,5", "R$ 550,00", "R$ 0,00", "R$ 5.225,00", "R$ 0,00", "R$ 0,00"],
-  ["7064/2026-89", "ANA THEREZA NUNES CAMPOS", "14/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 187,91", "R$ 0,00"],
-  ["7064/2026-89", "ELIETE JERONIMO DA SILVA", "14/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 187,91", "R$ 0,00"],
-  ["7623/2026-51", "SOLANGE PEREIRA COSTA", "14/04/2026", "3", "R$ 550,00", "R$ 0,00", "R$ 1.650,00", "R$ 0,00", "R$ 0,00"],
-  ["8047/2026-69", "CLEIDIANE CARVALHO RIBEIRO", "14/04/2026", "2,5", "R$ 600,00", "R$ 0,00", "R$ 1.500,00", "R$ 5.887,88", "R$ 0,00"],
-  ["8047/2026-69", "CLEIDIANE CARVALHO RIBEIRO", "14/04/2026", "4", "R$ 550,00", "R$ 0,00", "R$ 2.200,00", "R$ 0,00", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "15/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 640,27", "R$ 0,00"],
-  ["6861/2026-49", "IVISON LUAN FERREIRA ARAÚJO", "15/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 640,27", "R$ 0,00"],
-  ["7034/2026-72", "ELAINE SANTOS DA SILVA", "15/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 766,56", "R$ 0,00"],
-  ["7064/2026-89", "ANA THEREZA NUNES CAMPOS", "15/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 777,64", "R$ 0,00"],
-  ["7064/2026-89", "ELIETE JERONIMO DA SILVA", "15/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 777,64", "R$ 0,00"],
-  ["8418/2026-11", "DIONE DA CONCEIÇÃO GARCIA", "15/04/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 115,52", "R$ 0,00"],
-  ["8642/2026-02", "MANOEL MENDONCA DE FARIAS NETO", "15/04/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["9127/2026-31", "ROSENILDA APARECIDA DA SILVA", "15/04/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["9165/2026-94", "EMANOELA CAROLINE MOTA FERNANDES", "15/04/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["9165/2026-94", "PAULO DE ALMEIDA SILVA NETO", "15/04/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["7034/2026-72", "JAGUARACIRA ALVES PINTO", "16/04/2026", "0,5", "R$ 550,00", "R$ 110,00", "R$ 385,00", "R$ 0,00", "R$ 0,00"],
-  ["7618/2026-48", "ROGÉRIO SIMÃO RODRIGUES FILHO", "16/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 261,80", "R$ 0,00"],
-  ["7618/2026-48", "SUELLEN VIANA MARIZE LOPES", "16/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 261,80", "R$ 0,00"],
-  ["7623/2026-51", "SOLANGE PEREIRA COSTA", "16/04/2026", "2", "R$ 550,00", "R$ 0,00", "R$ 1.100,00", "R$ 0,00", "R$ 0,00"],
-  ["8447/2026-74", "PRISCILA DA SILVA RAMOS", "16/04/2026", "1,5", "R$ 600,00", "R$ 0,00", "R$ 900,00", "R$ 0,00", "R$ 0,00"],
-  ["8450/2026-98", "GERLANE ALBUQUERQUE DOS SANTOS", "16/04/2026", "1,5", "R$ 600,00", "R$ 0,00", "R$ 900,00", "R$ 0,00", "R$ 0,00"],
-  ["7623/2026-51", "SOLANGE PEREIRA COSTA", "18/04/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["8449/2026-63", "RAIMUNDA PEREIRA LIMA", "18/04/2026", "13,5", "R$ 550,00", "R$ 0,00", "R$ 7.425,00", "R$ 0,00", "R$ 0,00"],
-  ["9300/2026-00", "ERLISSON DOS SANTOS CIDADE", "20/04/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 0,00", "R$ 0,00"],
-  ["8642/2026-02", "MAYNAMY JOSE SANTANA DA SILVA", "21/04/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["8743/2026-75", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "21/04/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["9005/2026-45", "FÁBIO PEREIRA DOS SANTOS", "21/04/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "22/04/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 165,53", "R$ 0,00"],
-  ["6861/2026-49", "IVISON LUAN FERREIRA ARAÚJO", "22/04/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 165,53", "R$ 0,00"],
-  ["9174/2026-85", "LIBERIO UIAGUMEAREU", "22/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["9441/2026-14", "ANA CAROLINA SILVA GONÇALVES", "22/04/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["9525/2026-58", "GERLANE ALBUQUERQUE DOS SANTOS", "22/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 249,45", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "23/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 129,48", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "23/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 123,59", "R$ 0,00"],
-  ["6861/2026-49", "IVISON LUAN FERREIRA ARAÚJO", "23/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 123,59", "R$ 0,00"],
-  ["6861/2026-49", "IVISON LUAN FERREIRA ARAÚJO", "23/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 138,07", "R$ 0,00"],
-  ["6861/2026-49", "IVISON LUAN FERREIRA ARAÚJO", "23/04/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 129,48", "R$ 0,00"],
-  ["9619/2026-27", "ROSENILDA APARECIDA DA SILVA", "23/04/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["9441/2026-14", "ARA JOSEFINA SILVEIRA BRASIL", "24/04/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["9615/2026-49", "RONALDO RAMOS NUNES", "25/04/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["6796/2026-51", "GILMAR WAGNER", "26/04/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["8862/2026-28", "CRISTIANE FERREIRA DA SILVA", "26/04/2026", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["8959/2026-31", "ANDRESSA CARVALHO SANTOS", "26/04/2026", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 0,00", "R$ 0,00"],
-  ["9207/2026-97", "HERODOTO JEAN DE SALES", "26/04/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 4.511,90", "R$ 0,00"],
-  ["9352/2026-78", "IRENI HERCULANO UCHOA MOURA", "26/04/2026", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 0,00", "R$ 0,00"],
-  ["6705/2026-88", "UBIRACI SILVA MATOS", "27/04/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 1.595,43", "R$ 0,00"],
-  ["8066/2026-95", "JESIEL RODRIGUES", "27/04/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["8700/2026-90", "ANDREY THOMASSEN", "27/04/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["8743/2026-75", "ROBSON CASSIANO SOARES", "27/04/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["9927/2026-52", "RONALDO DOS SANTOS PENA", "27/04/2026", "3,5", "R$ 600,00", "R$ 0,00", "R$ 2.100,00", "R$ 0,00", "R$ 0,00"],
-  ["10191/2026-65", "PRISCILA DA SILVA RAMOS", "29/04/2026", "1,5", "R$ 600,00", "R$ 0,00", "R$ 900,00", "R$ 0,00", "R$ 0,00"],
-  ["9435/2026-67", "DERIK JOSE DOS SANTOS BELEN", "03/05/2026", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 0,00", "R$ 0,00"],
-  ["9729/2026-99", "SOLANGE PEREIRA COSTA", "03/05/2026", "6,5", "R$ 550,00", "R$ 0,00", "R$ 3.575,00", "R$ 523,60", "R$ 0,00"],
-  ["10181/2026-20", "DANILO GIUPATO", "04/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["10280/2026-10", "AILSON DOS SANTOS", "04/05/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["10288/2026-78", "ARGEMIRO FALCAO JUNIOR", "04/05/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["10288/2026-78", "LUIZ MARCELO MAGALHÃES CRUZ", "04/05/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["10370/2026-01", "URAAN ANDERSON SURUI", "04/05/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["10475/2026-51", "PLACIDA BEATRIZ OSORIO", "04/05/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["10367/2026-89", "GERLANE ALBUQUERQUE DOS SANTOS", "05/05/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 170,99", "R$ 0,00"],
-  ["10807/2026-06", "RONALDO RAMOS NUNES", "05/05/2026", "12,5", "R$ 550,00", "R$ 0,00", "R$ 6.875,00", "R$ 0,00", "R$ 0,00"],
-  ["10665/2026-79", "ELAINE SANTOS DA SILVA", "06/05/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 1.006,98", "R$ 0,00"],
-  ["10855/2026-96", "EDUARDO FUNCHAL", "06/05/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 522,98", "R$ 0,00"],
-  ["10575/2026-88", "ANA CAROLINA SILVA GONÇALVES", "07/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 416,37", "R$ 0,00"],
-  ["11328/2026-07", "DIONE DA CONCEIÇÃO GARCIA", "08/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "10/05/2026", "2", "R$ 550,00", "R$ 110,00", "R$ 1.210,00", "R$ 719,95", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA QUEIRÓS", "10/05/2026", "2", "R$ 550,00", "R$ 110,00", "R$ 1.210,00", "R$ 719,95", "R$ 0,00"],
-  ["10370/2026-01", "URAAN ANDERSON SURUI", "11/05/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["10513/2026-76", "AILSON DOS SANTOS", "11/05/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["10513/2026-76", "JACQUELINE DA SILVA TARGINO SOARES", "11/05/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["11508/2026-81", "DAVID WENDELL VEIGA LOBATO", "11/05/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["11508/2026-81", "KUTANAN WAIAPI WAIANA", "11/05/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["9838/2026-14", "MAYNAMY JOSE SANTANA DA SILVA", "11/05/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "12/05/2026", "1", "R$ 550,00", "R$ 110,00", "R$ 660,00", "R$ 14,99", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA QUEIRÓS", "12/05/2026", "1", "R$ 550,00", "R$ 110,00", "R$ 660,00", "R$ 14,99", "R$ 0,00"],
-  ["11410/2026-23", "ARGEMIRO FALCAO JUNIOR", "13/05/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["11410/2026-23", "LUIZ MARCELO MAGALHÃES CRUZ", "13/05/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA CARVALHO SANTOS", "13/05/2026", "3,5", "R$ 550,00", "R$ 110,00", "R$ 2.035,00", "R$ 416,88", "R$ 0,00"],
-  ["6861/2026-49", "ANDRESSA QUEIRÓS", "13/05/2026", "3,5", "R$ 550,00", "R$ 110,00", "R$ 2.035,00", "R$ 416,88", "R$ 0,00"],
-  ["11128/2026-46", "GABRIELA ALMEIDA PRADO", "14/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11128/2026-46", "ROSENILDA APARECIDA DA SILVA", "14/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11736/2026-51", "ROSENILDA APARECIDA DA SILVA", "14/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11736/2026-51", "ROSENILDA APARECIDA DA SILVA", "14/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11675/2026-21", "JACQUELINE DA SILVA TARGINO SOARES", "16/05/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 241,34", "R$ 0,00"],
-  ["12016/2026-11", "DIONE DA CONCEIÇÃO GARCIA", "16/05/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["11012/2026-15", "ANDRESSA CARVALHO SANTOS", "17/05/2026", "6,5", "R$ 550,00", "R$ 110,00", "R$ 3.685,00", "R$ 1.260,76", "R$ 0,00"],
-  ["11012/2026-15", "IVISON LUAN FERREIRA ARAÚJO", "17/05/2026", "6,5", "R$ 550,00", "R$ 110,00", "R$ 3.685,00", "R$ 1.260,76", "R$ 0,00"],
-  ["11087/2026-98", "ROBSON CASSIANO SOARES", "17/05/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["10575/2026-88", "NADJA ALMEIDA GUIMARÃES", "18/05/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 416,37", "R$ 0,00"],
-  ["12016/2026-11", "DIONE DA CONCEIÇÃO GARCIA", "18/05/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["12367/2026-13", "JOÃO PAULO VIEIRA NETO", "18/05/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 0,00", "R$ 0,00"],
-  ["11790/2026-04", "GERLANE ALBUQUERQUE DOS SANTOS", "19/05/2026", "3,5", "R$ 550,00", "R$ 110,00", "R$ 2.035,00", "R$ 109,71", "R$ 0,00"],
-  ["10665/2026-79", "ARA JOSEFINA SILVEIRA BRASIL", "20/05/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.220,90", "R$ 0,00"],
-  ["10665/2026-79", "ARA JOSEFINA SILVEIRA BRASIL", "20/05/2026", "2,5", "R$ 550,00", "R$ 110,00", "R$ 1.485,00", "R$ 0,00", "R$ 0,00"],
-  ["11644/2026-71", "JESIEL RODRIGUES", "20/05/2026", "5,5", "R$ 550,00", "R$ 0,00", "R$ 3.025,00", "R$ 0,00", "R$ 0,00"],
-  ["11788/2026-27", "PRISCILA DA SILVA RAMOS", "20/05/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["12156/2026-81", "ELAINE SANTOS DA SILVA", "20/05/2026", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 3.062,62", "R$ 0,00"],
-  ["12206/2026-20", "NADJA ALMEIDA GUIMARÃES", "21/05/2026", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 258,54", "R$ 0,00"],
-  ["12433/2026-55", "KATIA ELLEN DOS SANTOS", "21/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["12447/2026-79", "GABRIELA ALMEIDA PRADO", "21/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["10754/2026-15", "FABIO JUN SAKUMA", "22/05/2026", "7", "R$ 550,00", "R$ 110,00", "R$ 3.960,00", "R$ 4.789,45", "R$ 0,00"],
-  ["10754/2026-15", "FABIO PAGANINI PEREIRA DA COSTA", "22/05/2026", "7", "R$ 550,00", "R$ 110,00", "R$ 3.960,00", "R$ 4.037,08", "R$ 0,00"],
-  ["10754/2026-15", "GUILHERME AUGUSTO DE GOUVEIA TAFNER JORGE", "22/05/2026", "7", "R$ 550,00", "R$ 110,00", "R$ 3.960,00", "R$ 4.037,08", "R$ 0,00"],
-  ["11736/2026-51", "KRISNAR FERREIRA", "22/05/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["11736/2026-51", "KRISNAR FERREIRA", "22/05/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["12105/2026-59", "ELIANGELA TAVARES GONÇALVES", "22/05/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["11012/2026-15", "ANDRESSA CARVALHO SANTOS", "23/05/2026", "4", "R$ 550,00", "R$ 110,00", "R$ 2.310,00", "R$ 180,29", "R$ 0,00"],
-  ["11012/2026-15", "IVISON LUAN FERREIRA ARAÚJO", "23/05/2026", "4", "R$ 550,00", "R$ 110,00", "R$ 2.310,00", "R$ 180,29", "R$ 0,00"],
-  ["12091/2026-73", "MOACYR CAÑIZO DE BRITO FILHO", "23/05/2026", "10,5", "R$ 550,00", "R$ 0,00", "R$ 5.775,00", "R$ 0,00", "R$ 0,00"],
-  ["11646/2026-60", "NADJA ALMEIDA GUIMARÃES", "24/05/2026", "1", "R$ 600,00", "R$ 120,00", "R$ 720,00", "R$ 843,20", "R$ 0,00"],
-  ["12156/2026-81", "ELAINE SANTOS DA SILVA", "24/05/2026", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 3.820,71", "R$ 0,00"],
-  ["11646/2026-60", "NADJA ALMEIDA GUIMARÃES", "25/05/2026", "1,5", "R$ 550,00", "R$ 110,00", "R$ 935,00", "R$ 394,86", "R$ 0,00"],
-  ["12166/2026-16", "GERLANE ALBUQUERQUE DOS SANTOS", "25/05/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 416,65", "R$ 0,00"],
-  ["10435/2026-18", "AILSON DOS SANTOS", "26/05/2026", "8,5", "R$ 550,00", "R$ 0,00", "R$ 4.675,00", "R$ 0,00", "R$ 0,00"],
-  ["10435/2026-18", "JACQUELINE DA SILVA TARGINO SOARES", "26/05/2026", "8,5", "R$ 550,00", "R$ 0,00", "R$ 4.675,00", "R$ 0,00", "R$ 0,00"],
-  ["10754/2026-15", "CELSO TAKASHI NAKANO", "26/05/2026", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 4.360,12", "R$ 0,00"],
-  ["10754/2026-15", "CELSO TAKASHI NAKANO", "26/05/2026", "3", "R$ 550,00", "R$ 110,00", "R$ 1.760,00", "R$ 5.316,55", "R$ 0,00"],
-  ["10754/2026-15", "KAZUE TANIA NISHI", "26/05/2026", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 4.748,84", "R$ 0,00"],
-  ["10754/2026-15", "KAZUE TANIA NISHI", "26/05/2026", "3", "R$ 550,00", "R$ 110,00", "R$ 1.760,00", "R$ 5.286,59", "R$ 0,00"],
-  ["10754/2026-15", "RICARDO KENITHI NAKAMURA", "26/05/2026", "3", "R$ 550,00", "R$ 110,00", "R$ 1.760,00", "R$ 2.759,50", "R$ 0,00"],
-  ["10754/2026-15", "RICARDO KENITHI NAKAMURA", "26/05/2026", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 5.607,10", "R$ 0,00"],
-  ["12643/2026-43", "PLACIDA BEATRIZ OSORIO", "28/05/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["10754/2026-15", "FABIO JUN SAKUMA", "29/05/2026", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 4.515,47", "R$ 0,00"],
-  ["10754/2026-15", "FABIO PAGANINI PEREIRA DA COSTA", "29/05/2026", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 4.515,47", "R$ 0,00"],
-  ["10754/2026-15", "GUILHERME AUGUSTO DE GOUVEIA TAFNER JORGE", "29/05/2026", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 4.397,96", "R$ 0,00"],
-  ["12433/2026-55", "SUZENETE REGINA DE CARLIS", "29/05/2026", "0,5", "R$ 550,00", "R$ 0,00", "R$ 275,00", "R$ 0,00", "R$ 0,00"],
-  ["12787/2026-08", "NAIARA MARTINS DE SOUZA", "31/05/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["12803/2026-54", "LILIAN CRISTINA PEDROZA DA CUNHA LIMA", "31/05/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["12803/2026-54", "ROBSON CASSIANO SOARES", "01/06/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["13697/2026-26", "GERLANE ALBUQUERQUE DOS SANTOS", "01/06/2026", "2,5", "R$ 550,00", "R$ 0,00", "R$ 1.375,00", "R$ 0,00", "R$ 0,00"],
-  ["11787/2026-82", "SINDOMAR WARU", "02/06/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["4811/2026-27", "EUDES LOPES BATISTA", "08/06/2026", "2", "R$ 600,00", "R$ 120,00", "R$ 1.320,00", "R$ 2.018,96", "R$ 0,00"],
-  ["4811/2026-27", "ALESSANDRA LOPES TAVARES", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 5.384,52", "R$ 0,00"],
-  ["4811/2026-27", "ARUKAPÉ SURUÍ", "09/06/2026", "1,5", "R$ 600,00", "R$ 120,00", "R$ 1.020,00", "R$ 1.366,40", "R$ 0,00"],
-  ["4811/2026-27", "AWINHOO ARAWETÉ", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 1.523,12", "R$ 0,00"],
-  ["4811/2026-27", "AWINHOO ARAWETÉ", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 2.858,97", "R$ 0,00"],
-  ["4811/2026-27", "EUDES LOPES BATISTA", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 5.384,52", "R$ 0,00"],
-  ["4811/2026-27", "HITLER FERREIRA DA SILVA", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 2.609,33", "R$ 0,00"],
-  ["4811/2026-27", "JONATHAN TOTO JACINTO", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 3.385,47", "R$ 0,00"],
-  ["4811/2026-27", "LEANDRO SANTANA", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 2.329,75", "R$ 0,00"],
-  ["4811/2026-27", "LURDELICE MOREIRA NELSON", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 2.879,11", "R$ 0,00"],
-  ["4811/2026-27", "MRU-IRE METUKTIRE", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 2.711,13", "R$ 0,00"],
-  ["4811/2026-27", "NAARA NASCIMENTO COSTA", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 5.435,90", "R$ 0,00"],
-  ["4811/2026-27", "PEDRO SANTA RITA DA SILVA", "09/06/2026", "4", "R$ 600,00", "R$ 240,00", "R$ 2.640,00", "R$ 5.384,52", "R$ 0,00"],
-  ["4811/2026-27", "THIAGO SILVÉRIO DE CAMILO", "09/06/2026", "2,5", "R$ 600,00", "R$ 120,00", "R$ 1.620,00", "R$ 1.675,42", "R$ 0,00"],
-  ["13485/2026-49", "MANOEL MENDONCA DE FARIAS NETO", "11/06/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11248/2026-43", "EDUARDO LUCENA MOTA", "15/06/2026", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["11248/2026-43", "TATHIANI LIMA DA SILVA", "22/06/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11248/2026-43", "TATHIANI LIMA DA SILVA", "25/06/2026", "1,5", "R$ 550,00", "R$ 0,00", "R$ 825,00", "R$ 0,00", "R$ 0,00"],
-  ["11248/2026-43", "PALOMA SENA AMORIM", "30/06/2026", "3,5", "R$ 550,00", "R$ 0,00", "R$ 1.925,00", "R$ 0,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "ANA PATRÍCIA SANTANA DE SOUSA MOREIRA", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 210,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "ANA PATRÍCIA SANTANA DE SOUSA MOREIRA", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 280,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "CLEIDIANE CARVALHO RIBEIRO", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 210,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "DANILO GIUPATO", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 210,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "GUILHERME OLIVEIRA CHAGAS", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 210,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "KADJURE METYKTIRE", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.864,33", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "MARCOS ROBERTO DANTAS DA SILVA", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 210,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "MATAVITSA KENA WAURA TXUCARRAMÃE", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 210,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "RONALDO DOS SANTOS PENA", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 200,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "TANIA PAIAKAN KAIAPÓ", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 210,00", "R$ 0,00"],
-  ["006/2025/GAB/PRES", "VALDENIR ANDRADE FRANÇA", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 200,00", "R$ 0,00"],
-  ["0381/2026-74", "GERLANE ALBUQUERQUE DOS SANTOS", "", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["3144/2026-65", "FÁBIO PEREIRA DOS SANTOS", "", "4,5", "R$ 550,00", "R$ 0,00", "R$ 2.475,00", "R$ 0,00", "R$ 0,00"],
-  ["5146/2026-99", "RAYLENE ANDRADE OLIVEIRA", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 280,00", "R$ 0,00"],
-  ["5146/2026-99", "SUELLEN VIANA MARIZE LOPES", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 200,00", "R$ 0,00"],
-  ["7988/2025-02", "ARA JOSEFINA SILVEIRA BRASIL", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 130,00", "R$ 0,00"],
-  ["7988/2025-02", "ARA JOSEFINA SILVEIRA BRASIL", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 2.223,39", "R$ 0,00"],
-  ["7988/2025-02", "AVANILSON KARAJA", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 130,00", "R$ 0,00"],
-  ["7988/2025-02", "NADJA ALMEIDA GUIMARÃES", "", "0", "R$ 0,00", "R$ 0,00", "R$ 0,00", "R$ 130,00", "R$ 0,00"]
+  ["001/2025/ERR DSEI_Y","IGOR ALEJANDRO ARCAY FUENMAYOR","24/12/2024","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","ANALIMAR DIAS CASTELO BRANCO","08/02/2025","7,5","R$ 600,00","R$ 120,00","R$ 4.620,00","R$ 3.017,15","R$ 0,00"],
+  ["006/2025/GAB/PRES","AUDERILDE GERMANO JUSTINO","08/02/2025","7,5","R$ 600,00","R$ 120,00","R$ 4.620,00","R$ 3.072,35","R$ 0,00"],
+  ["006/2025/GAB/PRES","CRISTIANE FERREIRA DA SILVA","08/02/2025","7,5","R$ 600,00","R$ 120,00","R$ 4.620,00","R$ 3.671,89","R$ 0,00"],
+  ["006/2025/GAB/PRES","VALDENIR ANDRADE FRANÇA","08/02/2025","7,5","R$ 600,00","R$ 120,00","R$ 4.620,00","R$ 3.017,15","R$ 0,00"],
+  ["006/2025/GAB/PRES","ANA PATRÍCIA SANTANA DE SOUSA MOREIRA","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 4.815,05","R$ 0,00"],
+  ["006/2025/GAB/PRES","CARLOS HENRIQUE OREBEWE DA SILVA TSERONHONHIMI RAMIWE","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 348,07","R$ 1.168,41"],
+  ["006/2025/GAB/PRES","CLEIDIANE CARVALHO RIBEIRO","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 3.691,11","R$ 0,00"],
+  ["006/2025/GAB/PRES","DANILO GIUPATO","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 3.595,42","R$ 0,00"],
+  ["006/2025/GAB/PRES","FÁBIO PEREIRA DOS SANTOS","09/02/2025","7,5","R$ 600,00","R$ 120,00","R$ 4.620,00","R$ 2.689,11","R$ 0,00"],
+  ["006/2025/GAB/PRES","FÁBIO PEREIRA DOS SANTOS","09/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 410,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","FLÁVIO HENRIQUE SANCHES DOS SANTOS","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 3.595,42","R$ 0,00"],
+  ["006/2025/GAB/PRES","GUILHERME OLIVEIRA CHAGAS","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 2.624,70","R$ 0,00"],
+  ["006/2025/GAB/PRES","JOATAN LIMA CARDOSO","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 3.691,11","R$ 0,00"],
+  ["006/2025/GAB/PRES","JORGE ALBERTO SANTOS TEMBÉ","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 348,07","R$ 0,00"],
+  ["006/2025/GAB/PRES","KADJURE METYKTIRE","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 2.251,78","R$ 0,00"],
+  ["006/2025/GAB/PRES","LUIZ CARLOS FERREIRA PENHA","09/02/2025","7,5","R$ 600,00","R$ 120,00","R$ 4.620,00","R$ 2.989,11","R$ 0,00"],
+  ["006/2025/GAB/PRES","LUIZ CARLOS FERREIRA PENHA","09/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 410,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","MARCOS ROBERTO DANTAS DA SILVA","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 2.624,70","R$ 0,00"],
+  ["006/2025/GAB/PRES","MATAVITSA KENA WAURA TXUCARRAMÃE","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 2.251,78","R$ 0,00"],
+  ["006/2025/GAB/PRES","MAYARA DE ASSIS CARDOSO","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 1.543,72","R$ 0,00"],
+  ["006/2025/GAB/PRES","ROBERTH REYTMANN DA SILVA","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 2.451,65","R$ 0,00"],
+  ["006/2025/GAB/PRES","RONALDO DOS SANTOS PENA","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 3.299,19","R$ 0,00"],
+  ["006/2025/GAB/PRES","TANIA PAIAKAN KAIAPÓ","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 1.543,72","R$ 0,00"],
+  ["006/2025/GAB/PRES","VANESSA TAÍS DE SANTANA BARROS","09/02/2025","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 3.028,78","R$ 0,00"],
+  ["006/2025/GAB/PRES","FÁBIO PEREIRA DOS SANTOS","10/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.971,86","R$ 0,00"],
+  ["006/2025/GAB/PRES","LUIZ CARLOS FERREIRA PENHA","10/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.971,86","R$ 0,00"],
+  ["006/2025/GAB/PRES","LUIZ CARLOS FERREIRA PENHA","14/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 355,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","ANALIMAR DIAS CASTELO BRANCO","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.653,36","R$ 0,00"],
+  ["006/2025/GAB/PRES","AUDERILDES GERMANO JUSTINO","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.655,11","R$ 0,00"],
+  ["006/2025/GAB/PRES","AUDERILDES GERMANO JUSTINO","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 400,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 0,00","R$ 1.285,25"],
+  ["006/2025/GAB/PRES","CRISTIANE FERREIRA DA SILVA","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.591,21","R$ 0,00"],
+  ["006/2025/GAB/PRES","FÁBIO PEREIRA DOS SANTOS","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.474,97","R$ 0,00"],
+  ["006/2025/GAB/PRES","JOATAN LIMA CARDOSO","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 490,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","LUIZ CARLOS FERREIRA PENHA","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.474,97","R$ 0,00"],
+  ["006/2025/GAB/PRES","VALDENIR ANDRADE FRANÇA","15/02/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.653,36","R$ 0,00"],
+  ["014/2025/PRES","VALDENIR ANDRADE FRANÇA","24/02/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["031/2025/PRES","RONALDO DOS SANTOS PENA","27/03/2025","2,5","R$ 600,00","R$ 0,00","R$ 1.500,00","R$ 0,00","R$ 0,00"],
+  ["033/2025/CVI/PRES","CLEIDIANE CARVALHO RIBEIRO","27/03/2025","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 0,00","R$ 0,00"],
+  ["030/2025/PRES","VALDENIR ANDRADE FRANÇA","05/04/2025","7,5","R$ 600,00","R$ 120,00","R$ 4.620,00","R$ 3.255,11","R$ 0,00"],
+  ["030/2025/PRES","ZELANDES ALBERTO OLIVEIRA","05/04/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 5.779,65","R$ 0,00"],
+  ["030/2025/PRES","VALDENIR ANDRADE FRANÇA","12/04/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.029,91","R$ 0,00"],
+  ["030/2025/PRES","VALDENIR ANDRADE FRANÇA","12/04/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 995,00","R$ 0,00"],
+  ["049/2025-29","RONALDO DOS SANTOS PENA","23/04/2025","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 0,00","R$ 0,00"],
+  ["049/2025-29","RONALDO DOS SANTOS PENA","24/04/2025","3","R$ 550,00","R$ 110,00","R$ 1.760,00","R$ 0,00","R$ 0,00"],
+  ["039/2025/SEAR/PRES","VALDENIR ANDRADE FRANÇA","28/04/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["268/2025-16","GILMAR WAGNER","19/05/2025","4,5","R$ 600,00","R$ 120,00","R$ 2.820,00","R$ 2.288,70","R$ 0,00"],
+  ["378/2025","MATAVITSA KENA WAURA TXUCARRAMÃE","20/05/2025","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["1053/2025-12","LIBÉRIO UIAGUMEAREU","08/06/2025","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["1818/2025-14","FABIO PEREIRA DOS SANTOS","15/06/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["1543/2025-19","CRISTIANE FERREIRA DA SILVA","01/07/2025","3,5","R$ 600,00","R$ 120,00","R$ 2.220,00","R$ 2.231,57","R$ 0,00"],
+  ["1543/2025-19","CRISTIANE FERREIRA DA SILVA","02/07/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.095,32","R$ 0,00"],
+  ["2319/2025-36","GILMAR WAGNER","05/07/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 271,88","R$ 0,00"],
+  ["2319/2025-36","GILMAR WAGNER","07/07/2025","10,5","R$ 550,00","R$ 110,00","R$ 5.885,00","R$ 886,25","R$ 0,00"],
+  ["2043/2025-96","MATAVITSA KENA WAURA TXUCARRAMÃE","08/07/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["2765/2025-41","VANESSA TAÍS DE SANTANA BARROS","14/07/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["2319/2025-36","GILMAR WAGNER","16/07/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 109,04","R$ 0,00"],
+  ["2404/2025-02","DANILO GIUPATO","16/07/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["2487/2025-21","FRANCISCO MACEDO MOÇAMBITE","21/07/2025","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["2587/2025-58","CLEIDIANE CARVALHO RIBEIRO","25/07/2025","1","R$ 550,00","R$ 110,00","R$ 660,00","R$ 8.297,49","R$ 0,00"],
+  ["2587/2025-58","CLEIDIANE CARVALHO RIBEIRO","26/07/2025","12,5","R$ 550,00","R$ 110,00","R$ 6.985,00","R$ 1.186,24","R$ 0,00"],
+  ["2484/2025-98","GUILHERME OLIVEIRA CHAGAS","27/07/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 470,07","R$ 0,00"],
+  ["2484/2025-98","GUILHERME OLIVEIRA CHAGAS","27/07/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 470,07","R$ 0,00"],
+  ["2998/2025-43","CRISTIANE FERREIRA DA SILVA","31/07/2025","10,5","R$ 550,00","R$ 0,00","R$ 5.775,00","R$ 0,00","R$ 0,00"],
+  ["2587/2025-58","CLEIDIANE CARVALHO RIBEIRO","04/08/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 695,00","R$ 0,00"],
+  ["2587/2025-58","CLEIDIANE CARVALHO RIBEIRO","07/08/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.238,38","R$ 0,00"],
+  ["3482/2025-16","CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE","07/08/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["3285/2025-05","GILMAR WAGNER","08/08/2025","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 4.029,86","R$ 0,00"],
+  ["3285/2025-05","GILMAR WAGNER","08/08/2025","10","R$ 550,00","R$ 110,00","R$ 5.610,00","R$ 2.951,31","R$ 0,00"],
+  ["3902/2025-64","DANILO GIUPATO","08/08/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["3624/2025-45","RONALDO DOS SANTOS PENA","13/08/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["4013/2025-14","LIBERIO UIAGUMEAREU","23/08/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["4117/2025-29","RONALDO DOS SANTOS PENA","24/08/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["3998/2025-61","TANIA PAIAKAN KAIAPÓ","25/08/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["4005/2025-78","VANESSA TAÍS DE SANTANA BARROS","27/08/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["4204/2025-86","KADJURE METYKURE","27/08/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["3647/2025-50","GILMAR WAGNER","29/08/2025","0,5","R$ 600,00","R$ 120,00","R$ 420,00","R$ 2.616,60","R$ 0,00"],
+  ["3647/2025-50","GILMAR WAGNER","29/08/2025","11","R$ 550,00","R$ 110,00","R$ 6.160,00","R$ 4.897,21","R$ 0,00"],
+  ["4285/2025-14","KADJURE METYKURE","29/08/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["3841/2025-35","CLEIDIANE CARVALHO RIBEIRO","31/08/2025","3","R$ 600,00","R$ 120,00","R$ 1.920,00","R$ 6.173,88","R$ 0,00"],
+  ["4884/2025-38","LIBERIO UIAGUMEAREU","01/09/2025","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["3841/2025-35","CLEIDIANE CARVALHO RIBEIRO","06/09/2025","3,5","R$ 600,00","R$ 120,00","R$ 2.220,00","R$ 3.445,27","R$ 0,00"],
+  ["5396/2025-48","JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ","07/09/2025","3,5","R$ 600,00","R$ 0,00","R$ 2.100,00","R$ 0,00","R$ 0,00"],
+  ["3933/2025-15","GILMAR WAGNER","13/09/2025","13","R$ 550,00","R$ 220,00","R$ 7.370,00","R$ 523,73","R$ 0,00"],
+  ["5505/2025-27","MATAVITSA KENA WAURA TXUCARRAMÃE","16/09/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["3933/2025-15","GILMAR WAGNER","20/09/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 75,10","R$ 0,00"],
+  ["5520/2025-75","MATAVITSA KENA WAURA TXUCARRAMÃE","22/09/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["6355/2025-79","FÁBIO PEREIRA DOS SANTOS","23/09/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["3933/2025-15","GILMAR WAGNER","26/09/2025","0,5","R$ 600,00","R$ 0,00","R$ 300,00","R$ 453,14","R$ 0,00"],
+  ["6361/2025-26","DANILO GIUPATO","02/10/2025","9,5","R$ 550,00","R$ 0,00","R$ 5.225,00","R$ 0,00","R$ 0,00"],
+  ["6718/2025-76","CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE","06/10/2025","9,5","R$ 550,00","R$ 0,00","R$ 5.225,00","R$ 0,00","R$ 0,00"],
+  ["6523/2025-26","VANESSA TAÍS DE SANTANA BARROS","11/10/2025","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["6700/2025-74","KADJURE METYKTIRE","13/10/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["7120/2025-02","NADJA ALMEIDA GUIMARÃES","15/10/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["7284/2025-21","RONALDO DOS SANTOS PENA","15/10/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["6464/2025-96","JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ","16/10/2025","10,5","R$ 550,00","R$ 0,00","R$ 5.775,00","R$ 0,00","R$ 0,00"],
+  ["7302/2025-75","CLEIDIANE CARVALHO RIBEIRO","19/10/2025","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 3.365,23","R$ 0,00"],
+  ["7302/2025-75","CLEIDIANE CARVALHO RIBEIRO","19/10/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 385,00","R$ 0,00"],
+  ["8634/2025-77","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","26/10/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 238,00","R$ 0,00"],
+  ["7116/2025-36","MATAVITSA KENA WAURA TXUCARRAMÃE","27/10/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["8068/2025-01","JOÃO PAULO VIEIRA NETO","27/10/2025","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["7915/2025-11","ANDRESSA CARVALHO SANTOS","28/10/2025","3,5","R$ 550,00","R$ 110,00","R$ 2.035,00","R$ 140,67","R$ 0,00"],
+  ["8819/2025-81","ARA JOSEFINA SILVEIRA BRASIL","02/11/2025","4,5","R$ 550,00","R$ 110,00","R$ 2.585,00","R$ 550,68","R$ 0,00"],
+  ["8819/2025-81","NADJA ALMEIDA GUIMARÃES","02/11/2025","4,5","R$ 550,00","R$ 110,00","R$ 2.585,00","R$ 550,68","R$ 0,00"],
+  ["8068/2025-01","JOÃO PAULO VIEIRA NETO","03/11/2025","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["8068/2025-01","RAIMUNDO SEBASTIÃO RODRIGUES NETO","03/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["8648/2025-91","JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ","03/11/2025","3,5","R$ 600,00","R$ 0,00","R$ 2.100,00","R$ 0,00","R$ 0,00"],
+  ["8711/2025-99","MOACYR CANIZO DE BRITO FILHO","04/11/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["9493/2025-18","NADJA ALMEIDA GUIMARÃES","06/11/2025","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 614,86","R$ 0,00"],
+  ["8277/2025-47","TANIA PAIAKAN KAIAPÓ","10/11/2025","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["9774/2025-62","LIBERIO UIAGUMEAREU","11/11/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["10206/2025-12","RONALDO DOS SANTOS PENA","17/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["9085/2025-58","LIBERIO UIAGUMEAREU","17/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["9318/2025-12","LUIZ CARLOS FERREIRA PENHA","17/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["9530/2025-80","MAYNAMY JOSÉ SANTANA DA SILVA","17/11/2025","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["9995/2025-31","SUELLEN VIANA MARIZÊ LOPES","17/11/2025","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["8133/2025-91","ARA JOSEFINA SILVEIRA BRASIL","19/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["8133/2025-91","NADJA ALMEIDA GUIMARÃES","19/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["10664/2025-43","RAIMUNDO SEBASTIÃO RODRIGUES NETO","24/11/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["10683/2025-70","MANOEL MENDONÇA DE FARIAS NETO","24/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["10683/2025-70","MAYNAMY JOSÉ SANTANA DA SILVA","24/11/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["12629/2025/69","DIONE DA CONCEIÇÃO GARCIA","25/11/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["7988/2025-02","JESIEL RODRIGUES","29/11/2025","2,5","R$ 600,00","R$ 0,00","R$ 1.500,00","R$ 6.749,54","R$ 0,00"],
+  ["7988/2025-02","RAYLENE ANDRADE OLIVEIRA","29/11/2025","3,5","R$ 600,00","R$ 0,00","R$ 2.100,00","R$ 4.641,58","R$ 0,00"],
+  ["7988/2025-02","RAYLENE ANDRADE OLIVEIRA","29/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 4.923,58","R$ 0,00"],
+  ["7988/2025-02","AILSON DOS SANTOS","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 7.574,13","R$ 0,00"],
+  ["7988/2025-02","ARA JOSEFINA SILVEIRA BRASIL","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.182,88","R$ 0,00"],
+  ["7988/2025-02","AVANILSON IJORARU DIAS AIRES KARAJÁ","30/11/2025","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 2.979,09","R$ 0,00"],
+  ["7988/2025-02","CLEIDIANE CARVALHO RIBEIRO","30/11/2025","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 7.584,55","R$ 0,00"],
+  ["7988/2025-02","DIONE DA CONCEIÇÃO GARCIA","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 5.769,05","R$ 0,00"],
+  ["7988/2025-02","DIONE DA CONCEIÇÃO GARCIA","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 260,00","R$ 0,00"],
+  ["7988/2025-02","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.527,97","R$ 0,00"],
+  ["7988/2025-02","JACQUELINE DA SILVA TARGINO SOARES","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.698,97","R$ 0,00"],
+  ["7988/2025-02","JOÃO PAULO VIEIRA NETO","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 5.144,82","R$ 0,00"],
+  ["7988/2025-02","JOÃO PAULO VIEIRA NETO","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 260,00","R$ 0,00"],
+  ["7988/2025-02","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","30/11/2025","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 2.828,06","R$ 0,00"],
+  ["7988/2025-02","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 260,00","R$ 0,00"],
+  ["7988/2025-02","MANOEL MENDONÇA DE FARIAS NETO","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 4.928,08","R$ 0,00"],
+  ["7988/2025-02","MATAVITSA KENA WAURA TXUCARRAMÃE","30/11/2025","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 5.195,90","R$ 0,00"],
+  ["7988/2025-02","MOACYR CANIZO DE BRITO FILHO","30/11/2025","1,5","R$ 600,00","R$ 0,00","R$ 900,00","R$ 6.866,02","R$ 0,00"],
+  ["7988/2025-02","NADJA ALMEIDA GUIMARÃES","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.022,72","R$ 0,00"],
+  ["7988/2025-02","PRISCILA DA SILVA RAMOS","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.089,10","R$ 0,00"],
+  ["7988/2025-02","PRISCILA DA SILVA RAMOS","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 130,00","R$ 0,00"],
+  ["7988/2025-02","RAIMUNDO SEBASTIÃO RODRIGUES NETO","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 5.044,73","R$ 0,00"],
+  ["7988/2025-02","RAYLENE ANDRADE OLIVEIRA","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.802,62","R$ 0,00"],
+  ["7988/2025-02","ROBSON CASSIANO SOARES","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.686,17","R$ 0,00"],
+  ["7988/2025-02","ROBSON CASSIANO SOARES","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 270,00","R$ 0,00"],
+  ["7988/2025-02","SOLANGE PEREIRA COSTA","30/11/2025","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 1.394,89","R$ 0,00"],
+  ["7988/2025-02","SOLANGE PEREIRA COSTA","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 270,00","R$ 0,00"],
+  ["7988/2025-02","SUELLEN VIANA MARIZÊ LOPES","30/11/2025","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 1.400,33","R$ 0,00"],
+  ["7988/2025-02","SUELLEN VIANA MARIZÊ LOPES","30/11/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 260,00","R$ 0,00"],
+  ["7988/2025-02","ANDRESSA CARVALHO SANTOS","01/12/2025","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 2.166,78","R$ 0,00"],
+  ["7988/2025-02","ANDRESSA CARVALHO SANTOS","01/12/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 270,00","R$ 0,00"],
+  ["10398/2025-59","TAISSA RAFAELA GUINANCIO DE SOUZA","02/12/2025","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 5.610,31","R$ 0,00"],
+  ["11433/2025-57","AILSON DOS SANTOS","07/12/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["11433/2025-57","JACQUELINE DA SILVA TARGINO SOARES","07/12/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["11433/2025-57","JACQUELINE DA SILVA TARGINO SOARES","07/12/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["7988/2025-02","GILMAR WAGNER","07/12/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 510,99","R$ 0,00"],
+  ["11598/2025-29","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","08/12/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["11693/2025-22","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","09/12/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 238,00","R$ 0,00"],
+  ["11844/2025-42","NADJA ALMEIDA GUIMARÃES","09/12/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 6.312,95","R$ 0,00"],
+  ["11563/2025-90","RAIMUNDO SEBASTIÃO RODRIGUES NETO","10/12/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["11331/2025-31","ANDRESSA CARVALHO SANTOS","11/12/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["12090/2025-48","JORGE ALBERTO SARMENTO DOS SANTOS TEMBÉ","11/12/2025","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["11630/2025-76","MOACYR CANIZO DE BRITO FILHO","13/12/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["11016/2025-12","AILSON DOS SANTOS","14/12/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["11016/2025-12","JACQUELINE DA SILVA TARGINO SOARES","14/12/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["11016/2025-12","JACQUELINE DA SILVA TARGINO SOARES","14/12/2025","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["11358/2025-24","SOLANGE PEREIRA COSTA","14/12/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["11540/2025-85","SUELLEN VIANA MARIZÊ LOPES","14/12/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["11611/2025-40","JOÃO PAULO VIEIRA NETO","15/12/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["12177/2025-15","ROBSON CASSIANO SOARES","15/12/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["12177/2025-15","ROBSON CASSIANO SOARES","15/12/2025","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11095/2025-53","GILMAR WAGNER","17/12/2025","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["7988/2025-02","MAYNAMY JOSÉ SANTANA DA SILVA","30/12/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.591,89","R$ 0,00"],
+  ["7988/2025-02","MAYNAMY JOSÉ SANTANA DA SILVA","30/12/2025","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 130,00","R$ 0,00"],
+  ["12778/2025-28","DIONE DA CONCEIÇÃO GARCIA","06/01/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 416,81","R$ 0,00"],
+  ["166/2026-73","RAYLENE ANDRADE OLIVEIRA","06/01/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["166/2026-73","RAYLENE ANDRADE OLIVEIRA","06/01/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["11800/2025-12","RONALDO RAMOS NUNES","07/01/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["12810/2025-75","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","07/01/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 238,00","R$ 0,00"],
+  ["12810/2025-75","PRISCILA DA SILVA RAMOS","07/01/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["12865/2025-85","RONALDO DOS SANTOS PENA","07/01/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["12590/2025-80","RONALDO DOS SANTOS PENA","12/01/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["328/2026-73","FRANCISCO MACEDO MOÇAMBITE","15/01/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["895/2026-20","AVANILSON IJORARU DIAS KARAJÁ","16/01/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["535/2026-28","CRISTIANE FERREIRA DA SILVA","18/01/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["12861/2025-05","RONALDO DOS SANTOS PENA","19/01/2026","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["784/2026-13","ROBSON CASSIANO SOARES","19/01/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["814/2026-91","SUELLEN VIANNA MARIZÊ LOPES","19/01/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["334/2026-21","FRANCISCO MACEDO MOÇAMBITE","22/01/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["810/2026-11","JOÃO PAULO VIEIRA NETO","26/01/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["1367/2026-98","DIONE DA CONCEIÇÃO GARCIA","28/01/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 267,48","R$ 0,00"],
+  ["1452/2026-56","ERLISSON DOS SANTOS CIDADE","31/01/2026","1","R$ 550,00","R$ 0,00","R$ 550,00","R$ 0,00","R$ 0,00"],
+  ["877/2026-48","JESIEL RODRIGUES","02/02/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["001331/2026-12","LIBÉRIO UIAGUMEAREU","03/02/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["001483/2026-15","FRANCISCO MACEDO MOÇAMBITE","03/02/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["0503/2026-22","VANESSA TAÍS DE SANTANA BARROS","03/02/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["1716/2026-71","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","03/02/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 384,38","R$ 0,00"],
+  ["1716/2026-71","PRISCILLA DA SILVA RAMOS","03/02/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 384,38","R$ 0,00"],
+  ["1691/2026-14","RAQUEL MONTEATH DOS SANTOS","04/02/2026","3,5","R$ 600,00","R$ 120,00","R$ 2.220,00","R$ 6.667,31","R$ 0,00"],
+  ["2358/2026-14","ANDRESSA CARVALHO SANTOS","09/02/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["2465/2026-42","RONALDO NUNES RAMOS","09/02/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["3021/2026-24","ERLISSON DOS SANTOS CIDADE","09/02/2026","4,5","R$ 600,00","R$ 120,00","R$ 2.820,00","R$ 0,00","R$ 0,00"],
+  ["1485/2026-04","CRISTIANE FERREIRA DA SILVA","10/02/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["2042/2026-22","RONALDO DO SANTOS PENA","10/02/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["2779/2026-45","FRANCISCO MACEDO MOÇAMBITE","11/02/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["2355/2026-81","FRANCISCO MACEDO MOÇAMBITE","16/02/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["2594/2026-31","DANIELLE RODRIGUES ACAMPORA DE MATOS","22/02/2026","10","R$ 550,00","R$ 120,00","R$ 5.620,00","R$ 267,98","R$ 0,00"],
+  ["2594/2026-31","HENRIQUE DE LIMA OLVEIRA","22/02/2026","10","R$ 550,00","R$ 120,00","R$ 5.620,00","R$ 267,98","R$ 0,00"],
+  ["2594/2026-31","PRYSCILA GOMES LOBO","22/02/2026","10","R$ 550,00","R$ 120,00","R$ 5.620,00","R$ 267,98","R$ 0,00"],
+  ["2357/2026-70","CRISTIANE FERREIRA DA SILVA","23/02/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["2535/2026-62","MAYNAMY JOSÉ SANTANA DA SILVA","23/02/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["3113/2026-12","SUELLEN VIANNA MARIZÊ LOPES","23/02/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["3686/2026-38","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","24/02/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 688,12","R$ 0,00"],
+  ["4526/2026-14","FÁBIO PEREIRA DOS SANTOS","27/02/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["4006/2026-01","ERLISSON DOS SANTOS CIDADE","01/03/2026","6,5","R$ 600,00","R$ 120,00","R$ 4.020,00","R$ 0,00","R$ 0,00"],
+  ["3822/2026-90","RONALDO DOS SANTOS PENA","02/03/2026","5,5","R$ 550,00","R$ 110,00","R$ 3.135,00","R$ 0,00","R$ 0,00"],
+  ["4096/2026-22","LIBÉRIO UIAGUMEAREU","02/03/2026","2,5","R$ 600,00","R$ 0,00","R$ 1.500,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MAYNAMY JOSÉ SANTANA DA SILVA","03/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["2594/2026-31","DANIELLE RODRIGUES ACAMPORA DE MATOS","04/03/2026","1,5","R$ 600,00","R$ 110,00","R$ 1.010,00","R$ 1.482,55","R$ 0,00"],
+  ["2594/2026-31","HENRIQUE DE LIMA OLVEIRA","04/03/2026","1,5","R$ 600,00","R$ 110,00","R$ 1.010,00","R$ 1.482,55","R$ 0,00"],
+  ["2594/2026-31","PRYSCILA GOMES LOBO","04/03/2026","1,5","R$ 600,00","R$ 110,00","R$ 1.010,00","R$ 1.264,55","R$ 0,00"],
+  ["1463/2026-36","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","08/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["1463/2026-36","ROBSON CASSIANO SOARES","08/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["3069/2026-32","RONALDO DOS SANTOS PENA","08/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["3612/2026-00","ERLISSON DOS SANTOS CIDADE","08/03/2026","9,5","R$ 550,00","R$ 110,00","R$ 5.335,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MAYNAMY JOSÉ SANTANA DA SILVA","09/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["4711/2026-09","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","11/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["5288/2026-56","FÁBIO PEREIRA DOS SANTOS","12/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["4711/2026-09","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","15/03/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["4075/2026-15","SOLANGE PEREIRA COSTA","16/03/2026","4,5","R$ 550,00","R$ 110,00","R$ 2.585,00","R$ 392,70","R$ 0,00"],
+  ["4498/2026-27","VANESSA TAÍS DE SANTANA BARROS","16/03/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["4770/2026-79","ANA CAROLINA DELGADO DE ALMEIDA","16/03/2026","3,5","R$ 550,00","R$ 110,00","R$ 2.035,00","R$ 749,71","R$ 0,00"],
+  ["4770/2026-79","THAYNARA SIPREDI SOUSA SILVA XERENTE","16/03/2026","3,5","R$ 550,00","R$ 110,00","R$ 2.035,00","R$ 749,71","R$ 0,00"],
+  ["5499/2026-99","FRANCISCCO MACEDO MOÇAMBITE","16/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["5780/2026-21","KUTANAN WAIAPI WAIANA","16/03/2026","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MANOEL MENDONÇA DE FARIAS NETO","18/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MANOEL MENDONÇA DE FARIAS NETO","18/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["5730/2026-44","AILSON DOS SANTOS","18/03/2026","13,5","R$ 550,00","R$ 0,00","R$ 7.425,00","R$ 0,00","R$ 0,00"],
+  ["5730/2026-44","JACQUELINE DA SILVA TARGINO SOARES","18/03/2026","13,5","R$ 550,00","R$ 0,00","R$ 7.425,00","R$ 0,00","R$ 0,00"],
+  ["6216/2026-26","ROSENILDA APARECIDA DA SILVA","19/03/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["6412/2026-09","PRISCILA DA SILVA RAMOS","19/03/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["6536/2026-86","FÁBIO PEREIRA DOS SANTOS","19/03/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["2753/2026-05","VANESSA TAÍS DE SANTANA BARROS","20/03/2026","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["5112/2026-02","MOACYR CANIZO DE BRITO FILHO","22/03/2026","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["6205/2026-46","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","22/03/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["6656/2026-83","DANILO GIUPATO","22/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MAYNAMY JOSÉ SANTANA DA SILVA","23/03/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["4075/2026-15","SOLANGE PEREIRA COSTA","23/03/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 476,00","R$ 0,00"],
+  ["4557/2026-67","MATAVITSA KENA WAURA TXUCARRAMÃE","23/03/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["5232/2026-00","CLAUDIA LEITE VIEIRA","23/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["5500/2026-85","CRISTIANE FERREIRA DA SILVA","23/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MANOEL MENDONÇA DE FARIAS NETO","24/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["6412/2026-09","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","25/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 269,37","R$ 0,00"],
+  ["6998/2026-01","CLEOMARA RODRIGUES DOS SANTOS FACHOLLI","25/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["7000/2026-88","DANILO GIUPATO","25/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["6798/2026-41","ALIRIO ARTUR GUIMARÃES","26/03/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["6798/2026-41","GUILHERME OLIVEIRA CHAVES","26/03/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["5926/2026-39","RILDO MENDES","29/03/2026","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MANOEL MENDONÇA DE FARIAS NETO","30/03/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["3784/2026-75","MANOEL MENDONÇA DE FARIAS NETO","30/03/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["5232/2026-00","CLAUDIA LEITE VIEIRA","30/03/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["5775/2026-19","JESIEL RODRIGUES","30/03/2026","8,5","R$ 550,00","R$ 0,00","R$ 4.675,00","R$ 0,00","R$ 0,00"],
+  ["6205/2026-46","ROBSON CASSIANO SOARES","30/03/2026","1","R$ 550,00","R$ 0,00","R$ 550,00","R$ 0,00","R$ 0,00"],
+  ["6778/2026-70","ELIENE DA SILVA MACHADO","30/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["6778/2026-70","JÉSSICA ANNE PEREIRA CORRÊA FRANÇA","30/03/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["6205/2026-46","ROBSON CASSIANO SOARES","31/03/2026","1,5","R$ 600,00","R$ 0,00","R$ 900,00","R$ 0,00","R$ 0,00"],
+  ["6665/2026-74","AVANILSON IJORARU DIAS AIRES KARAJÁ","31/03/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["6613/2026-06","FÁBIO PEREIRA DOS SANTOS","03/04/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["7892/2026-17","DANILO GIUPATO","03/04/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["5146/2026-99","RAYLENE ANDRADE OLIVEIRA","04/04/2026","2,5","R$ 600,00","R$ 0,00","R$ 1.500,00","R$ 3.709,05","R$ 0,00"],
+  ["5146/2026-99","SAMUEL YRIWERANA KARAJA","04/04/2026","6,5","R$ 600,00","R$ 0,00","R$ 3.900,00","R$ 0,00","R$ 0,00"],
+  ["5146/2026-99","AILSON DOS SANTOS","05/04/2026","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 0,00","R$ 0,00"],
+  ["5146/2026-99","ANDRESSA CARVALHO SANTOS","05/04/2026","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 878,77","R$ 0,00"],
+  ["5146/2026-99","JOÃO PAULO VIEIRA NETO","05/04/2026","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 6.839,04","R$ 0,00"],
+  ["5146/2026-99","LIBÉRIO UIAGUMEAREU","05/04/2026","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 3.564,42","R$ 0,00"],
+  ["5146/2026-99","MARCOS MORREIRA","05/04/2026","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 2.881,39","R$ 0,00"],
+  ["5146/2026-99","MARCOS MORREIRA","05/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 1.938,06","R$ 0,00"],
+  ["5146/2026-99","MATAVITSA KENA WAURA TXUCARRAMÃE","05/04/2026","6,5","R$ 600,00","R$ 0,00","R$ 3.900,00","R$ 5.655,13","R$ 0,00"],
+  ["5146/2026-99","MAYNAMY JOSÉ SANTANA DA SILVA","05/04/2026","5,5","R$ 600,00","R$ 120,00","R$ 3.420,00","R$ 3.676,11","R$ 0,00"],
+  ["5146/2026-99","RAYLENE ANDRADE OLIVEIRA","05/04/2026","5","R$ 600,00","R$ 0,00","R$ 3.000,00","R$ 5.694,76","R$ 0,00"],
+  ["5146/2026-99","ROBSON CASSIANO SOARES","05/04/2026","5,5","R$ 600,00","R$ 0,00","R$ 3.300,00","R$ 4.923,76","R$ 0,00"],
+  ["5146/2026-99","SUELLEN VIANNA MARIZÊ LOPES","05/04/2026","6,5","R$ 600,00","R$ 0,00","R$ 3.900,00","R$ 3.245,85","R$ 0,00"],
+  ["5146/2026-99","TANIA PAIAKAN KAIAPÓ","05/04/2026","6,5","R$ 600,00","R$ 0,00","R$ 3.900,00","R$ 1.628,05","R$ 0,00"],
+  ["7511/2026-08","ENIVALDO SARMENTO DOS SANTOS TEMBÉ","05/04/2026","6,5","R$ 600,00","R$ 0,00","R$ 3.900,00","R$ 0,00","R$ 0,00"],
+  ["6559/2026-91","SERGIO MURILO CARDOSO DINIZ","06/04/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["6809/2026-92","FRANCISCO MACEDO MOÇAMBITE","06/04/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["7399/2026-05","ELDA MESSIAS DE OLIVEIRA PINHEIRO","06/04/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["7399/2026-05","ELIENE DA SILVA MACHADO","06/04/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["8179/2026-91","ROSENILDA APARECIDA DA SILVA","07/04/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["7034/2026-72","BARBARA CRISTINA BATISTA LOPES SANTOS","08/04/2026","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 1.125,65","R$ 0,00"],
+  ["8160/2026-44","FÁBIO PEREIRA DOS SANTOS","09/04/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["8247/2026-11","ALIRIO ARTUR GUIMARÃES","09/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["5724/2026-97","JESIEL RODRIGUES","10/04/2026","12,5","R$ 550,00","R$ 0,00","R$ 6.875,00","R$ 0,00","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","12/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 753,27","R$ 0,00"],
+  ["6861/2026-49","IVISON LUAN FERREIRA ARAÚJO","12/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 753,27","R$ 0,00"],
+  ["7064/2026-89","ANA THEREZA NUNES CAMPOS","12/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 460,65","R$ 0,00"],
+  ["7064/2026-89","ANDRESSA CARVALHO SANTOS","12/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 716,92","R$ 0,00"],
+  ["7064/2026-89","ELIETE JERONIMO DA SILVA","12/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 460,65","R$ 0,00"],
+  ["7064/2026-89","ELIETE JERONIMO DA SILVA","12/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 716,92","R$ 0,00"],
+  ["7623/2026-51","SOLANGE PEREIRA COSTA","12/04/2026","1","R$ 600,00","R$ 0,00","R$ 600,00","R$ 0,00","R$ 0,00"],
+  ["7973/2026-17","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","12/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["7973/2026-17","ROBSON CASSINAO SOARES","12/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["5232/2026-00","CLAUDIA LEITE VIEIRA","13/04/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["6812/2026-14","CRISTIANE FERREIRA DA SILVA","13/04/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["7034/2026-72","BARBARA CRISTINA BATISTA LOPES SANTOS","13/04/2026","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 145,36","R$ 0,00"],
+  ["7480/2026-87","ÒHÒRI HARITXANA DE FARIAS KARAJÁ","13/04/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["7618/2026-48","ROGÉRIO SIMÃO RODRIGUES FILHO","13/04/2026","3","R$ 550,00","R$ 0,00","R$ 1.650,00","R$ 535,50","R$ 0,00"],
+  ["7618/2026-48","SUELLEN VIANNA MARIZÊ LOPES","13/04/2026","3","R$ 550,00","R$ 0,00","R$ 1.650,00","R$ 535,50","R$ 0,00"],
+  ["7970/2026-83","ELIENE DA SILVA MACHADO","13/04/2026","4,5","R$ 600,00","R$ 0,00","R$ 2.700,00","R$ 0,00","R$ 0,00"],
+  ["7970/2026-83","JÉSSICA ANNE PEREIRA CORRÊA FRANÇA","13/04/2026","4,5","R$ 600,00","R$ 0,00","R$ 2.700,00","R$ 0,00","R$ 0,00"],
+  ["8506/2026-12","EDUARDO FUNCHAL","13/04/2026","0,5","R$ 600,00","R$ 0,00","R$ 300,00","R$ 0,00","R$ 0,00"],
+  ["8763/2026-46","MAYNAMY JOSÉ SANTANA DA SILVA","13/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["2594/2026-31","CARLOS HENRIQUE OREBEWE DA SILVA TSERENHONHIMI RAMIWE","14/04/2026","9,5","R$ 550,00","R$ 0,00","R$ 5.225,00","R$ 0,00","R$ 0,00"],
+  ["7064/2026-89","ANA THEREZA NUNES CAMPOS","14/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 187,91","R$ 0,00"],
+  ["7064/2026-89","ELIETE JERONIMO DA SILVA","14/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 187,91","R$ 0,00"],
+  ["7623/2026-51","SOLANGE PEREIRA COSTA","14/04/2026","3","R$ 550,00","R$ 0,00","R$ 1.650,00","R$ 0,00","R$ 0,00"],
+  ["8047/2026-69","CLEIDIANE CARVALHO RIBEIRO","14/04/2026","2,5","R$ 600,00","R$ 0,00","R$ 1.500,00","R$ 5.887,88","R$ 0,00"],
+  ["8047/2026-69","CLEIDIANE CARVALHO RIBEIRO","14/04/2026","4","R$ 550,00","R$ 0,00","R$ 2.200,00","R$ 0,00","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","15/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 640,27","R$ 0,00"],
+  ["6861/2026-49","IVISON LUAN FERREIRA ARAÚJO","15/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 640,27","R$ 0,00"],
+  ["7034/2026-72","ELAINE SANTOS DA SILVA","15/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 766,56","R$ 0,00"],
+  ["7064/2026-89","ANA THEREZA NUNES CAMPOS","15/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 777,64","R$ 0,00"],
+  ["7064/2026-89","ELIETE JERONIMO DA SILVA","15/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 777,64","R$ 0,00"],
+  ["8418/2026-11","DIONE DA CONCEIÇÃO GARCIA","15/04/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 115,52","R$ 0,00"],
+  ["8642/2026-02","MANOEL MENDONÇA DE FARIAS NETO","15/04/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["9127/2026-31","ROSENILDA APARECIDA DA SILVA","15/04/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["9165/2026-94","EMANOELA CAROLINE MOTA FERNANDES","15/04/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["9165/2026-94","PAULO DE ALMEIDA SILVA NETO","15/04/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["7034/2026-72","JAGUARACIRA ALVES PINTO","16/04/2026","0,5","R$ 550,00","R$ 110,00","R$ 385,00","R$ 0,00","R$ 0,00"],
+  ["7618/2026-48","ROGÉRIO SIMÃO RODRIGUES FILHO","16/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 261,80","R$ 0,00"],
+  ["7618/2026-48","SUELLEN VIANNA MARIZÊ LOPES","16/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 261,80","R$ 0,00"],
+  ["7623/2026-51","SOLANGE PEREIRA COSTA","16/04/2026","2","R$ 550,00","R$ 0,00","R$ 1.100,00","R$ 0,00","R$ 0,00"],
+  ["8447/2026-74","PRISCILA DA SILVA RAMOS","16/04/2026","1,5","R$ 600,00","R$ 0,00","R$ 900,00","R$ 0,00","R$ 0,00"],
+  ["8450/2026-98","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","16/04/2026","1,5","R$ 600,00","R$ 0,00","R$ 900,00","R$ 0,00","R$ 0,00"],
+  ["7623/2026-51","SOLANGE PEREIRA COSTA","18/04/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["8449/2026-63","RAIMUNDA PEREIRA LIMA","18/04/2026","13,5","R$ 550,00","R$ 0,00","R$ 7.425,00","R$ 0,00","R$ 0,00"],
+  ["9300/2026-00","ERLISSON DOS SANTOS CIDADE","20/04/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 0,00","R$ 0,00"],
+  ["8642/2026-02","MAYNAMY JOSÉ SANTANA DA SILVA","21/04/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["8743/2026-75","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","21/04/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["9005/2026-45","FÁBIO PEREIRA DOS SANTOS","21/04/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","22/04/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 165,53","R$ 0,00"],
+  ["6861/2026-49","IVISON LUAN FERREIRA ARAÚJO","22/04/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 165,53","R$ 0,00"],
+  ["9174/2026-85","LIBERIO UIAGUMEAREU","22/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["9441/2026-14","ANA CAROLINA DA SILVA GONÇALVES","22/04/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["9525/2026-58","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","22/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 249,45","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","23/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 129,48","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","23/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 123,59","R$ 0,00"],
+  ["6861/2026-49","IVISON FERREIRA ARAÚJO","23/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 123,59","R$ 0,00"],
+  ["6861/2026-49","IVISON FERREIRA ARAÚJO","23/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 138,07","R$ 0,00"],
+  ["6861/2026-49","IVISON LUAN FERREIRA ARAÚJO","23/04/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 129,48","R$ 0,00"],
+  ["9619/2026-27","ROSENILDA APARECIDA DA SILVA","23/04/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["9441/2026-14","ARA JOSEFINA SILVEIRA BRASIL","24/04/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["9615/2026-49","RONALDO RAMOS NUNES","25/04/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["6796/2026-51","GILMAR WAGNER","26/04/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["8862/2026-28","CRISTIANE FERREIRA DA SILVA","26/04/2026","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["8959/2026-31","ANDRESSA CARVALHO SANTOS","26/04/2026","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 0,00","R$ 0,00"],
+  ["9207/2026-97","HERODOTO JEAN DE SALES","26/04/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 4.511,90","R$ 0,00"],
+  ["9352/2026-78","IRENÍ HERCULANO UCHÔA MOURA","26/04/2026","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 0,00","R$ 0,00"],
+  ["6705/2026-88","UBIRACI SILVA MATOS","27/04/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 1.595,43","R$ 0,00"],
+  ["8066/2026-95","JESIEL RODRIGUES","27/04/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["8700/2026-90","ANDREY THOMASSEN CORRÊA","27/04/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["8743/2026-75","ROBSON CASSIANO SOARES","27/04/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["9927/2026-52","RONALDO DOS SANTOS PENA","27/04/2026","3,5","R$ 600,00","R$ 0,00","R$ 2.100,00","R$ 0,00","R$ 0,00"],
+  ["10191/2026-65","PRISCILA DA SILVA RAMOS","29/04/2026","1,5","R$ 600,00","R$ 0,00","R$ 900,00","R$ 0,00","R$ 0,00"],
+  ["9435/2026-67","DERIK JOSÉ DOS SANTOS BELÉM","03/05/2026","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 0,00","R$ 0,00"],
+  ["9729/2026-99","SOLANGE PEREIRA COSTA","03/05/2026","6,5","R$ 550,00","R$ 0,00","R$ 3.575,00","R$ 523,60","R$ 0,00"],
+  ["10181/2026-20","DANILO GIUPATO","04/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["10280/2026-10","AILSON DOS SANTOS","04/05/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["10288/2026-78","ARGEMIRO FALCÃO JUNIOR","04/05/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["10288/2026-78","LUIZ MARCELO MAGALHÃES CRUZ","04/05/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["10370/2026-01","URAAN ANDERSON SURUÍ","04/05/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["10475/2026-51","PLÁCIDA BEATRIZ OSORIO","04/05/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["10367/2026-89","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","05/05/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 170,99","R$ 0,00"],
+  ["10807/2026-06","RONALDO RAMOS NUNES","05/05/2026","12,5","R$ 550,00","R$ 0,00","R$ 6.875,00","R$ 0,00","R$ 0,00"],
+  ["10665/2026-79","ELAINE SANTOS DA SILVA","06/05/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 1.006,98","R$ 0,00"],
+  ["10855/2026-96","EDUARDO FUNCHAL","06/05/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 522,98","R$ 0,00"],
+  ["10575/2026-88","ANA CAROLINA DA SILVA GONÇALVES","07/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 416,37","R$ 0,00"],
+  ["11328/2026-07","DIONE DA CONCEIÇÃO GARCIA","08/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","10/05/2026","2","R$ 550,00","R$ 110,00","R$ 1.210,00","R$ 719,95","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA DOS SANTOS QUEIRÓS","10/05/2026","2","R$ 550,00","R$ 110,00","R$ 1.210,00","R$ 719,95","R$ 0,00"],
+  ["10370/2026-01","URAAN ANDERSON SURUÍ","11/05/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["10513/2026-76","AILSON DOS SANTOS","11/05/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["10513/2026-76","JACQUELINE DA SILVA TARGINO SOARES","11/05/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["11508/2026-81","DAVID WENDELL VEIGA LOBATO","11/05/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["11508/2026-81","KUTANAN WAIAPI WAIANA","11/05/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["9838/2026-14","MAYNAMY JOSÉ SANTANA DA SILVA","11/05/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","12/05/2026","1","R$ 550,00","R$ 110,00","R$ 660,00","R$ 14,99","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA DOS SANTOS QUEIRÓS","12/05/2026","1","R$ 550,00","R$ 110,00","R$ 660,00","R$ 14,99","R$ 0,00"],
+  ["11410/2026-23","ARGEMIRO FALCÃO JUNIOR","13/05/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["11410/2026-23","LUIZ MARCELO MAGALHÃES CRUZ","13/05/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA CARVALHO SANTOS","13/05/2026","3,5","R$ 550,00","R$ 110,00","R$ 2.035,00","R$ 416,88","R$ 0,00"],
+  ["6861/2026-49","ANDRESSA DOS SANTOS QUEIRÓS","13/05/2026","3,5","R$ 550,00","R$ 110,00","R$ 2.035,00","R$ 416,88","R$ 0,00"],
+  ["11128/2026-46","GABRIELA ALMEIDA PRADO","14/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11128/2026-46","ROSENILDA APARECIDA DA SILVA","14/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11736/2026-51","ROSENILDA APARECIDA DA SILVA","14/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11736/2026-51","ROSENILDA APARECIDA DA SILVA","14/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11675/2026-21","JACQUELINE DA SILVA TARGINO SOARES","16/05/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 241,34","R$ 0,00"],
+  ["12016/2026-11","DIONE DA CONCEIÇÃO GARCIA","16/05/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["11012/2026-15","ANDRESSA CARVALHO SANTOS","17/05/2026","6,5","R$ 550,00","R$ 110,00","R$ 3.685,00","R$ 1.260,76","R$ 0,00"],
+  ["11012/2026-15","IVISON FERREIRA ARAUJO","17/05/2026","6,5","R$ 550,00","R$ 110,00","R$ 3.685,00","R$ 1.260,76","R$ 0,00"],
+  ["11087/2026-98","ROBSON CASSIANO SOARES","17/05/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["10575/2026-88","NADJA ALMEIDA GUIMARÃES","18/05/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 416,37","R$ 0,00"],
+  ["12016/2026-11","DIONE DA CONCEIÇÃO GARCIA","18/05/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["12367/2026-13","JOÃO PAULO VIEIRA NETO","18/05/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 0,00","R$ 0,00"],
+  ["11790/2026-04","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","19/05/2026","3,5","R$ 550,00","R$ 110,00","R$ 2.035,00","R$ 109,71","R$ 0,00"],
+  ["10665/2026-79","ARA JOSEFINA SILVEIRA BRASIL","20/05/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.220,90","R$ 0,00"],
+  ["10665/2026-79","ARA JOSEFINA SILVEIRA BRASIL","20/05/2026","2,5","R$ 550,00","R$ 110,00","R$ 1.485,00","R$ 0,00","R$ 0,00"],
+  ["11644/2026-71","JESIEL RODRIGUES","20/05/2026","5,5","R$ 550,00","R$ 0,00","R$ 3.025,00","R$ 0,00","R$ 0,00"],
+  ["11788/2026-27","PRISCILA DA SILVA RAMOS","20/05/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["12156/2026-81","ELAINE SANTOS DA SILVA","20/05/2026","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 3.062,62","R$ 0,00"],
+  ["12206/2026-20","NADJA ALMEIDA GUIMARÃES","21/05/2026","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 258,54","R$ 0,00"],
+  ["12433/2026-55","KÁTIA ELLEN DOS SANTOS","21/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["12447/2026-79","GABRIELA ALMEIDA PRADO","21/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["10754/2026-15","FABIO JUN SAKUMA","22/05/2026","7","R$ 550,00","R$ 110,00","R$ 3.960,00","R$ 4.789,45","R$ 0,00"],
+  ["10754/2026-15","FABIO PAGANINI PEREIRA DA COSTA","22/05/2026","7","R$ 550,00","R$ 110,00","R$ 3.960,00","R$ 4.037,08","R$ 0,00"],
+  ["10754/2026-15","GUILHERME AUGUSTO DE GOUVEIA TAFNER JORGE","22/05/2026","7","R$ 550,00","R$ 110,00","R$ 3.960,00","R$ 4.037,08","R$ 0,00"],
+  ["11736/2026-51","KRISNAR MARIA CRUZ FERREIRA","22/05/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["11736/2026-51","KRISNAR MARIA CRUZ FERREIRA","22/05/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["12105/2026-59","ELIÂNGELA TAVARES GONÇALVES","22/05/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["11012/2026-15","ANDRESSA CARVALHO SANTOS","23/05/2026","4","R$ 550,00","R$ 110,00","R$ 2.310,00","R$ 180,29","R$ 0,00"],
+  ["11012/2026-15","IVISON FERREIRA ARAUJO","23/05/2026","4","R$ 550,00","R$ 110,00","R$ 2.310,00","R$ 180,29","R$ 0,00"],
+  ["12091/2026-73","MOACYR CANIZO DE BRITO FILHO","23/05/2026","10,5","R$ 550,00","R$ 0,00","R$ 5.775,00","R$ 0,00","R$ 0,00"],
+  ["11646/2026-60","NADJA ALMEIDA GUIMARÃES","24/05/2026","1","R$ 600,00","R$ 120,00","R$ 720,00","R$ 843,20","R$ 0,00"],
+  ["12156/2026-81","ELAINE SANTOS DA SILVA","24/05/2026","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 3.820,71","R$ 0,00"],
+  ["11646/2026-60","NADJA ALMEIDA GUIMARÃES","25/05/2026","1,5","R$ 550,00","R$ 110,00","R$ 935,00","R$ 394,86","R$ 0,00"],
+  ["12166/2026-16","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","25/05/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 416,65","R$ 0,00"],
+  ["10435/2026-18","AILSON DOS SANTOS","26/05/2026","8,5","R$ 550,00","R$ 0,00","R$ 4.675,00","R$ 0,00","R$ 0,00"],
+  ["10435/2026-18","JACQUELINE DA SILVA TARGINO SOARES","26/05/2026","8,5","R$ 550,00","R$ 0,00","R$ 4.675,00","R$ 0,00","R$ 0,00"],
+  ["10754/2026-15","CELSO TAKASHI NAKANO","26/05/2026","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 4.360,12","R$ 0,00"],
+  ["10754/2026-15","CELSO TAKASHI NAKANO","26/05/2026","3","R$ 550,00","R$ 110,00","R$ 1.760,00","R$ 5.316,55","R$ 0,00"],
+  ["10754/2026-15","KAZUE TANIA NISHI","26/05/2026","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 4.748,84","R$ 0,00"],
+  ["10754/2026-15","KAZUE TANIA NISHI","26/05/2026","3","R$ 550,00","R$ 110,00","R$ 1.760,00","R$ 5.286,59","R$ 0,00"],
+  ["10754/2026-15","RICARDO KENITHI NAKAMURA","26/05/2026","3","R$ 550,00","R$ 110,00","R$ 1.760,00","R$ 2.759,50","R$ 0,00"],
+  ["10754/2026-15","RICARDO KENITHI NAKAMURA","26/05/2026","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 5.607,10","R$ 0,00"],
+  ["12643/2026-43","PLÁCIDA BEATRIZ OSORIO","28/05/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["10754/2026-15","FABIO JUN SAKUMA","29/05/2026","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 4.515,47","R$ 0,00"],
+  ["10754/2026-15","FABIO PAGANINI PEREIRA DA COSTA","29/05/2026","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 4.515,47","R$ 0,00"],
+  ["10754/2026-15","GUILHERME AUGUSTO DE GOUVEIA TAFNER JORGE","29/05/2026","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 4.397,96","R$ 0,00"],
+  ["12433/2026-55","SUZENETE REGINA DE CARLIS","29/05/2026","0,5","R$ 550,00","R$ 0,00","R$ 275,00","R$ 0,00","R$ 0,00"],
+  ["12787/2026-08","NAIARA MARTINS DE SOUZA","31/05/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["12803/2026-54","LILIAN CRISTINA PEDROZA DA CUNHA LIMA","31/05/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["12803/2026-54","ROBSON CASSIANO SOARES","01/06/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["13697/2026-26","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","01/06/2026","2,5","R$ 550,00","R$ 0,00","R$ 1.375,00","R$ 0,00","R$ 0,00"],
+  ["11787/2026-82","SINDOMAR WARU","02/06/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["4811/2026-27","EUDES LOPES BATISTA","08/06/2026","2","R$ 600,00","R$ 120,00","R$ 1.320,00","R$ 2.018,96","R$ 0,00"],
+  ["4811/2026-27","ALESSANDRA LOPES TAVARES","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 5.384,52","R$ 0,00"],
+  ["4811/2026-27","ARUKAPÉ SURUÍ","09/06/2026","1,5","R$ 600,00","R$ 120,00","R$ 1.020,00","R$ 1.366,40","R$ 0,00"],
+  ["4811/2026-27","AWINHOO ARAWETÉ","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 1.523,12","R$ 0,00"],
+  ["4811/2026-27","AWINHOO ARAWETÉ","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 2.858,97","R$ 0,00"],
+  ["4811/2026-27","EUDES LOPES BATISTA","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 5.384,52","R$ 0,00"],
+  ["4811/2026-27","HITLER FERREIRA DA SILVA","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 2.609,33","R$ 0,00"],
+  ["4811/2026-27","JONATHAN TOTO JACINTO","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 3.385,47","R$ 0,00"],
+  ["4811/2026-27","LEANDRO SANTANA","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 2.329,75","R$ 0,00"],
+  ["4811/2026-27","LURDELICE MOREIRA NELSON","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 2.879,11","R$ 0,00"],
+  ["4811/2026-27","MRU-IRE METUKTIRE","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 2.711,13","R$ 0,00"],
+  ["4811/2026-27","NAARA NASCIMENTO COSTA","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 5.435,90","R$ 0,00"],
+  ["4811/2026-27","PEDRO SANTA RITA DA SILVA","09/06/2026","4","R$ 600,00","R$ 240,00","R$ 2.640,00","R$ 5.384,52","R$ 0,00"],
+  ["4811/2026-27","THIAGO SILVÉRIO DE CAMILO","09/06/2026","2,5","R$ 600,00","R$ 120,00","R$ 1.620,00","R$ 1.675,42","R$ 0,00"],
+  ["13485/2026-49","MANOEL MENDONÇA DE FARIAS NETO","11/06/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11248/2026-43","EDUARDO LUCENA MOTA","15/06/2026","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["11248/2026-43","TATHIANI LIMA DA SILVA","22/06/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11248/2026-43","TATHIANI LIMA DA SILVA","25/06/2026","1,5","R$ 550,00","R$ 0,00","R$ 825,00","R$ 0,00","R$ 0,00"],
+  ["11248/2026-43","PALOMA SENA AMORIM","30/06/2026","3,5","R$ 550,00","R$ 0,00","R$ 1.925,00","R$ 0,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","ANA PATRÍCIA SANTANA DE SOUSA MOREIRA","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 210,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","ANA PATRÍCIA SANTANA DE SOUSA MOREIRA","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 280,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","CLEIDIANE CARVALHO RIBEIRO","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 210,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","DANILO GIUPATO","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 210,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","GUILHERME OLIVEIRA CHAGAS","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 210,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","KADJURE METYKTIRE","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.864,33","R$ 0,00"],
+  ["006/2025/GAB/PRES","MARCOS ROBERTO DANTAS DA SILVA","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 210,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","MATAVITSA KENA WAURA TXUCARRAMÃE","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 210,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","RONALDO DOS SANTOS PENA","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 200,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","TANIA PAIAKAN KAIAPÓ","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 210,00","R$ 0,00"],
+  ["006/2025/GAB/PRES","VALDENIR ANDRADE FRANÇA","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 200,00","R$ 0,00"],
+  ["0381/2026-74","GERLANE ALBUQUERQUE DOS SANTOS E SILVA","","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["3144/2026-65","FÁBIO PEREIRA DOS SANTOS","","4,5","R$ 550,00","R$ 0,00","R$ 2.475,00","R$ 0,00","R$ 0,00"],
+  ["5146/2026-99","RAYLENE ANDRADE OLIVEIRA","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 280,00","R$ 0,00"],
+  ["5146/2026-99","SUELLEN VIANNA MARIZÊ LOPES","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 200,00","R$ 0,00"],
+  ["7988/2025-02","ARA JOSEFINA SILVEIRA BRASIL","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 130,00","R$ 0,00"],
+  ["7988/2025-02","ARA JOSEFINA SILVEIRA BRASIL","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 2.223,39","R$ 0,00"],
+  ["7988/2025-02","AVANILSON IJORARU DIAS AIRES KARAJÁ","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 130,00","R$ 0,00"],
+  ["7988/2025-02","NADJA ALMEIDA GUIMARÃES","","0","R$ 0,00","R$ 0,00","R$ 0,00","R$ 130,00","R$ 0,00"]
 ];
 
+// ==========================================
+// GLOBALS E HELPERS
+// ==========================================
+let FILTRO_CATEGORIA = 'Todas';
+let metricaCategoria = 'processos';
 
-// ==========================================
-// 2. FUNÇÕES DE SUPORTE E PROCESSAMENTO
-// ==========================================
+function getCategoria(esc) {
+  if (esc.includes('Regional')) return 'Atenção Especializada';
+  if (esc.includes('Distrital')) return 'Saúde Indígena';
+  return 'Sem categoria';
+}
 
 const BRL = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const NUM = n => n.toLocaleString('pt-BR',{maximumFractionDigits:1});
-const BRL_CARD = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0});
+const BRL_CARD = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:0,maximumFractionDigits:0});
 const NUM_CARD = n => Math.round(n).toLocaleString('pt-BR');
-const norm = s => s ? s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
-const parseBrFloat = str => parseFloat(str.replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '')) || 0;
+const norm = s => s ? s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim() : "";
+const parseBrFloat = str => parseFloat(str.replace(/\./g,'').replace(',','.').replace(/[^\d.-]/g,''))||0;
 
 function parseDate(dateStr) {
-  if (!dateStr || dateStr.trim() === "") return null;
+  if (!dateStr || dateStr.trim()==="") return null;
   const parts = dateStr.split('/');
-  if (parts.length === 3) return new Date(parts[2], parts[1] - 1, parts[0]);
+  if (parts.length===3) return new Date(parts[2],parts[1]-1,parts[0]);
   return null;
 }
 
-// Cria mapa de Cadastro (Nome -> Escritorio)
 const MAPA_PESSOAS = {};
-RAW_CADASTRO.forEach(c => {
-  MAPA_PESSOAS[norm(c.NOME)] = { esc: c.ESCRITORIO, uf: c.UF };
-});
+RAW_CADASTRO.forEach(c => { MAPA_PESSOAS[norm(c.NOME)] = { esc:c.ESCRITORIO, uf:c.UF }; });
 
-// Processa Base de Viagens transformando-a em objetos manipuláveis
 const DADOS_BRUTOS = RAW_VIAGENS.map(v => {
   const nomeColab = v[1];
   const dateObj = parseDate(v[2]);
   return {
-    processo: v[0],
-    nome: nomeColab,
-    nomeNormalizado: norm(nomeColab),
-    data: dateObj,
-    dataStr: v[2],
+    processo: v[0], nome: nomeColab, nomeNormalizado: norm(nomeColab),
+    data: dateObj, dataStr: v[2],
     mesAno: dateObj ? `${String(dateObj.getMonth()+1).padStart(2,'0')}/${dateObj.getFullYear()}` : "Sem Data",
     timestamp: dateObj ? dateObj.getTime() : 0,
-    qtd: parseBrFloat(v[3]),
-    valDiarias: parseBrFloat(v[6]),
-    valPassagem: parseBrFloat(v[7]),
-    valOutros: parseBrFloat(v[8]),
-    cadastro: MAPA_PESSOAS[norm(nomeColab)] || { esc: "(Não vinculado a escritório)", uf: "-" }
+    qtd: parseBrFloat(v[3]), valDiarias: parseBrFloat(v[6]),
+    valPassagem: parseBrFloat(v[7]), valOutros: parseBrFloat(v[8]),
+    cadastro: MAPA_PESSOAS[norm(nomeColab)] || { esc:"(Não vinculado a escritório)", uf:"-" }
   };
 });
 
-// Calcula Data Mínima e Máxima Global (ignorando os 'Sem Data')
 const viagensComData = DADOS_BRUTOS.filter(d => d.data !== null);
 let MIN_DATE = new Date(Math.min(...viagensComData.map(d => d.timestamp)));
 let MAX_DATE = new Date(Math.max(...viagensComData.map(d => d.timestamp)));
 
-// Seta Valores default nos inputs
 document.getElementById('data-inicio').value = MIN_DATE.toISOString().split('T')[0];
 document.getElementById('data-fim').value = MAX_DATE.toISOString().split('T')[0];
 
-let DADOS_AGRUPADOS = {}; // Guardará o estado consolidado para renderização
+let DADOS_AGRUPADOS = {};
 
 // ==========================================
-// 3. MOTOR DE FILTRAGEM E AGRUPAMENTO
+// MOTOR DE FILTRAGEM E AGRUPAMENTO
 // ==========================================
 function processarDados() {
   const dataIniStr = document.getElementById('data-inicio').value;
   const dataFimStr = document.getElementById('data-fim').value;
-  
-  let startTs = dataIniStr ? new Date(dataIniStr + 'T00:00:00').getTime() : 0;
-  let endTs = dataFimStr ? new Date(dataFimStr + 'T23:59:59').getTime() : Infinity;
+  let startTs = dataIniStr ? new Date(dataIniStr+'T00:00:00').getTime() : 0;
+  let endTs   = dataFimStr ? new Date(dataFimStr+'T23:59:59').getTime() : Infinity;
 
-  // Filtragem
-  const viagensFiltradas = DADOS_BRUTOS.filter(v => {
-    if(!v.data) return true; // Mantém quem não tem data (pode adaptar se preferir ocultar)
+  // ---- Breakdown SI x AE (apenas filtro de data, sem filtro de categoria)
+  const viagensParaBreakdown = DADOS_BRUTOS.filter(v => {
+    if (!v.data) return false;
     return v.timestamp >= startTs && v.timestamp <= endTs;
   });
+  let tlCat = { SI:{ proc:{}, dia:{}, tot:{} }, AE:{ proc:{}, dia:{}, tot:{} } };
+  viagensParaBreakdown.forEach(v => {
+    const cat = getCategoria(v.cadastro.esc);
+    if (cat !== 'Saúde Indígena' && cat !== 'Atenção Especializada') return;
+    const k = cat === 'Saúde Indígena' ? 'SI' : 'AE';
+    if (!tlCat[k].proc[v.mesAno]) tlCat[k].proc[v.mesAno] = new Set();
+    tlCat[k].proc[v.mesAno].add(v.processo);
+    tlCat[k].dia[v.mesAno] = (tlCat[k].dia[v.mesAno]||0) + v.qtd;
+    tlCat[k].tot[v.mesAno] = (tlCat[k].tot[v.mesAno]||0) + v.valDiarias + v.valPassagem + v.valOutros;
+  });
+  const allMesesCat = [...new Set([...Object.keys(tlCat.SI.dia),...Object.keys(tlCat.AE.dia)])].sort((a,b)=>{
+    let [ma,ya]=a.split('/'); let [mb,yb]=b.split('/');
+    return new Date(ya,ma-1)-new Date(yb,mb-1);
+  });
+  const dadosCategoria = {
+    labels: allMesesCat,
+    SI:{
+      processos: allMesesCat.map(m => tlCat.SI.proc[m] ? tlCat.SI.proc[m].size : 0),
+      diarias:   allMesesCat.map(m => tlCat.SI.dia[m]||0),
+      total:     allMesesCat.map(m => tlCat.SI.tot[m]||0)
+    },
+    AE:{
+      processos: allMesesCat.map(m => tlCat.AE.proc[m] ? tlCat.AE.proc[m].size : 0),
+      diarias:   allMesesCat.map(m => tlCat.AE.dia[m]||0),
+      total:     allMesesCat.map(m => tlCat.AE.tot[m]||0)
+    }
+  };
 
-  // Estruturas para consolidação
-  let totais = { qtd: 0, diarias: 0, passagem: 0, outros: 0, npass: 0, nrec: 0, total: 0, processosSet: new Set(), pessoasSet: new Set() };
+  // ---- Filtro principal (data + categoria)
+  const viagensFiltradas = DADOS_BRUTOS.filter(v => {
+    if (v.data) {
+      if (v.timestamp < startTs || v.timestamp > endTs) return false;
+    }
+    if (FILTRO_CATEGORIA !== 'Todas') {
+      const cat = getCategoria(v.cadastro.esc);
+      if (cat !== FILTRO_CATEGORIA) return false;
+    }
+    return true;
+  });
+
+  let totais = { qtd:0, diarias:0, passagem:0, outros:0, npass:0, nrec:0, total:0, processosSet:new Set(), pessoasSet:new Set() };
   let escMap = {};
   let timelineProc = {};
   let timelineDiarias = {};
 
   viagensFiltradas.forEach(v => {
     let eName = v.cadastro.esc;
-    
-    // Aggregation Globall
-    totais.qtd += v.qtd; totais.diarias += v.valDiarias; 
+    totais.qtd += v.qtd; totais.diarias += v.valDiarias;
     totais.passagem += v.valPassagem; totais.outros += v.valOutros;
-    if(v.valPassagem > 0) totais.npass++;
+    if (v.valPassagem > 0) totais.npass++;
     totais.nrec++;
     totais.processosSet.add(v.processo);
     totais.pessoasSet.add(v.nomeNormalizado);
-
-    // Aggregation Timeline
     if (v.data) {
-      if(!timelineProc[v.mesAno]) timelineProc[v.mesAno] = new Set();
+      if (!timelineProc[v.mesAno]) timelineProc[v.mesAno] = new Set();
       timelineProc[v.mesAno].add(v.processo);
-      timelineDiarias[v.mesAno] = (timelineDiarias[v.mesAno] || 0) + v.qtd;
+      timelineDiarias[v.mesAno] = (timelineDiarias[v.mesAno]||0) + v.qtd;
     }
-
-    // Aggregation Escritorio
-    if(!escMap[eName]) {
-      escMap[eName] = { esc: eName, ufs: new Set([v.cadastro.uf]), qtd: 0, diarias: 0, passagem: 0, outros: 0, npass: 0, nrec: 0, processosSet: new Set(), pessoasMap: {} };
+    if (!escMap[eName]) {
+      escMap[eName] = { esc:eName, ufs:new Set([v.cadastro.uf]), qtd:0, diarias:0, passagem:0, outros:0, npass:0, nrec:0, processosSet:new Set(), pessoasMap:{} };
     }
     let o = escMap[eName];
     o.qtd += v.qtd; o.diarias += v.valDiarias; o.passagem += v.valPassagem; o.outros += v.valOutros;
-    if(v.valPassagem > 0) o.npass++;
+    if (v.valPassagem > 0) o.npass++;
     o.nrec++; o.processosSet.add(v.processo);
-
-    // Aggregation Pessoas dentro do Escritorio
-    if(!o.pessoasMap[v.nome]) {
-      o.pessoasMap[v.nome] = { nome: v.nome, qtd: 0, diarias: 0, passagem: 0, outros: 0, npass: 0, total: 0 };
+    if (!o.pessoasMap[v.nome]) {
+      o.pessoasMap[v.nome] = { nome:v.nome, qtd:0, diarias:0, passagem:0, outros:0, npass:0, total:0 };
     }
     let p = o.pessoasMap[v.nome];
     p.qtd += v.qtd; p.diarias += v.valDiarias; p.passagem += v.valPassagem; p.outros += v.valOutros;
-    if(v.valPassagem > 0) p.npass++;
+    if (v.valPassagem > 0) p.npass++;
   });
 
-  // Finalizando Calculos (Convertendo Sets e Maps em Arrays calculados)
   totais.total = totais.diarias + totais.passagem + totais.outros;
   totais.n_processos = totais.processosSet.size;
   totais.n_pessoas = totais.pessoasSet.size;
@@ -1034,106 +1040,89 @@ function processarDados() {
     o.total = o.diarias + o.passagem + o.outros;
     o.n_processos = o.processosSet.size;
     o.ufs = Array.from(o.ufs);
-    let pessoasArr = Object.values(o.pessoasMap).map(p => {
-      p.total = p.diarias + p.passagem + p.outros;
-      return p;
-    });
-    // Ordena as pessoas de cada escritorio pelo gasto
+    let pessoasArr = Object.values(o.pessoasMap).map(p => { p.total = p.diarias + p.passagem + p.outros; return p; });
     o.pessoas = pessoasArr.sort((a,b) => b.total - a.total);
     o.n_pessoas = pessoasArr.length;
     return o;
   });
 
-  // Timeline Ordenada (MM/YYYY)
   let chavesMeses = Object.keys(timelineDiarias).sort((a,b) => {
-    let [ma, ya] = a.split('/'); let [mb, yb] = b.split('/');
-    return new Date(ya, ma-1) - new Date(yb, mb-1);
+    let [ma,ya]=a.split('/'); let [mb,yb]=b.split('/');
+    return new Date(ya,ma-1)-new Date(yb,mb-1);
   });
-  
   let dadosTimeline = {
     labels: chavesMeses,
     processos: chavesMeses.map(m => timelineProc[m] ? timelineProc[m].size : 0),
-    diarias: chavesMeses.map(m => timelineDiarias[m] || 0)
+    diarias: chavesMeses.map(m => timelineDiarias[m]||0)
   };
 
-  DADOS_AGRUPADOS = { totais, escritorios: escritoriosArr, timeline: dadosTimeline };
+  DADOS_AGRUPADOS = { totais, escritorios: escritoriosArr, timeline: dadosTimeline, dadosCategoria };
   renderUI();
 }
 
-
 // ==========================================
-// 4. RENDERIZAÇÃO DA INTERFACE E GRÁFICOS
+// RENDERIZAÇÃO
 // ==========================================
 Chart.register(window.ChartDataLabels);
 Chart.defaults.set('plugins.datalabels', {
-    color: '#1c2321', align: 'right', anchor: 'end',
-    font: { weight: 'bold', size: 10, family: 'Archivo' },
-    formatter: v => v > 0 ? (Number.isInteger(v) ? v : v.toFixed(1)) : ''
+  color:'#1c2321', align:'right', anchor:'end',
+  font:{ weight:'bold', size:10, family:'Archivo' },
+  formatter: v => v > 0 ? (Number.isInteger(v) ? v : v.toFixed(1)) : ''
 });
 
 let chartsInstances = {};
 
 function formatName(name) {
-  if(name.startsWith('(')) return 'Sem vínculo';
-  return name.replace('Distrital de ', '').replace('Regional de ', '') + 
-         (name.includes('Distrital') ? ' (Dist.)' : name.includes('Regional') ? ' (Reg.)' : '');
+  if (name.startsWith('(')) return 'Sem vínculo';
+  return name.replace('Distrital de ','').replace('Regional de ','').replace('Regional do ','').replace('Regional São ','São ')
+    + (name.includes('Distrital') ? ' (D.)' : name.includes('Regional') ? ' (R.)' : '');
 }
 
 function renderUI() {
   const t = DADOS_AGRUPADOS.totais;
-  const mProc = t.n_processos > 0 ? (t.total / t.n_processos) : 0;
+  const mProc = t.n_processos > 0 ? t.total / t.n_processos : 0;
 
-  // 1. CARDS
+  // CARDS
   document.getElementById('cards').innerHTML = [
-    {c:'',   lab:'Gasto total',            val:BRL_CARD(t.total), note:NUM_CARD(t.nrec)+' reg. de viagem'},
-    {c:'c2', lab:'Valor de diárias',       val:BRL_CARD(t.diarias), note:NUM_CARD(t.qtd)+' diárias (dias)'},
-    {c:'c3', lab:'Gasto passagens',        val:BRL_CARD(t.passagem), note:NUM_CARD(t.npass)+' passagens'},
-    {c:'c5', lab:'Processos',              val:NUM_CARD(t.n_processos), note:'abertos no período'},
-    {c:'c6', lab:'Média / Processo',       val:BRL_CARD(mProc), note:'Custo / nº de proc.'},
-    {c:'c4', lab:'Outros gastos',          val:BRL_CARD(t.outros), note:'locação veículos'}
+    {c:'',   lab:'Gasto total',       val:BRL_CARD(t.total),    note:NUM_CARD(t.nrec)+' reg. de viagem'},
+    {c:'c2', lab:'Valor de diárias',  val:BRL_CARD(t.diarias),  note:NUM_CARD(t.qtd)+' diárias (dias)'},
+    {c:'c3', lab:'Gasto passagens',   val:BRL_CARD(t.passagem), note:NUM_CARD(t.npass)+' passagens'},
+    {c:'c5', lab:'Processos',         val:NUM_CARD(t.n_processos), note:'no período filtrado'},
+    {c:'c6', lab:'Média / Processo',  val:BRL_CARD(mProc),      note:'custo médio'},
+    {c:'c4', lab:'Outros gastos',     val:BRL_CARD(t.outros),   note:'locação veículos'}
   ].map(c=>`<div class="card ${c.c}"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="note">${c.note}</div></div>`).join('');
 
-  document.getElementById('meta').innerHTML = `<span><b>${NUM(t.nrec)}</b> registros</span><span><b>${NUM(t.npass)}</b> passagens</span><span><b>${NUM(t.qtd)}</b> diárias</span><span>Total <b>${BRL(t.total)}</b></span>`;
+  document.getElementById('meta').innerHTML =
+    `<span><b>${NUM(t.nrec)}</b> registros</span><span><b>${NUM(t.npass)}</b> passagens</span><span><b>${NUM(t.qtd)}</b> diárias</span><span>Total <b>${BRL(t.total)}</b></span>`;
 
-  // 2. ORDENAÇÃO E BUSCA
   let ordem = document.getElementById('ord').value;
-  let busca = document.getElementById('busca').value.trim().toLowerCase();
-
-  let escs = DADOS_AGRUPADOS.escritorios.slice();
-  const naoVinc = escs.filter(o=>o.esc.startsWith('('));
-  let normais = escs.filter(o=>!o.esc.startsWith('('));
-  
-  const cmp = {
-    total: (a,b) => b.total - a.total, diarias: (a,b) => b.diarias - a.diarias, passagem: (a,b) => b.passagem - a.passagem, 
-    npass: (a,b) => b.npass - a.npass, qtd: (a,b) => b.qtd - a.qtd, processos: (a,b) => b.n_processos - a.n_processos,
-    nome: (a,b) => a.esc.localeCompare(b.esc,'pt-BR')
-  }[ordem];
-  
+  let busca  = document.getElementById('busca').value.trim().toLowerCase();
+  let escs   = DADOS_AGRUPADOS.escritorios.slice();
+  const naoVinc = escs.filter(o => o.esc.startsWith('('));
+  let normais   = escs.filter(o => !o.esc.startsWith('('));
+  const cmp = { total:(a,b)=>b.total-a.total, diarias:(a,b)=>b.diarias-a.diarias,
+    passagem:(a,b)=>b.passagem-a.passagem, npass:(a,b)=>b.npass-a.npass, qtd:(a,b)=>b.qtd-a.qtd,
+    processos:(a,b)=>b.n_processos-a.n_processos, nome:(a,b)=>a.esc.localeCompare(b.esc,'pt-BR') }[ordem];
   normais.sort(cmp);
   const ordered = normais.concat(naoVinc);
-  const itensParaGrafico = []; // Oculta sem vínculo nos gráficos
+  const itensParaGrafico = [];
 
-  // 3. RENDERIZAÇÃO DA LISTA DE ESCRITÓRIOS
-  document.getElementById('lista').innerHTML = ordered.map((o,i)=>{
+  document.getElementById('lista').innerHTML = ordered.map((o,i) => {
     const isU = o.esc.startsWith('(');
     const rank = isU ? '–' : (i+1);
-    
     let pessoas = o.pessoas;
     let matchEsc = !busca || o.esc.toLowerCase().includes(busca);
-    
-    if(busca && !matchEsc){
-      pessoas = o.pessoas.filter(p=>p.nome.toLowerCase().includes(busca));
-      if(pessoas.length===0) return '';
+    if (busca && !matchEsc) {
+      pessoas = o.pessoas.filter(p => p.nome.toLowerCase().includes(busca));
+      if (pessoas.length===0) return '';
     }
-    
-    if(!isU && matchEsc) itensParaGrafico.push(o); // Sincroniza o gráfico com a busca e ordenação atual!
-
+    if (!isU && matchEsc) itensParaGrafico.push(o);
     const tags = [];
-    if(isU) tags.push('<span class="tag warn">Sem vínculo</span>');
-    else { o.ufs.forEach(u=> u!=='-' && tags.push(`<span class="tag uf">${u}</span>`)); tags.push(`<span class="tag">${o.n_pessoas} pes.</span>`); }
-    
-    const rows = pessoas.map(p=>`<tr><td class="nm">${p.nome}</td><td class="opt">${NUM(p.qtd)}</td><td>${p.npass}</td><td class="opt">${p.diarias?BRL(p.diarias):'<span class=muted>—</span>'}</td><td>${p.passagem?BRL(p.passagem):'<span class=muted>—</span>'}</td><td class="opt">${p.outros?BRL(p.outros):'<span class=muted>—</span>'}</td><td><b>${BRL(p.total)}</b></td></tr>`).join('');
-    
+    if (isU) tags.push('<span class="tag warn">Sem vínculo</span>');
+    else { o.ufs.forEach(u => u!=='-' && tags.push(`<span class="tag uf">${u}</span>`)); tags.push(`<span class="tag">${o.n_pessoas} pes.</span>`); }
+    const rows = pessoas.map(p =>
+      `<tr><td class="nm">${p.nome}</td><td class="opt">${NUM(p.qtd)}</td><td>${p.npass}</td><td class="opt">${p.diarias?BRL(p.diarias):'<span class=muted>—</span>'}</td><td>${p.passagem?BRL(p.passagem):'<span class=muted>—</span>'}</td><td class="opt">${p.outros?BRL(p.outros):'<span class=muted>—</span>'}</td><td><b>${BRL(p.total)}</b></td></tr>`
+    ).join('');
     return `<div class="office ${isU?'unlinked':''} ${busca?'open':''}">
       <div class="ohead" onclick="this.parentNode.classList.toggle('open')">
         <div class="oname"><span class="rank">${rank}</span>${o.esc} ${tags.join(' ')}</div>
@@ -1143,116 +1132,143 @@ function renderUI() {
         <div class="ocell"><span class="k">Val. diárias</span>${BRL(o.diarias)}</div>
         <div class="ocell total"><span class="k">Total</span>${BRL(o.total)}</div>
         <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div><div class="obody"><table><thead><tr><th>Colaborador</th><th class="opt">Diárias</th><th>Pass.</th><th class="opt">V. diárias</th><th>V. pass.</th><th class="opt">Outros</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
-  }).join('') || '<p style="padding:24px; color:var(--ink-soft);">Nenhum resultado.</p>';
+      </div>
+      <div class="obody"><table><thead><tr><th>Colaborador</th><th class="opt">Diárias</th><th>Pass.</th><th class="opt">V. diárias</th><th>V. pass.</th><th class="opt">Outros</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table></div>
+    </div>`;
+  }).join('') || '<p style="padding:24px;color:var(--ink-soft)">Nenhum resultado.</p>';
 
-  // 4. ATUALIZAR GRÁFICOS
-  const tline = DADOS_AGRUPADOS.timeline;
-  
-  // Destroi para recriar
+  // ---- Destroi gráficos anteriores
   Object.values(chartsInstances).forEach(c => c.destroy());
+  chartsInstances = {};
 
-  // Gráfico Evolução Mista
+  // ---- Gráfico Evolução Mista
+  const tline = DADOS_AGRUPADOS.timeline;
   chartsInstances.cEvoMista = new Chart(document.getElementById('graficoEvolucaoMista'), {
-    type: 'line', 
-    data: { 
-      labels: tline.labels, 
-      datasets: [
-        { label:'Processos', data: tline.processos, borderColor: '#1f6f5c', backgroundColor: 'rgba(31,111,92,0.1)', fill: true, tension: 0.3, yAxisID: 'y' },
-        { label:'Diárias (Dias)', data: tline.diarias, borderColor: '#FFA500', backgroundColor: 'rgba(58,90,140,0.1)', fill: true, tension: 0.3, yAxisID: 'y1' }
-      ] 
-    },
-    options: { 
-      responsive: true, maintainAspectRatio: false, 
-      plugins: { legend: { display: true, position: 'top' }, datalabels: { align: 'top', anchor: 'end' } },
-      scales: {
-        y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Processos' } },
-        y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Diárias' }, grid: { drawOnChartArea: false } }
+    type:'line',
+    data:{ labels:tline.labels, datasets:[
+      { label:'Processos', data:tline.processos, borderColor:'#1f6f5c', backgroundColor:'rgba(31,111,92,.1)', fill:true, tension:.3, yAxisID:'y' },
+      { label:'Diárias (Dias)', data:tline.diarias, borderColor:'#FFA500', backgroundColor:'rgba(255,165,0,.1)', fill:true, tension:.3, yAxisID:'y1' }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:true,position:'top'}, datalabels:{align:'top',anchor:'end'} },
+      scales:{
+        y:{ type:'linear', display:true, position:'left', title:{display:true,text:'Processos'} },
+        y1:{ type:'linear', display:true, position:'right', title:{display:true,text:'Diárias'}, grid:{drawOnChartArea:false} }
       }
     }
   });
 
-  // Gráficos Horizontais (Todos os Escritórios) - Ordenados de forma descendente de forma independente
-  // Ajuste de altura dinâmica baseada na quantidade de itens para não espremer barras
+  // ---- Gráfico Breakdown SI x AE
+  renderCatChart();
+
+  // ---- Gráficos Horizontais por Escritório
   const dynHeight = Math.max(300, itensParaGrafico.length * 35);
   document.getElementById('graficoProcessos').parentNode.style.height = dynHeight + 'px';
-  document.getElementById('graficoDiarias').parentNode.style.height = dynHeight + 'px';
+  document.getElementById('graficoDiarias').parentNode.style.height   = dynHeight + 'px';
 
-  // Ordena independentemente para garantir ordem decrescente nos gráficos
-  let dadosOrdenadosProc = [...itensParaGrafico].sort((a, b) => b.n_processos - a.n_processos);
-  let labelsProcEsc = dadosOrdenadosProc.map(o => formatName(o.esc));
-  let dadosProcEsc = dadosOrdenadosProc.map(o => o.n_processos);
-
-  let dadosOrdenadosDia = [...itensParaGrafico].sort((a, b) => b.qtd - a.qtd);
-  let labelsDiaEsc = dadosOrdenadosDia.map(o => formatName(o.esc));
-  let dadosDiaEsc = dadosOrdenadosDia.map(o => o.qtd);
+  let dadosOrdProc = [...itensParaGrafico].sort((a,b) => b.n_processos - a.n_processos);
+  let dadosOrdDia  = [...itensParaGrafico].sort((a,b) => b.qtd - a.qtd);
 
   chartsInstances.cProc = new Chart(document.getElementById('graficoProcessos'), {
-    type: 'bar', data: { labels: labelsProcEsc, datasets: [{ data: dadosProcEsc, backgroundColor: '#1f6f5c', borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { padding: 4 } }, scales: { x: { beginAtZero: true, suggestedMax: Math.max(...dadosProcEsc)*1.1 } } }
+    type:'bar', data:{ labels:dadosOrdProc.map(o=>formatName(o.esc)), datasets:[{data:dadosOrdProc.map(o=>o.n_processos), backgroundColor:'#1f6f5c', borderRadius:4}] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},datalabels:{padding:4}}, scales:{x:{beginAtZero:true,suggestedMax:Math.max(...dadosOrdProc.map(o=>o.n_processos))*1.1}} }
   });
-
   chartsInstances.cDia = new Chart(document.getElementById('graficoDiarias'), {
-    type: 'bar', data: { labels: labelsDiaEsc, datasets: [{ data: dadosDiaEsc, backgroundColor: '#3a5a8c', borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { padding: 4 } }, scales: { x: { beginAtZero: true, suggestedMax: Math.max(...dadosDiaEsc)*1.1 } } }
+    type:'bar', data:{ labels:dadosOrdDia.map(o=>formatName(o.esc)), datasets:[{data:dadosOrdDia.map(o=>o.qtd), backgroundColor:'#3a5a8c', borderRadius:4}] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},datalabels:{padding:4}}, scales:{x:{beginAtZero:true,suggestedMax:Math.max(...dadosOrdDia.map(o=>o.qtd))*1.1}} }
   });
 
-  // Gráfico Top 10 Pessoas com mais diárias (Analisando globalmente, baseados na lista ordenada)
+  // ---- Top 10 Pessoas
   let mapPessoasQtd = {};
-  ordered.forEach(esc => {
-    esc.pessoas.forEach(p => {
-      mapPessoasQtd[p.nome] = (mapPessoasQtd[p.nome] || 0) + p.qtd;
-    });
-  });
-  
-  let top10Pessoas = Object.keys(mapPessoasQtd)
-    .map(nome => ({ nome, qtd: mapPessoasQtd[nome] }))
-    .sort((a,b) => b.qtd - a.qtd)
-    .slice(0, 10);
-
+  ordered.forEach(esc => esc.pessoas.forEach(p => { mapPessoasQtd[p.nome] = (mapPessoasQtd[p.nome]||0) + p.qtd; }));
+  let top10 = Object.keys(mapPessoasQtd).map(nome=>({nome,qtd:mapPessoasQtd[nome]})).sort((a,b)=>b.qtd-a.qtd).slice(0,10);
   chartsInstances.cTopPessoas = new Chart(document.getElementById('graficoTopPessoasDiarias'), {
-    type: 'bar', 
-    data: { 
-      labels: top10Pessoas.map(p => p.nome), 
-      datasets: [{ data: top10Pessoas.map(p => p.qtd), backgroundColor: '#b5552a', borderRadius: 4 }] 
-    },
-    options: { 
-      indexAxis: 'y', 
-      responsive: true, 
-      maintainAspectRatio: false, 
-      plugins: { legend: { display: false }, datalabels: { padding: 4 } }, 
-      scales: { x: { beginAtZero: true, suggestedMax: Math.max(...top10Pessoas.map(p=>p.qtd))*1.1 } } 
+    type:'bar', data:{ labels:top10.map(p=>p.nome), datasets:[{data:top10.map(p=>p.qtd), backgroundColor:'#b5552a', borderRadius:4}] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},datalabels:{padding:4}}, scales:{x:{beginAtZero:true,suggestedMax:Math.max(...top10.map(p=>p.qtd))*1.1}} }
+  });
+}
+
+// ---- Renderiza só o gráfico de categoria (chamado também no toggle de métrica)
+function renderCatChart() {
+  if (chartsInstances.cCat) { chartsInstances.cCat.destroy(); delete chartsInstances.cCat; }
+  const catD  = DADOS_AGRUPADOS.dadosCategoria;
+  if (!catD || !catD.labels.length) return;
+  const isTot = metricaCategoria === 'total';
+  const isDia = metricaCategoria === 'diarias';
+  const fmtCatV = v => {
+    if (!v || v === 0) return '';
+    if (isTot) return 'R$'+(v/1000).toFixed(0)+'k';
+    return isDia ? (v%1===0 ? v : v.toFixed(1)) : v;
+  };
+  chartsInstances.cCat = new Chart(document.getElementById('graficoCategoriaMes'), {
+    type:'bar',
+    data:{ labels:catD.labels, datasets:[
+      { label:'Saúde Indígena',       data:catD.SI[metricaCategoria], backgroundColor:'rgba(31,111,92,.82)',  borderRadius:4 },
+      { label:'Atenção Especializada', data:catD.AE[metricaCategoria], backgroundColor:'rgba(58,90,140,.82)', borderRadius:4 }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ display:true, position:'top' },
+        datalabels:{ color:'#1c2321', align:'top', anchor:'end', font:{weight:'bold',size:9,family:'Archivo'}, formatter:fmtCatV },
+        tooltip:{ callbacks:{ label:ctx => {
+          const v = ctx.raw;
+          if (isTot) return ctx.dataset.label+': '+v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:0,maximumFractionDigits:0});
+          return ctx.dataset.label+': '+v.toLocaleString('pt-BR',{maximumFractionDigits:1});
+        }}}
+      },
+      scales:{
+        x:{ grid:{display:false} },
+        y:{ beginAtZero:true, ticks:{ callback: v => isTot ? 'R$'+(v/1000).toFixed(0)+'k' : v } }
+      }
     }
   });
 }
 
 // ==========================================
-// 5. EVENTOS DA TELA
+// EVENTOS
 // ==========================================
-document.getElementById('data-inicio').addEventListener('change', () => { document.getElementById('btn-limpar').style.display='inline-block'; processarDados(); });
-document.getElementById('data-fim').addEventListener('change', () => { document.getElementById('btn-limpar').style.display='inline-block'; processarDados(); });
-document.getElementById('ord').addEventListener('change', renderUI);
-document.getElementById('busca').addEventListener('input', renderUI);
-
-document.getElementById('btn-limpar').addEventListener('click', () => {
+document.getElementById('data-inicio').addEventListener('change',()=>{ document.getElementById('btn-limpar').style.display='inline-block'; processarDados(); });
+document.getElementById('data-fim').addEventListener('change',()=>{ document.getElementById('btn-limpar').style.display='inline-block'; processarDados(); });
+document.getElementById('btn-limpar').addEventListener('click',()=>{
   document.getElementById('data-inicio').value = MIN_DATE.toISOString().split('T')[0];
-  document.getElementById('data-fim').value = MAX_DATE.toISOString().split('T')[0];
+  document.getElementById('data-fim').value    = MAX_DATE.toISOString().split('T')[0];
   document.getElementById('btn-limpar').style.display = 'none';
   document.getElementById('busca').value = '';
   processarDados();
 });
+document.getElementById('ord').addEventListener('change', renderUI);
+document.getElementById('busca').addEventListener('input', renderUI);
 
 const btnExp = document.getElementById('toggleAll');
 btnExp.addEventListener('click',()=>{
-  const open = btnExp.dataset.s!=='1';
-  document.querySelectorAll('.office').forEach(o=>o.classList.toggle('open',open));
-  btnExp.dataset.s = open?'1':'0';
-  btnExp.textContent = open?'Recolher todos':'Expandir todos';
+  const open = btnExp.dataset.s !== '1';
+  document.querySelectorAll('.office').forEach(o => o.classList.toggle('open', open));
+  btnExp.dataset.s = open ? '1' : '0';
+  btnExp.textContent = open ? 'Recolher todos' : 'Expandir todos';
+});
+
+// Filtro de categoria
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    FILTRO_CATEGORIA = btn.dataset.cat;
+    processarDados();
+  });
+});
+
+// Toggle de métrica (gráfico SI x AE) — não chama processarDados, só re-renderiza o gráfico
+document.querySelectorAll('.metric-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.metric-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    metricaCategoria = btn.dataset.metric;
+    renderCatChart();
+  });
 });
 
 // Inicialização
 processarDados();
-
 </script>
 </body>
 </html>
