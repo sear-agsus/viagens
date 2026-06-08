@@ -126,6 +126,30 @@ td.nm{text-align:left;font-weight:500}
 
 .datas-viagem{display:block;font-size:10.5px;color:var(--accent-3);margin-top:4px;line-height:1.7;letter-spacing:.01em}
 
+
+.section-divider{margin:32px 0 18px;display:flex;align-items:center;gap:14px}
+.section-divider h2{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--ink);white-space:nowrap}
+.section-divider::after{content:'';flex:1;height:2px;background:var(--line-strong)}
+.chart-sub{text-align:center;font-size:12px;color:var(--ink-soft);margin:-8px 0 12px;line-height:1.5}
+/* Heatmap */
+.hm-table{border-collapse:collapse;min-width:600px;width:100%}
+.hm-table th{padding:5px 7px;font-size:10px;font-weight:600;color:var(--ink-soft);text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+.hm-table th:first-child{text-align:left;min-width:150px;padding-left:0}
+.hm-label{padding:5px 12px 5px 0;font-size:11px;font-weight:500;color:var(--ink);white-space:nowrap}
+.hm-cell{text-align:center;font-size:10px;font-weight:600;padding:6px 2px;min-width:36px;cursor:default;transition:opacity .15s;color:#fff}
+.hm-cell.zero{color:var(--ink-soft);background:transparent!important}
+.hm-cell:hover{opacity:.7}
+
+/* ---- Abas ---- */
+.tab-nav{display:flex;gap:0;border-bottom:2px solid var(--line-strong);margin-bottom:24px}
+.tab-btn{font-family:'Fraunces',serif;font-size:15px;font-weight:600;padding:12px 26px;border:none;background:transparent;cursor:pointer;color:var(--ink-soft);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-btn:hover:not(.active){color:var(--ink);background:rgba(31,111,92,.05)}
+/* ---- Viagens por colaborador ---- */
+.viagens-list{display:block;margin-top:6px;border-top:1px solid var(--line);padding-top:5px}
+.viagem-item{display:flex;gap:10px;align-items:baseline;padding:2px 0;font-size:10.5px;line-height:1.4}
+.vproc{color:var(--accent-3);font-weight:600;font-size:10px;letter-spacing:.01em;min-width:130px;flex-shrink:0}
+.vdata{color:var(--ink-soft)}
 </style>
 </head>
 <body>
@@ -156,6 +180,11 @@ td.nm{text-align:left;font-weight:500}
     </div>
   </div>
 
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="painel">&#128202; Painel</button>
+    <button class="tab-btn" data-tab="detalhe">&#128203; Detalhamento</button>
+  </div>
+  <div id="tab-painel" class="tab-content">
   <section class="cards" id="cards"></section>
 
   <section class="charts-grid">
@@ -163,6 +192,12 @@ td.nm{text-align:left;font-weight:500}
     <div class="chart-box" style="grid-column:1/-1;">
       <h3>Evolução de Processos e Diárias (Mês/Ano · Data Ida)</h3>
       <div class="chart-wrap timeline"><canvas id="graficoEvolucaoMista"></canvas></div>
+    </div>
+
+    <div class="chart-box">
+      <h3>Distribui&#231;&#227;o da Dura&#231;&#227;o das Viagens</h3>
+      <p class="chart-sub">Quantidade de registros por faixa de dias de di&#225;ria</p>
+      <div class="chart-wrap" style="height:300px"><canvas id="graficoDistribuicao"></canvas></div>
     </div>
 
     <!-- NOVO: Breakdown SI x AE -->
@@ -192,6 +227,19 @@ td.nm{text-align:left;font-weight:500}
       <div class="chart-wrap"><canvas id="graficoTopPessoasDiarias"></canvas></div>
     </div>
 
+    <!-- Correlação DSEI -->
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Correla&#231;&#227;o: &#193;rea de Abrang&#234;ncia do DSEI &#215; Dias de Viagem por Pessoa</h3>
+      <p style="text-align:center;font-size:12px;color:var(--ink-soft);margin:-8px 0 12px">Cada bolha representa um escrit&#243;rio distrital. Tamanho proporcional ao gasto total. Escala logar&#237;tmica no eixo X.</p>
+      <div class="chart-wrap" style="height:380px"><canvas id="graficoScatter"></canvas></div>
+    </div>
+
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Correla&#231;&#227;o: Frequ&#234;ncia de Processos &#215; &#193;rea de Abrang&#234;ncia do DSEI</h3>
+      <p class="chart-sub">Cada bolha &#233; um escrit&#243;rio distrital &#8212; tamanho proporcional ao gasto total &#8212; escala logar&#237;tmica</p>
+      <div class="chart-wrap" style="height:360px"><canvas id="graficoFreqArea"></canvas></div>
+    </div>
+
     <!-- Índice de Ausência -->
     <div class="chart-box" style="grid-column:1/-1;">
       <h3>&#205;ndice de Aus&#234;ncia por Escrit&#243;rio (% dos dias do per&#237;odo por pessoa)</h3>
@@ -206,17 +254,55 @@ td.nm{text-align:left;font-weight:500}
         </div>
       </div>
     </div>
-
-    <!-- Correlação DSEI -->
-    <div class="chart-box" style="grid-column:1/-1;">
-      <h3>Correla&#231;&#227;o: &#193;rea de Abrang&#234;ncia do DSEI &#215; Dias de Viagem por Pessoa</h3>
-      <p style="text-align:center;font-size:12px;color:var(--ink-soft);margin:-8px 0 12px">Cada bolha representa um escrit&#243;rio distrital. Tamanho proporcional ao gasto total. Escala logar&#237;tmica no eixo X.</p>
-      <div class="chart-wrap" style="height:380px"><canvas id="graficoScatter"></canvas></div>
-    </div>
   </section>
 
+
+  <!-- ═══ Análises Avançadas ═══ -->
+  <div class="section-divider">
+    <h2>An&#225;lises Avan&#231;adas</h2>
+  </div>
+  <section class="charts-grid">
+
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Curva de Pareto &#8212; Concentra&#231;&#227;o de Gastos por Colaborador</h3>
+      <p class="chart-sub">Identifica quantos colaboradores respondem por 80% do gasto total no per&#237;odo</p>
+      <div class="chart-wrap" style="height:340px"><canvas id="graficoPareto"></canvas></div>
+    </div>
+
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Evolu&#231;&#227;o do Custo M&#233;dio por Viagem (R$ / registro)</h3>
+      <div class="chart-wrap timeline"><canvas id="graficoCustoMedio"></canvas></div>
+    </div>
+
+    <div class="chart-box">
+      <h3>Custo M&#233;dio por Processo por Escrit&#243;rio</h3>
+      <div class="chart-scroll-area"><div class="chart-wrap tall" id="wrCustoProc"><canvas id="graficoCustoProc"></canvas></div></div>
+    </div>
+
+    <div class="chart-box">
+      <h3>Propor&#231;&#227;o Di&#225;rias &#215; Passagens por Escrit&#243;rio</h3>
+      <p class="chart-sub">100% empilhado &#183; Di&#225;rias &#183; Passagens &#183; Outros</p>
+      <div class="chart-scroll-area"><div class="chart-wrap tall" id="wrProporcao"><canvas id="graficoProporcao"></canvas></div></div>
+    </div>
+
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Gasto por km&#178; de Abrang&#234;ncia do DSEI</h3>
+      <p class="chart-sub">R$ total gastos / &#225;rea territorial estimada do DSEI</p>
+      <div class="chart-scroll-area"><div class="chart-wrap tall" id="wrGastoKm2"><canvas id="graficoGastoKm2"></canvas></div></div>
+    </div>
+
+    <div class="chart-box" style="grid-column:1/-1;">
+      <h3>Heatmap de Intensidade &#8212; Processos por Escrit&#243;rio / M&#234;s</h3>
+      <div id="heatmapContainer" style="overflow-x:auto;padding-top:6px"></div>
+    </div>
+
+  </section>
+
+  </div><!-- /tab-painel -->
+
+  <div id="tab-detalhe" class="tab-content" style="display:none">
   <div class="toolbar">
-    <h2>Detalhamento por Escritório</h2>
+    <h2>Detalhamento por Escrit&#243;rio</h2>
     <div class="ctrl"><input type="search" id="busca" placeholder="Buscar escritório ou pessoa…" aria-label="Buscar"></div>
     <div class="ctrl" style="margin-left:auto;"><label for="ord">Ordenar por:</label>
       <select id="ord">
@@ -231,6 +317,7 @@ td.nm{text-align:left;font-weight:500}
   </div>
   <section id="lista"></section>
   <div class="foot" id="rodape"></div>
+  </div><!-- /tab-detalhe -->
 </div>
 
 <script>
@@ -1196,6 +1283,11 @@ function processarDados() {
   let escMap = {};
   let timelineProc = {};
   let timelineDiarias = {};
+  let timelineTotal   = {};
+  let timelineNrec    = {};
+  const duracaoKeys   = ['0d','0.5-1d','1.5-2d','2.5-3d','3.5-5d','5.5-7d','7.5-10d','10d+'];
+  const duracaoDistrib = {};
+  duracaoKeys.forEach(function(k){duracaoDistrib[k]=0;});
 
   viagensFiltradas.forEach(v => {
     let eName = v.cadastro.esc;
@@ -1209,7 +1301,19 @@ function processarDados() {
       if (!timelineProc[v.mesAno]) timelineProc[v.mesAno] = new Set();
       timelineProc[v.mesAno].add(v.processo);
       timelineDiarias[v.mesAno] = (timelineDiarias[v.mesAno]||0) + v.qtd;
+      timelineTotal[v.mesAno]   = (timelineTotal[v.mesAno]||0) + v.valDiarias + v.valPassagem + v.valOutros;
+      timelineNrec[v.mesAno]    = (timelineNrec[v.mesAno]||0) + 1;
     }
+    // Distribuição de duração
+    var qq = v.qtd;
+    if(qq===0)      duracaoDistrib['0d']++;
+    else if(qq<=1)  duracaoDistrib['0.5-1d']++;
+    else if(qq<=2)  duracaoDistrib['1.5-2d']++;
+    else if(qq<=3)  duracaoDistrib['2.5-3d']++;
+    else if(qq<=5)  duracaoDistrib['3.5-5d']++;
+    else if(qq<=7)  duracaoDistrib['5.5-7d']++;
+    else if(qq<=10) duracaoDistrib['7.5-10d']++;
+    else            duracaoDistrib['10d+']++;
     if (!escMap[eName]) {
       escMap[eName] = { esc:eName, ufs:new Set([v.cadastro.uf]), qtd:0, diarias:0, passagem:0, outros:0, npass:0, nrec:0, processosSet:new Set(), pessoasMap:{} };
     }
@@ -1217,13 +1321,21 @@ function processarDados() {
     o.qtd += v.qtd; o.diarias += v.valDiarias; o.passagem += v.valPassagem; o.outros += v.valOutros;
     if (v.valPassagem > 0) o.npass++;
     o.nrec++; o.processosSet.add(v.processo);
+    // Heatmap: processos por escritório por mês
+    if(v.data){
+      if(!o.hmap) o.hmap = {};
+      if(!o.hmap[v.mesAno]) o.hmap[v.mesAno] = new Set();
+      o.hmap[v.mesAno].add(v.processo);
+    }
     if (!o.pessoasMap[v.nome]) {
-      o.pessoasMap[v.nome] = { nome:v.nome, qtd:0, diarias:0, passagem:0, outros:0, npass:0, total:0, datas:[] };
+      o.pessoasMap[v.nome] = { nome:v.nome, qtd:0, diarias:0, passagem:0, outros:0, npass:0, total:0, datas:[], viagens:[], _vSeen:[] };
     }
     let p = o.pessoasMap[v.nome];
     p.qtd += v.qtd; p.diarias += v.valDiarias; p.passagem += v.valPassagem; p.outros += v.valOutros;
     if (v.valPassagem > 0) p.npass++;
     if (v.dataStr && v.dataStr.trim() && !p.datas.includes(v.dataStr)) p.datas.push(v.dataStr);
+    var _vk = v.processo+'|'+(v.dataStr||'');
+    if(!p._vSeen.includes(_vk)){ p._vSeen.push(_vk); p.viagens.push({proc:v.processo, data:v.dataStr||''}); }
   });
 
   totais.total = totais.diarias + totais.passagem + totais.outros;
@@ -1241,10 +1353,20 @@ function processarDados() {
         var pa=a.split('/'),pb=b.split('/');
         return new Date(+pa[2],+pa[1]-1,+pa[0])-new Date(+pb[2],+pb[1]-1,+pb[0]);
       });
+      p.viagens = (p.viagens||[]).sort(function(a,b){
+        if(!a.data||!b.data) return 0;
+        var pa=a.data.split('/'),pb=b.data.split('/');
+        return new Date(+pa[2],+pa[1]-1,+pa[0])-new Date(+pb[2],+pb[1]-1,+pb[0]);
+      });
+      delete p._vSeen;
       return p;
     });
     o.pessoas = pessoasArr.sort((a,b) => b.total - a.total);
     o.n_pessoas = pessoasArr.length;
+    // Converter hmap Sets → contagens
+    var hmap2 = {};
+    Object.keys(o.hmap||{}).forEach(function(m){ hmap2[m] = o.hmap[m].size; });
+    o.hmap = hmap2;
     return o;
   });
 
@@ -1254,13 +1376,15 @@ function processarDados() {
   });
   let dadosTimeline = {
     labels: chavesMeses,
-    processos: chavesMeses.map(m => timelineProc[m] ? timelineProc[m].size : 0),
-    diarias: chavesMeses.map(m => timelineDiarias[m]||0)
+    processos:   chavesMeses.map(m => timelineProc[m] ? timelineProc[m].size : 0),
+    diarias:     chavesMeses.map(m => timelineDiarias[m]||0),
+    totalArr:    chavesMeses.map(m => timelineTotal[m]||0),
+    mediaViagem: chavesMeses.map(m => timelineNrec[m]>0 ? (timelineTotal[m]||0)/timelineNrec[m] : 0)
   };
 
   var periodSec = (endTs === Infinity ? Date.now() : endTs) - startTs;
   var periodDays = Math.max(1, Math.ceil(periodSec / (1000*60*60*24)) + 1);
-  DADOS_AGRUPADOS = { totais, escritorios: escritoriosArr, timeline: dadosTimeline, dadosCategoria, periodDays };
+  DADOS_AGRUPADOS = { totais, escritorios: escritoriosArr, timeline: dadosTimeline, dadosCategoria, periodDays, duracaoDistrib };
   renderUI();
 }
 
@@ -1325,10 +1449,18 @@ function renderUI() {
     if (isU) tags.push('<span class="tag warn">Sem vínculo</span>');
     else { o.ufs.forEach(u => u!=='-' && tags.push(`<span class="tag uf">${u}</span>`)); tags.push(`<span class="tag">${o.n_pessoas} pes.</span>`); }
     const rows = pessoas.map(function(p){
-      var ds = (p.datas&&p.datas.length)
-        ? '<span class="datas-viagem">'+p.datas.map(function(d){return d.slice(0,5);}).join(' &middot; ')+'</span>'
-        : '';
-      return '<tr><td class="nm">'+p.nome+ds+'</td>'
+      var vl = '';
+      if(p.viagens&&p.viagens.length){
+        vl = '<div class="viagens-list">'
+          + p.viagens.map(function(v){
+              return '<div class="viagem-item">'
+                + '<span class="vproc">'+v.proc+'</span>'
+                + (v.data?'<span class="vdata">'+v.data+'</span>':'')
+                + '</div>';
+            }).join('')
+          + '</div>';
+      }
+      return '<tr><td class="nm">'+p.nome+vl+'</td>'
         +'<td class="opt">'+NUM(p.qtd)+'</td><td>'+p.npass+'</td>'
         +'<td class="opt">'+(p.diarias?BRL(p.diarias):'<span class=muted>—</span>')+'</td>'
         +'<td>'+(p.passagem?BRL(p.passagem):'<span class=muted>—</span>')+'</td>'
@@ -1559,6 +1691,265 @@ function renderUI() {
       scales:{x:{beginAtZero:true,suggestedMax:Math.max(...top10.map(p=>p.qtd))*1.1}}
     }
   });
+
+  // ════════════════════════════════════════════════════
+  // ANÁLISES AVANÇADAS — 8 novos gráficos
+  // ════════════════════════════════════════════════════
+  (function(){
+    var tl   = DADOS_AGRUPADOS.timeline;
+    var escs = DADOS_AGRUPADOS.escritorios;
+    var escN = escs.filter(function(o){return !o.esc.startsWith('(');});
+    var BRL2 = function(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:0,maximumFractionDigits:0});};
+
+    // ── Pareto por colaborador ───────────────────────
+    var paretoCanvas = document.getElementById('graficoPareto');
+    if(paretoCanvas){
+      var todosP2 = [];
+      escs.forEach(function(e){e.pessoas.forEach(function(p){todosP2.push({nome:p.nome,total:p.total});});});
+      todosP2.sort(function(a,b){return b.total-a.total;});
+      var grandT = todosP2.reduce(function(s,p){return s+p.total;},0);
+      var cumPct = [], running = 0;
+      todosP2.forEach(function(p){running+=p.total; cumPct.push(+(running/grandT*100).toFixed(1));});
+      // Linha 80%
+      var idx80 = cumPct.findIndex(function(v){return v>=80;});
+      chartsInstances.cPareto = new Chart(paretoCanvas, {
+        type:'bar',
+        data:{
+          labels: todosP2.map(function(p){return p.nome.split(' ').slice(0,2).join(' ');}),
+          datasets:[
+            {type:'bar', label:'Gasto (R$)', data:todosP2.map(function(p){return p.total;}),
+             backgroundColor:'rgba(31,111,92,.7)', yAxisID:'y', order:2},
+            {type:'line', label:'% acumulado', data:cumPct,
+             borderColor:'#b5552a', backgroundColor:'transparent', yAxisID:'y1',
+             pointRadius:0, borderWidth:2, order:1}
+          ]
+        },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{
+            legend:{display:true, position:'top'},
+            datalabels:{display:false},
+            tooltip:{callbacks:{label:function(ctx){
+              if(ctx.datasetIndex===0) return '  '+ctx.raw.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+              return '  '+ctx.raw.toFixed(1)+'% acumulado';
+            }}}
+          },
+          scales:{
+            x:{ticks:{display:false}},
+            y:{beginAtZero:true, title:{display:true,text:'Gasto (R$)'},
+               ticks:{callback:function(v){return v>=1000?'R$'+(v/1000).toFixed(0)+'k':v;}}},
+            y1:{position:'right', min:0, max:100, grid:{drawOnChartArea:false},
+                title:{display:true,text:'% acumulado'},
+                ticks:{callback:function(v){return v+'%';}}}
+          },
+          annotation:{}
+        }
+      });
+    }
+
+    // ── Custo médio por viagem ao longo do tempo ─────
+    var custoCanvas = document.getElementById('graficoCustoMedio');
+    if(custoCanvas && tl.labels.length){
+      chartsInstances.cCustoMedio = new Chart(custoCanvas, {
+        type:'line',
+        data:{labels:tl.labels, datasets:[{
+          label:'Custo médio/registro (R$)',
+          data:tl.mediaViagem,
+          borderColor:'#9a7b29', backgroundColor:'rgba(154,123,41,.1)',
+          fill:true, tension:.3, pointRadius:3
+        }]},
+        options:{responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:false}, datalabels:{align:'top',anchor:'end',
+            formatter:function(v){return v>0?'R$'+(v/1000).toFixed(1)+'k':'';}
+          }},
+          scales:{y:{beginAtZero:true, ticks:{callback:function(v){return 'R$'+(v/1000).toFixed(0)+'k';}}}}
+        }
+      });
+    }
+
+    // ── Custo médio por processo por escritório ──────
+    var cpCanvas = document.getElementById('graficoCustoProc');
+    if(cpCanvas){
+      var cpData = escN.filter(function(o){return o.n_processos>0;})
+        .map(function(o){return {esc:o.esc, val:o.total/o.n_processos, total:o.total, np:o.n_processos};})
+        .sort(function(a,b){return b.val-a.val;});
+      var cpH = Math.max(300, cpData.length*32);
+      document.getElementById('wrCustoProc').style.height = cpH+'px';
+      chartsInstances.cCustoProc = new Chart(cpCanvas, {
+        type:'bar',
+        data:{labels:cpData.map(function(o){return formatName(o.esc);}), datasets:[{
+          data:cpData.map(function(o){return +o.val.toFixed(0);}),
+          backgroundColor:'rgba(58,90,140,.75)', borderRadius:4
+        }]},
+        options:{indexAxis:'y', responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:false},
+            datalabels:{padding:4, formatter:function(v){return 'R$'+(v/1000).toFixed(1)+'k';}},
+            tooltip:{callbacks:{label:function(ctx){
+              var d=cpData[ctx.dataIndex];
+              return ['  R$'+ctx.raw.toLocaleString('pt-BR')+'/processo',
+                      '  '+d.np+' processos | total '+d.total.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})];
+            }}}
+          },
+          scales:{x:{beginAtZero:true, ticks:{callback:function(v){return 'R$'+(v/1000).toFixed(0)+'k';}}}}
+        }
+      });
+    }
+
+    // ── Proporção diárias × passagens ────────────────
+    var propCanvas = document.getElementById('graficoProporcao');
+    if(propCanvas){
+      var propData = escN.slice().sort(function(a,b){return b.total-a.total;});
+      var propH = Math.max(300, propData.length*30);
+      document.getElementById('wrProporcao').style.height = propH+'px';
+      chartsInstances.cProporcao = new Chart(propCanvas, {
+        type:'bar',
+        data:{
+          labels:propData.map(function(o){return formatName(o.esc);}),
+          datasets:[
+            {label:'Diárias',   data:propData.map(function(o){return o.total>0?+(o.diarias/o.total*100).toFixed(1):0;}), backgroundColor:'rgba(31,111,92,.75)'},
+            {label:'Passagens', data:propData.map(function(o){return o.total>0?+(o.passagem/o.total*100).toFixed(1):0;}), backgroundColor:'rgba(58,90,140,.75)'},
+            {label:'Outros',    data:propData.map(function(o){return o.total>0?+(o.outros/o.total*100).toFixed(1):0;}),   backgroundColor:'rgba(154,123,41,.75)'}
+          ]
+        },
+        options:{indexAxis:'y', responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:true,position:'top'},
+            datalabels:{formatter:function(v){return v>2?v.toFixed(0)+'%':'';}},
+            tooltip:{callbacks:{label:function(ctx){return '  '+ctx.dataset.label+': '+ctx.raw.toFixed(1)+'%';}}}
+          },
+          scales:{
+            x:{stacked:true, min:0, max:100, ticks:{callback:function(v){return v+'%';}}},
+            y:{stacked:true}
+          }
+        }
+      });
+    }
+
+    // ── Distribuição da duração ──────────────────────
+    var distCanvas = document.getElementById('graficoDistribuicao');
+    if(distCanvas){
+      var dd = DADOS_AGRUPADOS.duracaoDistrib || {};
+      var ddKeys = ['0d','0.5-1d','1.5-2d','2.5-3d','3.5-5d','5.5-7d','7.5-10d','10d+'];
+      var ddVals = ddKeys.map(function(k){return dd[k]||0;});
+      chartsInstances.cDistrib = new Chart(distCanvas, {
+        type:'bar',
+        data:{labels:ddKeys, datasets:[{
+          data:ddVals, backgroundColor:'rgba(181,85,42,.75)', borderRadius:4
+        }]},
+        options:{responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:false},
+            datalabels:{align:'top',anchor:'end'},
+            tooltip:{callbacks:{label:function(ctx){return '  '+ctx.raw+' registros';}}}
+          },
+          scales:{x:{title:{display:true,text:'Dias de diária'}}, y:{beginAtZero:true, title:{display:true,text:'Nº de registros'}}}
+        }
+      });
+    }
+
+    // ── Gasto por km² ───────────────────────────────
+    var km2Canvas = document.getElementById('graficoGastoKm2');
+    if(km2Canvas){
+      var km2Data = [];
+      escN.forEach(function(o){
+        var area = DSEI_AREA_MAP[o.esc];
+        if(area && o.total>0) km2Data.push({esc:o.esc, val:o.total/area, total:o.total, area:area});
+      });
+      km2Data.sort(function(a,b){return b.val-a.val;});
+      var km2H = Math.max(300, km2Data.length*32);
+      document.getElementById('wrGastoKm2').style.height = km2H+'px';
+      chartsInstances.cGastoKm2 = new Chart(km2Canvas, {
+        type:'bar',
+        data:{labels:km2Data.map(function(o){return formatName(o.esc);}), datasets:[{
+          data:km2Data.map(function(o){return +o.val.toFixed(2);}),
+          gastoVals:km2Data.map(function(o){return o.total;}),
+          areaVals:km2Data.map(function(o){return o.area;}),
+          backgroundColor:'rgba(212,98,30,.78)', borderRadius:4
+        }]},
+        options:{indexAxis:'y', responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:false},
+            datalabels:{padding:4, formatter:function(v){return 'R$'+v.toFixed(2)+'/km²';}},
+            tooltip:{callbacks:{label:function(ctx){
+              var d=km2Data[ctx.dataIndex];
+              return ['  R$'+ctx.raw.toFixed(2)+'/km²',
+                      '  Área: '+d.area.toLocaleString('pt-BR')+' km²',
+                      '  Gasto total: '+d.total.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})];
+            }}}
+          },
+          scales:{x:{beginAtZero:true, title:{display:true,text:'R$ / km²'}}}
+        }
+      });
+    }
+
+    // ── Heatmap de intensidade ───────────────────────
+    var hmDiv = document.getElementById('heatmapContainer');
+    if(hmDiv && tl.labels.length){
+      var meses = tl.labels;
+      // Top 15 escritórios por total de processos
+      var hmEscs = escN.slice().sort(function(a,b){return b.n_processos-a.n_processos;});
+      // Encontrar máximo para escala de cor
+      var hmMax = 0;
+      hmEscs.forEach(function(e){
+        meses.forEach(function(m){ var v=(e.hmap||{})[m]||0; if(v>hmMax) hmMax=v; });
+      });
+      var html = '<table class="hm-table"><thead><tr><th></th>';
+      meses.forEach(function(m){ html += '<th>'+m+'</th>'; });
+      html += '</tr></thead><tbody>';
+      hmEscs.forEach(function(e){
+        html += '<tr><td class="hm-label">'+formatName(e.esc)+'</td>';
+        meses.forEach(function(m){
+          var v = (e.hmap||{})[m]||0;
+          var a = hmMax>0 ? 0.08+v/hmMax*0.82 : 0;
+          var cls = v===0?'hm-cell zero':'hm-cell';
+          var bg  = v>0?'background:rgba(31,111,92,'+a.toFixed(2)+')':'';
+          html += '<td class="'+cls+'" style="'+bg+'" title="'+formatName(e.esc)+' / '+m+': '+v+' proc.">'+
+                  (v>0?v:'')+'</td>';
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      hmDiv.innerHTML = html;
+    }
+
+    // ── Correlação frequência × área ─────────────────
+    var freqCanvas = document.getElementById('graficoFreqArea');
+    if(freqCanvas){
+      var faItems = [];
+      var faMaxCost = Math.max.apply(null, escN.map(function(o){return o.total;}));
+      escN.forEach(function(o){
+        var area = DSEI_AREA_MAP[o.esc];
+        if(!area || o.n_processos===0) return;
+        var r = Math.max(5, Math.sqrt(o.total/faMaxCost)*28);
+        faItems.push({x:area, y:o.n_processos, r:r,
+          label:o.esc.replace(/Distrital de |Distrital /g,''),
+          total:o.total, np:o.n_processos});
+      });
+      chartsInstances.cFreqArea = new Chart(freqCanvas, {
+        type:'bubble',
+        data:{datasets:[{
+          data:faItems,
+          backgroundColor:'rgba(58,90,140,.5)',
+          borderColor:'rgba(58,90,140,.85)',
+          borderWidth:1.5
+        }]},
+        options:{responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:false}, datalabels:{display:false},
+            tooltip:{callbacks:{label:function(ctx){
+              var d=ctx.raw;
+              return ['  '+d.label,
+                      '  Área DSEI: '+d.x.toLocaleString('pt-BR')+' km²',
+                      '  Processos: '+d.np,
+                      '  Gasto total: '+d.total.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})];
+            }}}
+          },
+          scales:{
+            x:{type:'logarithmic', title:{display:true,text:'Área de abrangência DSEI (km²)'},
+               ticks:{callback:function(v){return v>=10000?Math.round(v/1000)+'k':v;}}},
+            y:{beginAtZero:true, title:{display:true,text:'Número de processos'}}
+          }
+        }
+      });
+    }
+  })();
+
 }
 
 // ---- Renderiza só o gráfico de categoria (chamado também no toggle de métrica)
@@ -1686,6 +2077,18 @@ const DSEI_AREA_MAP = {
   'Distrital de Florianópolis':             153578,
   'Distrital de Curitiba':                  491268
 };
+
+// Abas Painel / Detalhamento
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var tab = btn.dataset.tab;
+    document.getElementById('tab-painel').style.display  = tab==='painel'  ? '' : 'none';
+    document.getElementById('tab-detalhe').style.display = tab==='detalhe' ? '' : 'none';
+    if(tab==='detalhe') renderUI();
+  });
+});
 
 // Inicialização
 processarDados();
